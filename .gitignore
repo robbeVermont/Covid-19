@@ -1,0 +1,5 @@
+.vscode
+dist/screen.css.map
+dist/screen.css
+node_modules
+pachage-lock.json

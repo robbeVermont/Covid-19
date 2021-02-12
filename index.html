@@ -5,13 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Covid-19 in kaart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="dist/screen.css" />
-    <script src="js/test.js"></script>
+    <script src="js/hamburger_menu.js"></script>
   </head>
   <body>
-    <div style="font-size: 20px">
-      Het coronavirus (Covid-19) is een besmettelijk virus. Je kan het makkelijk
-      van andere mensen krijgen of doorgeven.
-    </div>
+    <nav class="c-navbar">
+      <div class="container c-navbar__container">
+        <div class="c-navbar__logo">
+          <a href="index.html">
+            <img src="img/coronavirus-logo.svg" alt="logo">
+          </a>
+        </div>
+        <span class="hammenu">
+          <span class="hammenu__bar hammenu__bar--1"></span>
+          <span class="hammenu__bar hammenu__bar--2"></span>
+          <span class="hammenu__bar hammenu__bar--3"></span>
+      </span>
+        <ul class="c-navbar__items nvbar__items">
+          <li class="c-navbar__item"><a href="#">Actuele info</a></li>
+          <li class="c-navbar__item"><a href="about.html">Over Covid-19</a></li>
+          <li class="c-navbar__item"><a href="vaccinatie.html">Vaccinatie</a></li>
+        </ul>
+    </div> <!--end container -->
+    </nav>
   </body>
 </html>

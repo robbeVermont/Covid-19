@@ -7,6 +7,17 @@ $color-appelblauwzeegroen: #a3a7ac;
 $color-blauw: #354b60;
 
 $color-primary: $color-appelblauwzeegroen;
-$color-secondary: $color-blauw;
+$color-secondary: #00B8B1;
 
 $font-regular: "Mulish", cursive;
+
+
+//Grid
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1688px
+);

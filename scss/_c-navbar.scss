@@ -1,7 +1,6 @@
 .c-navbar{
     width: 100%;
     background-color: $color-blauw;
-    
 
     &__container{
         display: flex;
@@ -24,11 +23,10 @@
 
         @include media-breakpoint-down(sm){
             left: 2.6rem;
-            
         }
 
         @include media-breakpoint-down(xs){
-            width: 11rem;
+            width: 14rem;
         }
 
         img{
@@ -37,12 +35,11 @@
         }
     }
 
-
+    //navbar ul
     &__items{
         display: flex;
         align-items: center;
         padding: 2rem;
-        
         @include media-breakpoint-down(sm){
             display: none;
             width: 100vw;
@@ -50,12 +47,29 @@
             padding-top: 5rem;
             position: absolute;
             left: 0;
-            background-color: #354b60;
+            background-color: $color-blauw;
             margin: 8rem 0;
             flex-direction: column;
         }
 
+        .nav-active{
+
+            &::after{
+                content: "";
+                width: 100%;
+                background-color:$color-secondary;
+                height: .5rem;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                border-radius: 15px;
+                transition: all 0.4s;
+            }
+        }
+
     }
+
+    //navbar li
     &__item{
         list-style: none;
 
@@ -63,37 +77,41 @@
             margin: 4rem 0 0rem;
         }
 
-        a{
-            color: $color-white;
-            text-decoration: none;
-            font-size: 1.8rem;
-            padding: 1.5rem 1.5rem;
-            margin: 0 1rem;
-            position: relative;
+    }
 
+
+    &__link{
+        color: $color-white;
+        text-decoration: none;
+        font-size: 1.8rem;
+        padding: 1.5rem 1.5rem;
+        margin: 0 1rem;
+        position: relative;
+        transition: all 0.4s;
+
+
+        &:hover{
+            color:$color-secondary;
+            text-decoration: none;
+        }
+
+        &--active{
             &::after{
                 content: "";
                 width: 100%;
-                background-color:transparent;
+                background-color:$color-secondary;
                 height: .5rem;
                 position: absolute;
                 bottom: 0;
                 left: 0;
                 border-radius: 15px;
+                transition: all 0.4s;
             }
-            &:hover{
-                &::after{
-
-                    background-color:$color-secondary;
-                }
-            }
-
         }
     }
 
-
     //hamburger menu
-    .hammenu{
+    .c-hammenu{
         width: 3rem;
         display: none;
         cursor: pointer;
@@ -119,13 +137,13 @@
     }//end hammenu
 
     .js-transformed {
-        .hammenu__bar--1{
+        .c-hammenu__bar--1{
             transform: rotate(-45deg);
         }
-        .hammenu__bar--2{
+        .c-hammenu__bar--2{
             opacity: 0;
         }
-        .hammenu__bar--3{
+        .c-hammenu__bar--3{
             transform: rotate(45deg);
         }
     }

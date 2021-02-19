@@ -6,5 +6,4 @@ $(document).ready(function () {
         $(".nvbar__items").slideToggle(350, "linear");
         $(".nvbar__items").css("display", "flex");
     });
-
 });

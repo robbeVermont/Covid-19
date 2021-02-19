@@ -19,5 +19,15 @@ $grid-breakpoints: (
   md: 768px,
   lg: 992px,
   xl: 1200px,
-  xxl: 1688px
+  xxl: 1670px,
+);
+
+$container-max-widths: (
+  xxs: 90%,
+  xs: 430px,
+  sm: 540px,
+  md: 720px,
+  lg: 900px,
+  xl: 1300px,
+  xxl: 1500px,
 );

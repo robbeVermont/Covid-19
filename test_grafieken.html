@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>testbestand</title>
+    <link rel="stylesheet" href="dist/screen.css" />
+    <script src="node_modules/apexcharts/dist/apexcharts.js"></script>
+    <script src="js/grafiek.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2>De actuele situatie in <span class="js-country"></span> <img class="js-countryimg" src="" alt=""></h2>
+      <div class="row">
+        <div class="col-12 col-xl-4 d-flex justify-content-between flex-column">
+          <h3 class="mb-1">Positieve testen</h3>
+          <div class="pl-4 js-gevallen">
+            <h4 class="js-cases"></h4>
+            <p class="js-casestext"></p>
+          </div>
+          <div class="c-graph--small">
+            <div id="totalcaseschart"></div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-4 d-flex justify-content-between flex-column">
+          <h3 class="mb-1">Overlijdens</h3>
+          <div class="pl-4 js-overlijdens">
+            <h4 class="js-deaths"></h4>
+            <p class="js-deathstext"></p>
+          </div>
+          <div class="c-graph--small">
+            <div id="totaldeathschart"></div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-4 d-flex justify-content-between flex-column">
+          <h3 class="mb-1">Gezette vaccinaties</h3>
+          <div class="pl-4 js-vaccinatie">
+            <h4 class="js-vac"></h4>
+            <p class="js-vactext"></p>
+          </div>
+          <div class="c-graph--small">
+            <div id="vacpiechart"></div>
+          </div>
+        </div>
+      </div>
+      <h3>Aantal besmettingen per dag in <span class="js-country"></span></h3>
+      <div class="c-graph">
+        <a
+          class="js-casesbtn c-graph__button c-graph__button--active"
+          data-days="7"
+          href="#"
+          >Laatste 7 dagen</a
+        >
+        <a class="js-casesbtn c-graph__button ml-1" data-days="14" href="#"
+          >Laatste 14 dagen</a
+        >
+        <a class="js-casesbtn c-graph__button ml-1" data-days="30" href="#"
+          >Laatste 30 dagen</a
+        >
+        <a class="js-casesbtn c-graph__button ml-1" data-days="all" href="#"
+          >Vanaf het begin</a
+        >
+        <div class="c-graph__chart">
+          <div id="caseschart"></div>
+        </div>
+      </div>
+      <h3>Aantal doden per dag in <span class="js-country"></span></h3>
+      <div class="c-graph">
+        <a
+          class="js-deathsbtn c-graph__button c-graph__button--active"
+          data-days="7"
+          href="#"
+          >Laatste 7 dagen</a
+        >
+        <a class="js-deathsbtn c-graph__button ml-1" data-days="14" href="#"
+          >Laatste 14 dagen</a
+        >
+        <a class="js-deathsbtn c-graph__button ml-1" data-days="30" href="#"
+          >Laatste 30 dagen</a
+        >
+        <a class="js-deathsbtn c-graph__button ml-1" data-days="all" href="#"
+          >Vanaf het begin</a
+        >
+        <div class="c-graph__chart">
+          <div id="deathschart"></div>
+        </div>
+      </div>
+      <div class="c-graph">
+        <span class="c-graph__label"
+          >Gemiddeld aantal sterfgevallen van de voorbije 7 dagen per
+          continent</span
+        >
+        <div class="c-graph__chart c-graph__chart--lines">
+          <div id="continentschart"></div>
+        </div>
+      </div>
+      <h1>zevendaags gemiddelde van het aantal nieuwe besmettingen</h1>
+      <div class="c-graph">
+        <span class="c-graph__label">Nieuwe besmettingen per land</span>
+        <div class="c-graph__chart">
+          <div id="countrybarchart"></div>
+        </div>
+      </div>
+      <div class="c-graph">
+        <span class="c-graph__label">Besmettingen per continent</span>
+        <div class="c-graph__chart">
+          <div id="continentbarchart"></div>
+        </div>
+      </div>
+      <h1>VACCINATIES</h1>
+      <div class="c-graph">
+        <a
+          class="js-vacbtn c-graph__button c-graph__button--active"
+          data-days="7"
+          href="#"
+          >Laatste 7 dagen</a
+        >
+        <a class="js-vacbtn c-graph__button ml-1" data-days="14" href="#"
+          >Laatste 14 dagen</a
+        >
+        <a class="js-vacbtn c-graph__button ml-1" data-days="30" href="#"
+          >Laatste 30 dagen</a
+        >
+        <a class="js-vacbtn c-graph__button ml-1" data-days="all" href="#"
+          >Vanaf het begin</a
+        >
+        <div class="c-graph__chart">
+          <div id="vacchart"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

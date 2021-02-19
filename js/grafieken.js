@@ -275,10 +275,36 @@ const continents = {
   ],
 };
 
-const translateName = function (nameEng) {
+const hashToCovid = function (nameHash) {
+  let nameCovid;
+  for (const country of countryTranslation) {
+    if (nameHash == country.url) {
+      nameCovid = country.covid.name;
+    }
+  }
+  return nameCovid;
+};
+
+const covidToNL = function (nameEng) {
+  const words = nameEng.split(" ");
+  let newName = "";
+
+  for (let i = 0; i < words.length; i++) {
+    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+    console.log[words];
+  }
+
+  for (let i = 0; i < words.length; i++) {
+    if (i < words.length - 1) {
+      newName += words[i] + " ";
+    } else {
+      newName += words[i];
+    }
+  }
+
   let nameNL;
   for (const country of countryTranslation) {
-    if (nameEng == country.EN_Covid) {
+    if (newName == country.EN_Covid) {
       nameNL = country.NL;
     }
   }
@@ -333,7 +359,7 @@ const setCountryData = function (data) {
 
     if (document.querySelector(".js-country")) {
       const titleNames = document.querySelectorAll(".js-country");
-      const countryNL = translateName(data.country);
+      const countryNL = covidToNL(data.country);
 
       for (let titleName of titleNames) {
         titleName.innerHTML = countryNL;
@@ -345,8 +371,6 @@ const setCountryData = function (data) {
         .setAttribute("src", data.countryInfo.flag);
     }
   }
-
-  laadGrafieken(data.country);
 };
 
 const laadMultipleLineGrafiek = function (data, id) {
@@ -1515,10 +1539,6 @@ const laadTotalCasesGrafiek = function (data, id, type) {
     (casesData[casesData.length - 2] - casesData[casesData.length - 3])
   ).toFixed(2);
 
-  // if (!Number.isInteger(stijgingProcent)) {
-  //   stijgingProcent = 0;
-  // }
-
   if (type == "cases") {
     document.querySelector(".js-cases").innerHTML = totalCasesToday;
     document.querySelector(
@@ -1831,13 +1851,13 @@ const getTotalCasesData = function (id, country, type) {
       if (type == "cases") {
         document.querySelector(
           ".js-gevallen"
-        ).innerHTML = `<p>Geen besmettingsgegevens gevonden voor ${translateName(
+        ).innerHTML = `<p>Geen besmettingsgegevens gevonden voor ${covidToNL(
           country
         )}</p>`;
       } else if (type == "deaths") {
         document.querySelector(
           ".js-overlijdens"
-        ).innerHTML = `<p>Geen overlijdingsgegevens gevonden voor ${translateName(
+        ).innerHTML = `<p>Geen overlijdingsgegevens gevonden voor ${covidToNL(
           country
         )}</p>`;
       }
@@ -1910,10 +1930,14 @@ const getCountryData = function (country) {
       // console.info("JSON object is aangemaakt");
 
       setCountryData(json, country);
+      laadGrafieken(country);
     })
     //als de fout opgeworpen is vangen we ze hier op
     .catch(function (error) {
-      console.error(`fout bij het verwerken van de jsonfile ${error}`);
+      document.querySelector(
+        ".js-page"
+      ).innerHTML = `<p>Geen gegevens gevonden voor ${country}</p>`;
+      // console.error(`fout bij het verwerken van de jsonfile ${error}`);
     });
 };
 
@@ -1963,14 +1987,14 @@ const getVacData = function (id, country) {
     .catch(function (error) {
       document.querySelector(
         ".js-vaccinatie"
-      ).innerHTML = `<p>Geen vaccinatiegegevens gevonden voor ${translateName(
+      ).innerHTML = `<p>Geen vaccinatiegegevens gevonden voor ${covidToNL(
         country
       )}</p>`;
       // console.error(`fout bij het verwerken van de jsonfile ${error}`);
     });
 };
 
-const getCountriesJson = function () {
+const getCountriesJson = function (country) {
   //ophalen van de externe json file
   fetch("../data/countryData.json")
     .then(function (response) {
@@ -1984,6 +2008,8 @@ const getCountriesJson = function () {
     .then(function (json) {
       // console.info("JSON object is aangemaakt");
       countryTranslation = json;
+
+      getCountryData(country);
     })
     //als de fout opgeworpen is vangen we ze hier op
     .catch(function (error) {
@@ -2102,8 +2128,12 @@ const init = function () {
 
   country = "belgium";
 
-  getCountriesJson();
-  getCountryData(country);
+  if (window.location.hash) {
+    country = hashToCovid(window.location.hash.substring(1, window.location.hash.length));
+  }
+
+
+  getCountriesJson(country);
 };
 
 document.addEventListener("DOMContentLoaded", init);

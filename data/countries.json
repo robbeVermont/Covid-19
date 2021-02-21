@@ -1,0 +1,3356 @@
+[
+  {
+    "id": 1,
+    "url": "afghanistan",
+    "covid": {
+      "name": "Afghanistan"
+    },
+    "geojson": {
+      "name": "Afghanistan"
+    },
+    "translations": {
+      "NL": "Afghanistan"
+    }
+  },
+  {
+    "id": 2,
+    "url": "albanie",
+    "covid": {
+      "name": "Albania"
+    },
+    "geojson": {
+      "name": "Albania"
+    },
+    "translations": {
+      "NL": "Albanië"
+    }
+  },
+  {
+    "id": 3,
+    "url": "algerije",
+    "covid": {
+      "name": "Algeria"
+    },
+    "geojson": {
+      "name": "Algeria"
+    },
+    "translations": {
+      "NL": "Algerije"
+    }
+  },
+  {
+    "id": 4,
+    "url": "andorra",
+    "covid": {
+      "name": "Andorra"
+    },
+    "geojson": {
+      "name": "Andorra"
+    },
+    "translations": {
+      "NL": "Andorra"
+    }
+  },
+  {
+    "id": 5,
+    "url": "angola",
+    "covid": {
+      "name": "Angola"
+    },
+    "geojson": {
+      "name": "Angola"
+    },
+    "translations": {
+      "NL": "Angola"
+    }
+  },
+  {
+    "id": 6,
+    "url": "anguilla",
+    "covid": {
+      "name": "Anguilla"
+    },
+    "geojson": {
+      "name": "Anguilla"
+    },
+    "translations": {
+      "NL": "Anguilla"
+    }
+  },
+  {
+    "id": 7,
+    "url": "antigua-en-barbuda",
+    "covid": {
+      "name": "Antigua and Barbuda"
+    },
+    "geojson": {
+      "name": "Antigua and Barb."
+    },
+    "translations": {
+      "NL": "Antigua en Barbuda"
+    }
+  },
+  {
+    "id": 8,
+    "url": "argentinie",
+    "covid": {
+      "name": "Argentina"
+    },
+    "geojson": {
+      "name": "Argentina"
+    },
+    "translations": {
+      "NL": "Argentinië"
+    }
+  },
+  {
+    "id": 9,
+    "url": "armenie",
+    "covid": {
+      "name": "Armenia"
+    },
+    "geojson": {
+      "name": "Armenia"
+    },
+    "translations": {
+      "NL": "Armenië"
+    }
+  },
+  {
+    "id": 10,
+    "url": "aruba",
+    "covid": {
+      "name": "Aruba"
+    },
+    "geojson": {
+      "name": "Aruba"
+    },
+    "translations": {
+      "NL": "Aruba"
+    }
+  },
+  {
+    "id": 11,
+    "url": "australie",
+    "covid": {
+      "name": "Australia"
+    },
+    "geojson": {
+      "name": "Australia"
+    },
+    "translations": {
+      "NL": "Australië"
+    }
+  },
+  {
+    "id": 12,
+    "url": "oostenrijk",
+    "covid": {
+      "name": "Austria"
+    },
+    "geojson": {
+      "name": "Austria"
+    },
+    "translations": {
+      "NL": "Oostenrijk"
+    }
+  },
+  {
+    "id": 13,
+    "url": "azerbeidzjan",
+    "covid": {
+      "name": "Azerbaijan"
+    },
+    "geojson": {
+      "name": "Azerbaijan"
+    },
+    "translations": {
+      "NL": "Azerbeidzjan"
+    }
+  },
+  {
+    "id": 14,
+    "url": "bahamas",
+    "covid": {
+      "name": "Bahamas"
+    },
+    "geojson": {
+      "name": "Bahamas"
+    },
+    "translations": {
+      "NL": "Bahama's"
+    }
+  },
+  {
+    "id": 15,
+    "url": "bahrein",
+    "covid": {
+      "name": "Bahrain"
+    },
+    "geojson": {
+      "name": "Bahrain"
+    },
+    "translations": {
+      "NL": "Bahrein"
+    }
+  },
+  {
+    "id": 16,
+    "url": "bangladesh",
+    "covid": {
+      "name": "Bangladesh"
+    },
+    "geojson": {
+      "name": "Bangladesh"
+    },
+    "translations": {
+      "NL": "Bangladesh"
+    }
+  },
+  {
+    "id": 17,
+    "url": "barbados",
+    "covid": {
+      "name": "Barbados"
+    },
+    "geojson": {
+      "name": "Barbados"
+    },
+    "translations": {
+      "NL": "Barbados"
+    }
+  },
+  {
+    "id": 18,
+    "url": "wit-rusland",
+    "covid": {
+      "name": "Belarus"
+    },
+    "geojson": {
+      "name": "Belarus"
+    },
+    "translations": {
+      "NL": "Wit-Rusland"
+    }
+  },
+  {
+    "id": 19,
+    "url": "belgie",
+    "covid": {
+      "name": "Belgium"
+    },
+    "geojson": {
+      "name": "Belgium"
+    },
+    "translations": {
+      "NL": "België"
+    }
+  },
+  {
+    "id": 20,
+    "url": "belize",
+    "covid": {
+      "name": "Belize"
+    },
+    "geojson": {
+      "name": "Belize"
+    },
+    "translations": {
+      "NL": "Belize"
+    }
+  },
+  {
+    "id": 21,
+    "url": "benin",
+    "covid": {
+      "name": "Benin"
+    },
+    "geojson": {
+      "name": "Benin"
+    },
+    "translations": {
+      "NL": "Benin"
+    }
+  },
+  {
+    "id": 22,
+    "url": "bermuda",
+    "covid": {
+      "name": "Bermuda"
+    },
+    "geojson": {
+      "name": "Bermuda"
+    },
+    "translations": {
+      "NL": "Bermuda"
+    }
+  },
+  {
+    "id": 23,
+    "url": "bhutan",
+    "covid": {
+      "name": "Bhutan"
+    },
+    "geojson": {
+      "name": "Bhutan"
+    },
+    "translations": {
+      "NL": "Bhutan"
+    }
+  },
+  {
+    "id": 24,
+    "url": "bolivia",
+    "covid": {
+      "name": "Bolivia"
+    },
+    "geojson": {
+      "name": "Bolivia"
+    },
+    "translations": {
+      "NL": "Bolivia"
+    }
+  },
+  {
+    "id": 25,
+    "url": "bosnie-en-herzegovina",
+    "covid": {
+      "name": "Bosnia"
+    },
+    "geojson": {
+      "name": "Bosnia and Herz."
+    },
+    "translations": {
+      "NL": "Bosnië en Herzegovina"
+    }
+  },
+  {
+    "id": 26,
+    "url": "botswana",
+    "covid": {
+      "name": "Botswana"
+    },
+    "geojson": {
+      "name": "Botswana"
+    },
+    "translations": {
+      "NL": "Botswana"
+    }
+  },
+  {
+    "id": 27,
+    "url": "brazilie",
+    "covid": {
+      "name": "Brazil"
+    },
+    "geojson": {
+      "name": "Brazil"
+    },
+    "translations": {
+      "NL": "Brazilië"
+    }
+  },
+  {
+    "id": 28,
+    "url": "britse-maagdeneilanden",
+    "covid": {
+      "name": "British Virgin Islands"
+    },
+    "geojson": {
+      "name": "British Virgin Is."
+    },
+    "translations": {
+      "NL": "Britse Maagdeneilanden"
+    }
+  },
+  {
+    "id": 29,
+    "url": "brunei",
+    "covid": {
+      "name": "Brunei"
+    },
+    "geojson": {
+      "name": "Brunei"
+    },
+    "translations": {
+      "NL": "Brunei"
+    }
+  },
+  {
+    "id": 30,
+    "url": "bulgarije",
+    "covid": {
+      "name": "Bulgaria"
+    },
+    "geojson": {
+      "name": "Bulgaria"
+    },
+    "translations": {
+      "NL": "Bulgarije"
+    }
+  },
+  {
+    "id": 31,
+    "url": "burkina-faso",
+    "covid": {
+      "name": "Burkina Faso"
+    },
+    "geojson": {
+      "name": "Burkina Faso"
+    },
+    "translations": {
+      "NL": "Burkina Faso"
+    }
+  },
+  {
+    "id": 32,
+    "url": "burundi",
+    "covid": {
+      "name": "Burundi"
+    },
+    "geojson": {
+      "name": "Burundi"
+    },
+    "translations": {
+      "NL": "Burundi"
+    }
+  },
+  {
+    "id": 33,
+    "url": "kaapverdie",
+    "covid": {
+      "name": "Cabo Verde"
+    },
+    "geojson": {
+      "name": "Cape Verde"
+    },
+    "translations": {
+      "NL": "Kaapverdië"
+    }
+  },
+  {
+    "id": 34,
+    "url": "cambodja",
+    "covid": {
+      "name": "Cambodia"
+    },
+    "geojson": {
+      "name": "Cambodia"
+    },
+    "translations": {
+      "NL": "Cambodja"
+    }
+  },
+  {
+    "id": 35,
+    "url": "kameroen",
+    "covid": {
+      "name": "Cameroon"
+    },
+    "geojson": {
+      "name": "Cameroon"
+    },
+    "translations": {
+      "NL": "Kameroen"
+    }
+  },
+  {
+    "id": 36,
+    "url": "canada",
+    "covid": {
+      "name": "Canada"
+    },
+    "geojson": {
+      "name": "Canada"
+    },
+    "translations": {
+      "NL": "Canada"
+    }
+  },
+  {
+    "id": 37,
+    "url": "caribisch-nederland",
+    "covid": {
+      "name": "Caribbean Netherlands"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Caribisch Nederland"
+    }
+  },
+  {
+    "id": 38,
+    "url": "kaaimaneilanden",
+    "covid": {
+      "name": "Cayman Islands"
+    },
+    "geojson": {
+      "name": "Cayman Is."
+    },
+    "translations": {
+      "NL": "Kaaimaneilanden"
+    }
+  },
+  {
+    "id": 39,
+    "url": "centraal-afrikaanse-republiek",
+    "covid": {
+      "name": "Central African Republic"
+    },
+    "geojson": {
+      "name": "Central African Rep."
+    },
+    "translations": {
+      "NL": "Centraal-Afrikaanse Republiek"
+    }
+  },
+  {
+    "id": 40,
+    "url": "tsjaad",
+    "covid": {
+      "name": "Chad"
+    },
+    "geojson": {
+      "name": "Chad"
+    },
+    "translations": {
+      "NL": "Tsjaad"
+    }
+  },
+  {
+    "id": 41,
+    "url": "kanaaleilanden",
+    "covid": {
+      "name": "Channel Islands"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Kanaaleilanden"
+    }
+  },
+  {
+    "id": 42,
+    "url": "chili",
+    "covid": {
+      "name": "Chile"
+    },
+    "geojson": {
+      "name": "Chile"
+    },
+    "translations": {
+      "NL": "Chili"
+    }
+  },
+  {
+    "id": 43,
+    "url": "china",
+    "covid": {
+      "name": "China"
+    },
+    "geojson": {
+      "name": "China"
+    },
+    "translations": {
+      "NL": "China"
+    }
+  },
+  {
+    "id": 44,
+    "url": "colombia",
+    "covid": {
+      "name": "Colombia"
+    },
+    "geojson": {
+      "name": "Colombia"
+    },
+    "translations": {
+      "NL": "Colombia"
+    }
+  },
+  {
+    "id": 45,
+    "url": "comoren",
+    "covid": {
+      "name": "Comoros"
+    },
+    "geojson": {
+      "name": "Comoros"
+    },
+    "translations": {
+      "NL": "Comoren"
+    }
+  },
+  {
+    "id": 46,
+    "url": "congo",
+    "covid": {
+      "name": "Congo"
+    },
+    "geojson": {
+      "name": "Congo"
+    },
+    "translations": {
+      "NL": "Congo"
+    }
+  },
+  {
+    "id": 47,
+    "url": "costa-rica",
+    "covid": {
+      "name": "Costa Rica"
+    },
+    "geojson": {
+      "name": "Costa Rica"
+    },
+    "translations": {
+      "NL": "Costa Rica"
+    }
+  },
+  {
+    "id": 48,
+    "url": "kroatie",
+    "covid": {
+      "name": "Croatia"
+    },
+    "geojson": {
+      "name": "Croatia"
+    },
+    "translations": {
+      "NL": "Kroatië"
+    }
+  },
+  {
+    "id": 49,
+    "url": "cuba",
+    "covid": {
+      "name": "Cuba"
+    },
+    "geojson": {
+      "name": "Cuba"
+    },
+    "translations": {
+      "NL": "Cuba"
+    }
+  },
+  {
+    "id": 50,
+    "url": "curacao",
+    "covid": {
+      "name": "Curaçao"
+    },
+    "geojson": {
+      "name": "Curaçao"
+    },
+    "translations": {
+      "NL": "Curaçao"
+    }
+  },
+  {
+    "id": 51,
+    "url": "cyprus",
+    "covid": {
+      "name": "Cyprus"
+    },
+    "geojson": {
+      "name": "Cyprus"
+    },
+    "translations": {
+      "NL": "Cyprus"
+    }
+  },
+  {
+    "id": 52,
+    "url": "tsjechie",
+    "covid": {
+      "name": "Czechia"
+    },
+    "geojson": {
+      "name": "Czech Rep."
+    },
+    "translations": {
+      "NL": "Tsjechië"
+    }
+  },
+  {
+    "id": 53,
+    "url": "ivoorkust",
+    "covid": {
+      "name": "Côte d'Ivoire"
+    },
+    "geojson": {
+      "name": "Côte d'Ivoire"
+    },
+    "translations": {
+      "NL": "Ivoorkust"
+    }
+  },
+  {
+    "id": 54,
+    "url": "democratische-republiek-congo",
+    "covid": {
+      "name": "DRC"
+    },
+    "geojson": {
+      "name": "Dem. Rep. Congo"
+    },
+    "translations": {
+      "NL": "Democratische Republiek Congo"
+    }
+  },
+  {
+    "id": 55,
+    "url": "denemarken",
+    "covid": {
+      "name": "Denmark"
+    },
+    "geojson": {
+      "name": "Denmark"
+    },
+    "translations": {
+      "NL": "Denemarken"
+    }
+  },
+  {
+    "id": 56,
+    "url": "diamond-princess",
+    "covid": {
+      "name": "Diamond Princess"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Diamond Princess"
+    }
+  },
+  {
+    "id": 57,
+    "url": "djibouti",
+    "covid": {
+      "name": "Djibouti"
+    },
+    "geojson": {
+      "name": "Djibouti"
+    },
+    "translations": {
+      "NL": "Djibouti"
+    }
+  },
+  {
+    "id": 58,
+    "url": "dominica",
+    "covid": {
+      "name": "Dominica"
+    },
+    "geojson": {
+      "name": "Dominica"
+    },
+    "translations": {
+      "NL": "Dominica"
+    }
+  },
+  {
+    "id": 59,
+    "url": "dominicaanse-republiek",
+    "covid": {
+      "name": "Dominican Republic"
+    },
+    "geojson": {
+      "name": "Dominican Rep."
+    },
+    "translations": {
+      "NL": "Dominicaanse Republiek"
+    }
+  },
+  {
+    "id": 60,
+    "url": "ecuador",
+    "covid": {
+      "name": "Ecuador"
+    },
+    "geojson": {
+      "name": "Ecuador"
+    },
+    "translations": {
+      "NL": "Ecuador"
+    }
+  },
+  {
+    "id": 61,
+    "url": "egypte",
+    "covid": {
+      "name": "Egypt"
+    },
+    "geojson": {
+      "name": "Egypt"
+    },
+    "translations": {
+      "NL": "Egypte"
+    }
+  },
+  {
+    "id": 62,
+    "url": "el-salvador",
+    "covid": {
+      "name": "El Salvador"
+    },
+    "geojson": {
+      "name": "El Salvador"
+    },
+    "translations": {
+      "NL": "El Salvador"
+    }
+  },
+  {
+    "id": 63,
+    "url": "equatoriaal-guinea",
+    "covid": {
+      "name": "Equatorial Guinea"
+    },
+    "geojson": {
+      "name": "Eq. Guinea"
+    },
+    "translations": {
+      "NL": "Equatoriaal-Guinea"
+    }
+  },
+  {
+    "id": 64,
+    "url": "eritrea",
+    "covid": {
+      "name": "Eritrea"
+    },
+    "geojson": {
+      "name": "Eritrea"
+    },
+    "translations": {
+      "NL": "Eritrea"
+    }
+  },
+  {
+    "id": 65,
+    "url": "estland",
+    "covid": {
+      "name": "Estonia"
+    },
+    "geojson": {
+      "name": "Estonia"
+    },
+    "translations": {
+      "NL": "Estland"
+    }
+  },
+  {
+    "id": 66,
+    "url": "ethiopie",
+    "covid": {
+      "name": "Ethiopia"
+    },
+    "geojson": {
+      "name": "Ethiopia"
+    },
+    "translations": {
+      "NL": "Ethiopië"
+    }
+  },
+  {
+    "id": 67,
+    "url": "falklandeilanden",
+    "covid": {
+      "name": "Falkland Islands (Malvinas)"
+    },
+    "geojson": {
+      "name": "Falkland Is."
+    },
+    "translations": {
+      "NL": "Falklandeilanden"
+    }
+  },
+  {
+    "id": 68,
+    "url": "faeroer",
+    "covid": {
+      "name": "Faroe Islands"
+    },
+    "geojson": {
+      "name": "Faeroe Is."
+    },
+    "translations": {
+      "NL": "Faeröer"
+    }
+  },
+  {
+    "id": 69,
+    "url": "fiji",
+    "covid": {
+      "name": "Fiji"
+    },
+    "geojson": {
+      "name": "Fiji"
+    },
+    "translations": {
+      "NL": "Fiji"
+    }
+  },
+  {
+    "id": 70,
+    "url": "finland",
+    "covid": {
+      "name": "Finland"
+    },
+    "geojson": {
+      "name": "Finland"
+    },
+    "translations": {
+      "NL": "Finland"
+    }
+  },
+  {
+    "id": 71,
+    "url": "frankrijk",
+    "covid": {
+      "name": "France"
+    },
+    "geojson": {
+      "name": "France"
+    },
+    "translations": {
+      "NL": "Frankrijk"
+    }
+  },
+  {
+    "id": 72,
+    "url": "frans-guyana",
+    "covid": {
+      "name": "French Guiana"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Frans-Guyana"
+    }
+  },
+  {
+    "id": 73,
+    "url": "frans-polynesie",
+    "covid": {
+      "name": "French Polynesia"
+    },
+    "geojson": {
+      "name": "Fr. Polynesia"
+    },
+    "translations": {
+      "NL": "Frans-Polynesië"
+    }
+  },
+  {
+    "id": 74,
+    "url": "gabon",
+    "covid": {
+      "name": "Gabon"
+    },
+    "geojson": {
+      "name": "Gabon"
+    },
+    "translations": {
+      "NL": "Gabon"
+    }
+  },
+  {
+    "id": 75,
+    "url": "gambia",
+    "covid": {
+      "name": "Gambia"
+    },
+    "geojson": {
+      "name": "Gambia"
+    },
+    "translations": {
+      "NL": "Gambia"
+    }
+  },
+  {
+    "id": 76,
+    "url": "georgie",
+    "covid": {
+      "name": "Georgia"
+    },
+    "geojson": {
+      "name": "Georgia"
+    },
+    "translations": {
+      "NL": "Georgië"
+    }
+  },
+  {
+    "id": 77,
+    "url": "duitsland",
+    "covid": {
+      "name": "Germany"
+    },
+    "geojson": {
+      "name": "Germany"
+    },
+    "translations": {
+      "NL": "Duitsland"
+    }
+  },
+  {
+    "id": 78,
+    "url": "ghana",
+    "covid": {
+      "name": "Ghana"
+    },
+    "geojson": {
+      "name": "Ghana"
+    },
+    "translations": {
+      "NL": "Ghana"
+    }
+  },
+  {
+    "id": 79,
+    "url": "gibraltar",
+    "covid": {
+      "name": "Gibraltar"
+    },
+    "geojson": {
+      "name": "Gibraltar"
+    },
+    "translations": {
+      "NL": "Gibraltar"
+    }
+  },
+  {
+    "id": 80,
+    "url": "griekenland",
+    "covid": {
+      "name": "Greece"
+    },
+    "geojson": {
+      "name": "Greece"
+    },
+    "translations": {
+      "NL": "Griekenland"
+    }
+  },
+  {
+    "id": 81,
+    "url": "groenland",
+    "covid": {
+      "name": "Greenland"
+    },
+    "geojson": {
+      "name": "Greenland"
+    },
+    "translations": {
+      "NL": "Groenland"
+    }
+  },
+  {
+    "id": 82,
+    "url": "grenada",
+    "covid": {
+      "name": "Grenada"
+    },
+    "geojson": {
+      "name": "Grenada"
+    },
+    "translations": {
+      "NL": "Grenada"
+    }
+  },
+  {
+    "id": 83,
+    "url": "guadeloupe",
+    "covid": {
+      "name": "Guadeloupe"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Guadeloupe"
+    }
+  },
+  {
+    "id": 84,
+    "url": "guatemala",
+    "covid": {
+      "name": "Guatemala"
+    },
+    "geojson": {
+      "name": "Guatemala"
+    },
+    "translations": {
+      "NL": "Guatemala"
+    }
+  },
+  {
+    "id": 85,
+    "url": "guinee",
+    "covid": {
+      "name": "Guinea"
+    },
+    "geojson": {
+      "name": "Guinea"
+    },
+    "translations": {
+      "NL": "Guinee"
+    }
+  },
+  {
+    "id": 86,
+    "url": "guinee-bissau",
+    "covid": {
+      "name": "Guinea-Bissau"
+    },
+    "geojson": {
+      "name": "Guinea-Bissau"
+    },
+    "translations": {
+      "NL": "Guinee-Bissau"
+    }
+  },
+  {
+    "id": 87,
+    "url": "guyana",
+    "covid": {
+      "name": "Guyana"
+    },
+    "geojson": {
+      "name": "Guyana"
+    },
+    "translations": {
+      "NL": "Guyana"
+    }
+  },
+  {
+    "id": 88,
+    "url": "haiti",
+    "covid": {
+      "name": "Haiti"
+    },
+    "geojson": {
+      "name": "Haiti"
+    },
+    "translations": {
+      "NL": "Haïti"
+    }
+  },
+  {
+    "id": 89,
+    "url": "vaticaan",
+    "covid": {
+      "name": "Holy See"
+    },
+    "geojson": {
+      "name": "Vatican"
+    },
+    "translations": {
+      "NL": "Vaticaan"
+    }
+  },
+  {
+    "id": 90,
+    "url": "honduras",
+    "covid": {
+      "name": "Honduras"
+    },
+    "geojson": {
+      "name": "Honduras"
+    },
+    "translations": {
+      "NL": "Honduras"
+    }
+  },
+  {
+    "id": 91,
+    "url": "hong-kong",
+    "covid": {
+      "name": "Hong Kong"
+    },
+    "geojson": {
+      "name": "Hong Kong"
+    },
+    "translations": {
+      "NL": "Hong Kong"
+    }
+  },
+  {
+    "id": 92,
+    "url": "hongarije",
+    "covid": {
+      "name": "Hungary"
+    },
+    "geojson": {
+      "name": "Hungary"
+    },
+    "translations": {
+      "NL": "Hongarije"
+    }
+  },
+  {
+    "id": 93,
+    "url": "ijsland",
+    "covid": {
+      "name": "Iceland"
+    },
+    "geojson": {
+      "name": "Iceland"
+    },
+    "translations": {
+      "NL": "IJsland"
+    }
+  },
+  {
+    "id": 94,
+    "url": "india",
+    "covid": {
+      "name": "India"
+    },
+    "geojson": {
+      "name": "India"
+    },
+    "translations": {
+      "NL": "India"
+    }
+  },
+  {
+    "id": 95,
+    "url": "indonesie",
+    "covid": {
+      "name": "Indonesia"
+    },
+    "geojson": {
+      "name": "Indonesia"
+    },
+    "translations": {
+      "NL": "Indonesië"
+    }
+  },
+  {
+    "id": 96,
+    "url": "iran",
+    "covid": {
+      "name": "Iran"
+    },
+    "geojson": {
+      "name": "Iran"
+    },
+    "translations": {
+      "NL": "Iran"
+    }
+  },
+  {
+    "id": 97,
+    "url": "irak",
+    "covid": {
+      "name": "Iraq"
+    },
+    "geojson": {
+      "name": "Iraq"
+    },
+    "translations": {
+      "NL": "Irak"
+    }
+  },
+  {
+    "id": 98,
+    "url": "ierland",
+    "covid": {
+      "name": "Ireland"
+    },
+    "geojson": {
+      "name": "Ireland"
+    },
+    "translations": {
+      "NL": "Ierland"
+    }
+  },
+  {
+    "id": 99,
+    "url": "man",
+    "covid": {
+      "name": "Isle of Man"
+    },
+    "geojson": {
+      "name": "Isle of Man"
+    },
+    "translations": {
+      "NL": "Man (eiland)"
+    }
+  },
+  {
+    "id": 100,
+    "url": "israel",
+    "covid": {
+      "name": "Israel"
+    },
+    "geojson": {
+      "name": "Israel"
+    },
+    "translations": {
+      "NL": "Israël"
+    }
+  },
+  {
+    "id": 101,
+    "url": "italie",
+    "covid": {
+      "name": "Italy"
+    },
+    "geojson": {
+      "name": "Italy"
+    },
+    "translations": {
+      "NL": "Italië"
+    }
+  },
+  {
+    "id": 102,
+    "url": "jamaica",
+    "covid": {
+      "name": "Jamaica"
+    },
+    "geojson": {
+      "name": "Jamaica"
+    },
+    "translations": {
+      "NL": "Jamaica"
+    }
+  },
+  {
+    "id": 103,
+    "url": "japan",
+    "covid": {
+      "name": "Japan"
+    },
+    "geojson": {
+      "name": "Japan"
+    },
+    "translations": {
+      "NL": "Japan"
+    }
+  },
+  {
+    "id": 104,
+    "url": "jordanie",
+    "covid": {
+      "name": "Jordan"
+    },
+    "geojson": {
+      "name": "Jordan"
+    },
+    "translations": {
+      "NL": "Jordanië"
+    }
+  },
+  {
+    "id": 105,
+    "url": "kazachstan",
+    "covid": {
+      "name": "Kazakhstan"
+    },
+    "geojson": {
+      "name": "Kazakhstan"
+    },
+    "translations": {
+      "NL": "Kazachstan"
+    }
+  },
+  {
+    "id": 106,
+    "url": "kenia",
+    "covid": {
+      "name": "Kenya"
+    },
+    "geojson": {
+      "name": "Kenya"
+    },
+    "translations": {
+      "NL": "Kenia"
+    }
+  },
+  {
+    "id": 107,
+    "url": "koeweit",
+    "covid": {
+      "name": "Kuwait"
+    },
+    "geojson": {
+      "name": "Kuwait"
+    },
+    "translations": {
+      "NL": "Koeweit"
+    }
+  },
+  {
+    "id": 108,
+    "url": "kirgizie",
+    "covid": {
+      "name": "Kyrgyzstan"
+    },
+    "geojson": {
+      "name": "Kyrgyzstan"
+    },
+    "translations": {
+      "NL": "Kirgizië"
+    }
+  },
+  {
+    "id": 109,
+    "url": "laos",
+    "covid": {
+      "name": "Lao People's Democratic Republic"
+    },
+    "geojson": {
+      "name": "Lao PDR"
+    },
+    "translations": {
+      "NL": "Laos"
+    }
+  },
+  {
+    "id": 110,
+    "url": "letland",
+    "covid": {
+      "name": "Latvia"
+    },
+    "geojson": {
+      "name": "Latvia"
+    },
+    "translations": {
+      "NL": "Letland"
+    }
+  },
+  {
+    "id": 111,
+    "url": "libanon",
+    "covid": {
+      "name": "Lebanon"
+    },
+    "geojson": {
+      "name": "Lebanon"
+    },
+    "translations": {
+      "NL": "Libanon"
+    }
+  },
+  {
+    "id": 112,
+    "url": "lesotho",
+    "covid": {
+      "name": "Lesotho"
+    },
+    "geojson": {
+      "name": "Lesotho"
+    },
+    "translations": {
+      "NL": "Lesotho"
+    }
+  },
+  {
+    "id": 113,
+    "url": "liberia",
+    "covid": {
+      "name": "Liberia"
+    },
+    "geojson": {
+      "name": "Liberia"
+    },
+    "translations": {
+      "NL": "Liberia"
+    }
+  },
+  {
+    "id": 114,
+    "url": "libie",
+    "covid": {
+      "name": "Libyan Arab Jamahiriya"
+    },
+    "geojson": {
+      "name": "Libya"
+    },
+    "translations": {
+      "NL": "Libië"
+    }
+  },
+  {
+    "id": 115,
+    "url": "liechtenstein",
+    "covid": {
+      "name": "Liechtenstein"
+    },
+    "geojson": {
+      "name": "Liechtenstein"
+    },
+    "translations": {
+      "NL": "Liechtenstein"
+    }
+  },
+  {
+    "id": 116,
+    "url": "litouwen",
+    "covid": {
+      "name": "Lithuania"
+    },
+    "geojson": {
+      "name": "Lithuania"
+    },
+    "translations": {
+      "NL": "Litouwen"
+    }
+  },
+  {
+    "id": 117,
+    "url": "luxemburg",
+    "covid": {
+      "name": "Luxembourg"
+    },
+    "geojson": {
+      "name": "Luxembourg"
+    },
+    "translations": {
+      "NL": "Luxemburg"
+    }
+  },
+  {
+    "id": 118,
+    "url": "zaandam",
+    "covid": {
+      "name": "MS Zaandam"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Zaandam"
+    }
+  },
+  {
+    "id": 119,
+    "url": "macau",
+    "covid": {
+      "name": "Macao"
+    },
+    "geojson": {
+      "name": "Macao"
+    },
+    "translations": {
+      "NL": "Macau"
+    }
+  },
+  {
+    "id": 120,
+    "url": "macedonie",
+    "covid": {
+      "name": "Macedonia"
+    },
+    "geojson": {
+      "name": "Macedonia"
+    },
+    "translations": {
+      "NL": "Macedonië"
+    }
+  },
+  {
+    "id": 121,
+    "url": "madagaskar",
+    "covid": {
+      "name": "Madagascar"
+    },
+    "geojson": {
+      "name": "Madagascar"
+    },
+    "translations": {
+      "NL": "Madagaskar"
+    }
+  },
+  {
+    "id": 122,
+    "url": "malawi",
+    "covid": {
+      "name": "Malawi"
+    },
+    "geojson": {
+      "name": "Malawi"
+    },
+    "translations": {
+      "NL": "Malawi"
+    }
+  },
+  {
+    "id": 123,
+    "url": "maleisie",
+    "covid": {
+      "name": "Malaysia"
+    },
+    "geojson": {
+      "name": "Malaysia"
+    },
+    "translations": {
+      "NL": "Maleisië"
+    }
+  },
+  {
+    "id": 124,
+    "url": "malediven",
+    "covid": {
+      "name": "Maldives"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Malediven"
+    }
+  },
+  {
+    "id": 125,
+    "url": "mali",
+    "covid": {
+      "name": "Mali"
+    },
+    "geojson": {
+      "name": "Mali"
+    },
+    "translations": {
+      "NL": "Mali"
+    }
+  },
+  {
+    "id": 126,
+    "url": "malta",
+    "covid": {
+      "name": "Malta"
+    },
+    "geojson": {
+      "name": "Malta"
+    },
+    "translations": {
+      "NL": "Malta"
+    }
+  },
+  {
+    "id": 127,
+    "url": "marshalleilanden",
+    "covid": {
+      "name": "Marshall Islands"
+    },
+    "geojson": {
+      "name": "Marshall Is."
+    },
+    "translations": {
+      "NL": "Marshalleilanden"
+    }
+  },
+  {
+    "id": 128,
+    "url": "martinique",
+    "covid": {
+      "name": "Martinique"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Martinique"
+    }
+  },
+  {
+    "id": 129,
+    "url": "mauritanie",
+    "covid": {
+      "name": "Mauritania"
+    },
+    "geojson": {
+      "name": "Mauritania"
+    },
+    "translations": {
+      "NL": "Mauritanië"
+    }
+  },
+  {
+    "id": 130,
+    "url": "mauritius",
+    "covid": {
+      "name": "Mauritius"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Mauritius"
+    }
+  },
+  {
+    "id": 131,
+    "url": "mayotte",
+    "covid": {
+      "name": "Mayotte"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Mayotte"
+    }
+  },
+  {
+    "id": 132,
+    "url": "mexico",
+    "covid": {
+      "name": "Mexico"
+    },
+    "geojson": {
+      "name": "Mexico"
+    },
+    "translations": {
+      "NL": "Mexico"
+    }
+  },
+  {
+    "id": 133,
+    "url": "micronesia",
+    "covid": {
+      "name": "Micronesia"
+    },
+    "geojson": {
+      "name": "Micronesia"
+    },
+    "translations": {
+      "NL": "Micronesia"
+    }
+  },
+  {
+    "id": 134,
+    "url": "moldavie",
+    "covid": {
+      "name": "Moldova"
+    },
+    "geojson": {
+      "name": "Moldova"
+    },
+    "translations": {
+      "NL": "Moldavië"
+    }
+  },
+  {
+    "id": 135,
+    "url": "monaco",
+    "covid": {
+      "name": "Monaco"
+    },
+    "geojson": {
+      "name": "Monaco"
+    },
+    "translations": {
+      "NL": "Monaco"
+    }
+  },
+  {
+    "id": 136,
+    "url": "mongolie",
+    "covid": {
+      "name": "Mongolia"
+    },
+    "geojson": {
+      "name": "Mongolia"
+    },
+    "translations": {
+      "NL": "Mongolië"
+    }
+  },
+  {
+    "id": 137,
+    "url": "montenegro",
+    "covid": {
+      "name": "Montenegro"
+    },
+    "geojson": {
+      "name": "Montenegro"
+    },
+    "translations": {
+      "NL": "Montenegro"
+    }
+  },
+  {
+    "id": 138,
+    "url": "montserrat",
+    "covid": {
+      "name": "Montserrat"
+    },
+    "geojson": {
+      "name": "Montserrat"
+    },
+    "translations": {
+      "NL": "Montserrat"
+    }
+  },
+  {
+    "id": 139,
+    "url": "marokko",
+    "covid": {
+      "name": "Morocco"
+    },
+    "geojson": {
+      "name": "Morocco"
+    },
+    "translations": {
+      "NL": "Marokko"
+    }
+  },
+  {
+    "id": 140,
+    "url": "mozambique",
+    "covid": {
+      "name": "Mozambique"
+    },
+    "geojson": {
+      "name": "Mozambique"
+    },
+    "translations": {
+      "NL": "Mozambique"
+    }
+  },
+  {
+    "id": 141,
+    "url": "myanmar",
+    "covid": {
+      "name": "Myanmar"
+    },
+    "geojson": {
+      "name": "Myanmar"
+    },
+    "translations": {
+      "NL": "Myanmar"
+    }
+  },
+  {
+    "id": 142,
+    "url": "namibie",
+    "covid": {
+      "name": "Namibia"
+    },
+    "geojson": {
+      "name": "Namibia"
+    },
+    "translations": {
+      "NL": "Namibië"
+    }
+  },
+  {
+    "id": 143,
+    "url": "nepal",
+    "covid": {
+      "name": "Nepal"
+    },
+    "geojson": {
+      "name": "Nepal"
+    },
+    "translations": {
+      "NL": "Nepal"
+    }
+  },
+  {
+    "id": 144,
+    "url": "nederland",
+    "covid": {
+      "name": "Netherlands"
+    },
+    "geojson": {
+      "name": "Netherlands"
+    },
+    "translations": {
+      "NL": "Nederland"
+    }
+  },
+  {
+    "id": 145,
+    "url": "nieuw-caledonie",
+    "covid": {
+      "name": "New Caledonia"
+    },
+    "geojson": {
+      "name": "New Caledonia"
+    },
+    "translations": {
+      "NL": "Nieuw-Caledonië"
+    }
+  },
+  {
+    "id": 146,
+    "url": "nieuw-zeeland",
+    "covid": {
+      "name": "New Zealand"
+    },
+    "geojson": {
+      "name": "New Zealand"
+    },
+    "translations": {
+      "NL": "Nieuw-Zeeland"
+    }
+  },
+  {
+    "id": 147,
+    "url": "nicaragua",
+    "covid": {
+      "name": "Nicaragua"
+    },
+    "geojson": {
+      "name": "Nicaragua"
+    },
+    "translations": {
+      "NL": "Nicaragua"
+    }
+  },
+  {
+    "id": 148,
+    "url": "niger",
+    "covid": {
+      "name": "Niger"
+    },
+    "geojson": {
+      "name": "Niger"
+    },
+    "translations": {
+      "NL": "Niger"
+    }
+  },
+  {
+    "id": 149,
+    "url": "nigeria",
+    "covid": {
+      "name": "Nigeria"
+    },
+    "geojson": {
+      "name": "Nigeria"
+    },
+    "translations": {
+      "NL": "Nigeria"
+    }
+  },
+  {
+    "id": 150,
+    "url": "noorwegen",
+    "covid": {
+      "name": "Norway"
+    },
+    "geojson": {
+      "name": "Norway"
+    },
+    "translations": {
+      "NL": "Noorwegen"
+    }
+  },
+  {
+    "id": 151,
+    "url": "oman",
+    "covid": {
+      "name": "Oman"
+    },
+    "geojson": {
+      "name": "Oman"
+    },
+    "translations": {
+      "NL": "Oman"
+    }
+  },
+  {
+    "id": 152,
+    "url": "pakistan",
+    "covid": {
+      "name": "Pakistan"
+    },
+    "geojson": {
+      "name": "Pakistan"
+    },
+    "translations": {
+      "NL": "Pakistan"
+    }
+  },
+  {
+    "id": 153,
+    "url": "palestina",
+    "covid": {
+      "name": "Palestine"
+    },
+    "geojson": {
+      "name": "Palestine"
+    },
+    "translations": {
+      "NL": "Palestina"
+    }
+  },
+  {
+    "id": 154,
+    "url": "panama",
+    "covid": {
+      "name": "Panama"
+    },
+    "geojson": {
+      "name": "Panama"
+    },
+    "translations": {
+      "NL": "Panama"
+    }
+  },
+  {
+    "id": 155,
+    "url": "papoea-nieuw-guinea",
+    "covid": {
+      "name": "Papua New Guinea"
+    },
+    "geojson": {
+      "name": "Papua New Guinea"
+    },
+    "translations": {
+      "NL": "Papoea-Nieuw-Guinea"
+    }
+  },
+  {
+    "id": 156,
+    "url": "paraguay",
+    "covid": {
+      "name": "Paraguay"
+    },
+    "geojson": {
+      "name": "Paraguay"
+    },
+    "translations": {
+      "NL": "Paraguay"
+    }
+  },
+  {
+    "id": 157,
+    "url": "peru",
+    "covid": {
+      "name": "Peru"
+    },
+    "geojson": {
+      "name": "Peru"
+    },
+    "translations": {
+      "NL": "Peru"
+    }
+  },
+  {
+    "id": 158,
+    "url": "filipijnen",
+    "covid": {
+      "name": "Philippines"
+    },
+    "geojson": {
+      "name": "Philippines"
+    },
+    "translations": {
+      "NL": "Filipijnen"
+    }
+  },
+  {
+    "id": 159,
+    "url": "polen",
+    "covid": {
+      "name": "Poland"
+    },
+    "geojson": {
+      "name": "Poland"
+    },
+    "translations": {
+      "NL": "Polen"
+    }
+  },
+  {
+    "id": 160,
+    "url": "portugal",
+    "covid": {
+      "name": "Portugal"
+    },
+    "geojson": {
+      "name": "Portugal"
+    },
+    "translations": {
+      "NL": "Portugal"
+    }
+  },
+  {
+    "id": 161,
+    "url": "qatar",
+    "covid": {
+      "name": "Qatar"
+    },
+    "geojson": {
+      "name": "Qatar"
+    },
+    "translations": {
+      "NL": "Qatar"
+    }
+  },
+  {
+    "id": 162,
+    "url": "roemenie",
+    "covid": {
+      "name": "Romania"
+    },
+    "geojson": {
+      "name": "Romania"
+    },
+    "translations": {
+      "NL": "Roemenië"
+    }
+  },
+  {
+    "id": 163,
+    "url": "rusland",
+    "covid": {
+      "name": "Russia"
+    },
+    "geojson": {
+      "name": "Russia"
+    },
+    "translations": {
+      "NL": "Rusland"
+    }
+  },
+  {
+    "id": 164,
+    "url": "rwanda",
+    "covid": {
+      "name": "Rwanda"
+    },
+    "geojson": {
+      "name": "Rwanda"
+    },
+    "translations": {
+      "NL": "Rwanda"
+    }
+  },
+  {
+    "id": 165,
+    "url": "reunion",
+    "covid": {
+      "name": "Réunion"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Réunion"
+    }
+  },
+  {
+    "id": 166,
+    "url": "zuid-korea",
+    "covid": {
+      "name": "S. Korea"
+    },
+    "geojson": {
+      "name": "Dem. Rep. Korea"
+    },
+    "translations": {
+      "NL": "Zuid-Korea"
+    }
+  },
+  {
+    "id": 167,
+    "url": "saint-kitts-en-nevis",
+    "covid": {
+      "name": "Saint Kitts and Nevis"
+    },
+    "geojson": {
+      "name": "St. Kitts and Nevis"
+    },
+    "translations": {
+      "NL": "Saint Kitts en Nevis"
+    }
+  },
+  {
+    "id": 168,
+    "url": "saint-lucia",
+    "covid": {
+      "name": "Saint Lucia"
+    },
+    "geojson": {
+      "name": "Saint Lucia"
+    },
+    "translations": {
+      "NL": "Saint Lucia"
+    }
+  },
+  {
+    "id": 169,
+    "url": "sint-maarten-fr",
+    "covid": {
+      "name": "Saint Martin"
+    },
+    "geojson": {
+      "name": "St-Martin"
+    },
+    "translations": {
+      "NL": "Sint Maarten"
+    }
+  },
+  {
+    "id": 170,
+    "url": "saint-vincent-en-de-grenadines",
+    "covid": {
+      "name": "Saint Vincent and the Grenadines"
+    },
+    "geojson": {
+      "name": "St. Vin. and Gren."
+    },
+    "translations": {
+      "NL": "Saint Vincent en de Grenadines"
+    }
+  },
+  {
+    "id": 171,
+    "url": "samoa",
+    "covid": {
+      "name": "Samoa"
+    },
+    "geojson": {
+      "name": "Samoa"
+    },
+    "translations": {
+      "NL": "Samoa"
+    }
+  },
+  {
+    "id": 172,
+    "url": "san-marino",
+    "covid": {
+      "name": "San Marino"
+    },
+    "geojson": {
+      "name": "San Marino"
+    },
+    "translations": {
+      "NL": "San Marino"
+    }
+  },
+  {
+    "id": 173,
+    "url": "sao-tome-en-principe",
+    "covid": {
+      "name": "Sao Tome and Principe"
+    },
+    "geojson": {
+      "name": "São Tomé and Principe"
+    },
+    "translations": {
+      "NL": "Sao Tomé en Principe"
+    }
+  },
+  {
+    "id": 174,
+    "url": "saudi-arabie",
+    "covid": {
+      "name": "Saudi Arabia"
+    },
+    "geojson": {
+      "name": "Saudi Arabia"
+    },
+    "translations": {
+      "NL": "Saudi-Arabië"
+    }
+  },
+  {
+    "id": 175,
+    "url": "senegal",
+    "covid": {
+      "name": "Senegal"
+    },
+    "geojson": {
+      "name": "Senegal"
+    },
+    "translations": {
+      "NL": "Senegal"
+    }
+  },
+  {
+    "id": 176,
+    "url": "servie",
+    "covid": {
+      "name": "Serbia"
+    },
+    "geojson": {
+      "name": "Serbia"
+    },
+    "translations": {
+      "NL": "Servië"
+    }
+  },
+  {
+    "id": 177,
+    "url": "seychellen",
+    "covid": {
+      "name": "Seychelles"
+    },
+    "geojson": {
+      "name": null
+    },
+    "translations": {
+      "NL": "Seychellen"
+    }
+  },
+  {
+    "id": 178,
+    "url": "sierra-leone",
+    "covid": {
+      "name": "Sierra Leone"
+    },
+    "geojson": {
+      "name": "Sierra Leone"
+    },
+    "translations": {
+      "NL": "Sierra Leone"
+    }
+  },
+  {
+    "id": 179,
+    "url": "singapore",
+    "covid": {
+      "name": "Singapore"
+    },
+    "geojson": {
+      "name": "Singapore"
+    },
+    "translations": {
+      "NL": "Singapore"
+    }
+  },
+  {
+    "id": 180,
+    "url": "sint-maarten-nl",
+    "covid": {
+      "name": "Sint Maarten"
+    },
+    "geojson": {
+      "name": "Sint Maarten"
+    },
+    "translations": {
+      "NL": "Sint Maarten"
+    }
+  },
+  {
+    "id": 181,
+    "url": "slowakije",
+    "covid": {
+      "name": "Slovakia"
+    },
+    "geojson": {
+      "name": "Slovakia"
+    },
+    "translations": {
+      "NL": "Slowakije"
+    }
+  },
+  {
+    "id": 182,
+    "url": "slovenie",
+    "covid": {
+      "name": "Slovenia"
+    },
+    "geojson": {
+      "name": "Slovenia"
+    },
+    "translations": {
+      "NL": "Slovenië"
+    }
+  },
+  {
+    "id": 183,
+    "url": "solomoneilanden",
+    "covid": {
+      "name": "Solomon Islands"
+    },
+    "geojson": {
+      "name": "Solomon Is."
+    },
+    "translations": {
+      "NL": "Solomoneilanden"
+    }
+  },
+  {
+    "id": 184,
+    "url": "somalie",
+    "covid": {
+      "name": "Somalia"
+    },
+    "geojson": {
+      "name": "Somalia"
+    },
+    "translations": {
+      "NL": "Somalië"
+    }
+  },
+  {
+    "id": 185,
+    "url": "zuid-afrika",
+    "covid": {
+      "name": "South Africa"
+    },
+    "geojson": {
+      "name": "South Africa"
+    },
+    "translations": {
+      "NL": "Zuid-Afrika"
+    }
+  },
+  {
+    "id": 186,
+    "url": "zuid-soedan",
+    "covid": {
+      "name": "South Sudan"
+    },
+    "geojson": {
+      "name": "S. Sudan"
+    },
+    "translations": {
+      "NL": "Zuid-Soedan"
+    }
+  },
+  {
+    "id": 187,
+    "url": "spanje",
+    "covid": {
+      "name": "Spain"
+    },
+    "geojson": {
+      "name": "Spain"
+    },
+    "translations": {
+      "NL": "Spanje"
+    }
+  },
+  {
+    "id": 188,
+    "url": "sri-lanka",
+    "covid": {
+      "name": "Sri Lanka"
+    },
+    "geojson": {
+      "name": "Sri Lanka"
+    },
+    "translations": {
+      "NL": "Sri Lanka"
+    }
+  },
+  {
+    "id": 189,
+    "url": "saint-barthelemy",
+    "covid": {
+      "name": "St. Barth"
+    },
+    "geojson": {
+      "name": "St-Barthélemy"
+    },
+    "translations": {
+      "NL": "Saint-Barthélemy"
+    }
+  },
+  {
+    "id": 190,
+    "url": "soedan",
+    "covid": {
+      "name": "Sudan"
+    },
+    "geojson": {
+      "name": "Sudan"
+    },
+    "translations": {
+      "NL": "Soedan"
+    }
+  },
+  {
+    "id": 191,
+    "url": "suriname",
+    "covid": {
+      "name": "Suriname"
+    },
+    "geojson": {
+      "name": "Suriname"
+    },
+    "translations": {
+      "NL": "Suriname"
+    }
+  },
+  {
+    "id": 192,
+    "url": "swaziland",
+    "covid": {
+      "name": "Swaziland"
+    },
+    "geojson": {
+      "name": "Swaziland"
+    },
+    "translations": {
+      "NL": "Swaziland"
+    }
+  },
+  {
+    "id": 193,
+    "url": "zweden",
+    "covid": {
+      "name": "Sweden"
+    },
+    "geojson": {
+      "name": "Sweden"
+    },
+    "translations": {
+      "NL": "Zweden"
+    }
+  },
+  {
+    "id": 194,
+    "url": "zwitserland",
+    "covid": {
+      "name": "Switzerland"
+    },
+    "geojson": {
+      "name": "Switzerland"
+    },
+    "translations": {
+      "NL": "Zwitserland"
+    }
+  },
+  {
+    "id": 195,
+    "url": "syrie",
+    "covid": {
+      "name": "Syrian Arab Republic"
+    },
+    "geojson": {
+      "name": "Syria"
+    },
+    "translations": {
+      "NL": "Syrië"
+    }
+  },
+  {
+    "id": 196,
+    "url": "taiwan",
+    "covid": {
+      "name": "Taiwan"
+    },
+    "geojson": {
+      "name": "Taiwan"
+    },
+    "translations": {
+      "NL": "Taiwan"
+    }
+  },
+  {
+    "id": 197,
+    "url": "tadzjikistan",
+    "covid": {
+      "name": "Tajikistan"
+    },
+    "geojson": {
+      "name": "Tajikistan"
+    },
+    "translations": {
+      "NL": "Tadzjikistan"
+    }
+  },
+  {
+    "id": 198,
+    "url": "tanzania",
+    "covid": {
+      "name": "Tanzania"
+    },
+    "geojson": {
+      "name": "Tanzania"
+    },
+    "translations": {
+      "NL": "Tanzania"
+    }
+  },
+  {
+    "id": 199,
+    "url": "thailand",
+    "covid": {
+      "name": "Thailand"
+    },
+    "geojson": {
+      "name": "Thailand"
+    },
+    "translations": {
+      "NL": "Thailand"
+    }
+  },
+  {
+    "id": 200,
+    "url": "oost-timor",
+    "covid": {
+      "name": "Timor-Leste"
+    },
+    "geojson": {
+      "name": "Timor-Leste"
+    },
+    "translations": {
+      "NL": "Oost-Timor"
+    }
+  },
+  {
+    "id": 201,
+    "url": "togo",
+    "covid": {
+      "name": "Togo"
+    },
+    "geojson": {
+      "name": "Togo"
+    },
+    "translations": {
+      "NL": "Togo"
+    }
+  },
+  {
+    "id": 202,
+    "url": "trinidad-en-tobago",
+    "covid": {
+      "name": "Trinidad and Tobago"
+    },
+    "geojson": {
+      "name": "Trinidad and Tobago"
+    },
+    "translations": {
+      "NL": "Trinidad en Tobago"
+    }
+  },
+  {
+    "id": 203,
+    "url": "tunesie",
+    "covid": {
+      "name": "Tunisia"
+    },
+    "geojson": {
+      "name": "Tunisia"
+    },
+    "translations": {
+      "NL": "Tunesië"
+    }
+  },
+  {
+    "id": 204,
+    "url": "turkije",
+    "covid": {
+      "name": "Turkey"
+    },
+    "geojson": {
+      "name": "Turkey"
+    },
+    "translations": {
+      "NL": "Turkije"
+    }
+  },
+  {
+    "id": 205,
+    "url": "turks-en-caicoseilanden",
+    "covid": {
+      "name": "Turks and Caicos Islands"
+    },
+    "geojson": {
+      "name": "Turks and Caicos Is."
+    },
+    "translations": {
+      "NL": "Turks- en Caicoseilanden"
+    }
+  },
+  {
+    "id": 206,
+    "url": "verenigde-arabische-emiraten",
+    "covid": {
+      "name": "UAE"
+    },
+    "geojson": {
+      "name": "United Arab Emirates"
+    },
+    "translations": {
+      "NL": "Verenigde Arabische Emiraten"
+    }
+  },
+  {
+    "id": 207,
+    "url": "verenigd-koninkrijk",
+    "covid": {
+      "name": "UK"
+    },
+    "geojson": {
+      "name": "United Kingdom"
+    },
+    "translations": {
+      "NL": "Verenigd Koninkrijk"
+    }
+  },
+  {
+    "id": 208,
+    "url": "verenigde-staten",
+    "covid": {
+      "name": "USA"
+    },
+    "geojson": {
+      "name": "United States"
+    },
+    "translations": {
+      "NL": "Verenigde Staten"
+    }
+  },
+  {
+    "id": 209,
+    "url": "uganda",
+    "covid": {
+      "name": "Uganda"
+    },
+    "geojson": {
+      "name": "Uganda"
+    },
+    "translations": {
+      "NL": "Uganda"
+    }
+  },
+  {
+    "id": 210,
+    "url": "ukraine",
+    "covid": {
+      "name": "Ukraine"
+    },
+    "geojson": {
+      "name": "Ukraine"
+    },
+    "translations": {
+      "NL": "Ukraïne"
+    }
+  },
+  {
+    "id": 211,
+    "url": "uruguay",
+    "covid": {
+      "name": "Uruguay"
+    },
+    "geojson": {
+      "name": "Uruguay"
+    },
+    "translations": {
+      "NL": "Uruguay"
+    }
+  },
+  {
+    "id": 212,
+    "url": "oezbekistan",
+    "covid": {
+      "name": "Uzbekistan"
+    },
+    "geojson": {
+      "name": "Uzbekistan"
+    },
+    "translations": {
+      "NL": "Oezbekistan"
+    }
+  },
+  {
+    "id": 213,
+    "url": "vanuatu",
+    "covid": {
+      "name": "Vanuatu"
+    },
+    "geojson": {
+      "name": "Vanuatu"
+    },
+    "translations": {
+      "NL": "Vanuatu"
+    }
+  },
+  {
+    "id": 214,
+    "url": "venezuela",
+    "covid": {
+      "name": "Venezuela"
+    },
+    "geojson": {
+      "name": "Venezuela"
+    },
+    "translations": {
+      "NL": "Venezuela"
+    }
+  },
+  {
+    "id": 215,
+    "url": "vietnam",
+    "covid": {
+      "name": "Vietnam"
+    },
+    "geojson": {
+      "name": "Vietnam"
+    },
+    "translations": {
+      "NL": "Vietnam"
+    }
+  },
+  {
+    "id": 216,
+    "url": "wallis-en-futuna",
+    "covid": {
+      "name": "Wallis and Futuna"
+    },
+    "geojson": {
+      "name": "Wallis and Futuna Is."
+    },
+    "translations": {
+      "NL": "Wallis en Futuna"
+    }
+  },
+  {
+    "id": 217,
+    "url": "westelijke-sahara",
+    "covid": {
+      "name": "Western Sahara"
+    },
+    "geojson": {
+      "name": "W. Sahara"
+    },
+    "translations": {
+      "NL": "Westelijke Sahara"
+    }
+  },
+  {
+    "id": 218,
+    "url": "jemen",
+    "covid": {
+      "name": "Yemen"
+    },
+    "geojson": {
+      "name": "Yemen"
+    },
+    "translations": {
+      "NL": "Jemen"
+    }
+  },
+  {
+    "id": 219,
+    "url": "zambia",
+    "covid": {
+      "name": "Zambia"
+    },
+    "geojson": {
+      "name": "Zambia"
+    },
+    "translations": {
+      "NL": "Zambia"
+    }
+  },
+  {
+    "id": 220,
+    "url": "zimbabwe",
+    "covid": {
+      "name": "Zimbabwe"
+    },
+    "geojson": {
+      "name": "Zimbabwe"
+    },
+    "translations": {
+      "NL": "Zimbabwe"
+    }
+  },
+  {
+    "id": 221,
+    "url": "bajo-nuevo",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Bajo Nuevo Bank (Petrel Is.)"
+    },
+    "translations": {
+      "NL": "Bajo Nuevo"
+    }
+  },
+  {
+    "id": 222,
+    "url": "serranilla",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Serranilla Bank"
+    },
+    "translations": {
+      "NL": "Serranilla"
+    }
+  },
+  {
+    "id": 223,
+    "url": "puerto-rico",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Puerto Rico"
+    },
+    "translations": {
+      "NL": "Puerto Rico"
+    }
+  },
+  {
+    "id": 224,
+    "url": "saint-pierre-en-miquelon",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "St. Pierre and Miquelon"
+    },
+    "translations": {
+      "NL": "Saint-Pierre en Miquelon"
+    }
+  },
+  {
+    "id": 225,
+    "url": "kleine-afgelegen-eilanden-van-de-verenigde-staten",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "U.S. Minor Outlying Is."
+    },
+    "translations": {
+      "NL": "Kleine Afgelegen Eilanden van de Verenigde Staten"
+    }
+  },
+  {
+    "id": 226,
+    "url": "guantanamo-bay",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "USNB Guantanamo Bay"
+    },
+    "translations": {
+      "NL": "Guantanamo Bay"
+    }
+  },
+  {
+    "id": 227,
+    "url": "amerikaanse-maagdeneilanden",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "U.S. Virgin Is."
+    },
+    "translations": {
+      "NL": "Amerikaanse Maagdeneilanden"
+    }
+  },
+  {
+    "id": 228,
+    "url": "vn-bufferzone",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "U.N. Buffer Zone"
+    },
+    "translations": {
+      "NL": "VN-bufferzone"
+    }
+  },
+  {
+    "id": 229,
+    "url": "noord-cyprus",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "N. Cyprus"
+    },
+    "translations": {
+      "NL": "Noord-Cyprus"
+    }
+  },
+  {
+    "id": 230,
+    "url": "cyprus",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Cyprus"
+    },
+    "translations": {
+      "NL": "Cyprus"
+    }
+  },
+  {
+    "id": 231,
+    "url": "akrotiri-en-dhekelia",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Dhekelia"
+    },
+    "translations": {
+      "NL": "Akrotiri en Dhekelia"
+    }
+  },
+  {
+    "id": 232,
+    "url": "brits-indische-oceaanterritorium",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Indian Ocean Ter."
+    },
+    "translations": {
+      "NL": "Brits Indische Oceaanterritorium"
+    }
+  },
+  {
+    "id": 233,
+    "url": "bajkonoer",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Baikonur"
+    },
+    "translations": {
+      "NL": "Bajkonoer"
+    }
+  },
+  {
+    "id": 234,
+    "url": "siachen-gletsjer",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Siachen Glacier"
+    },
+    "translations": {
+      "NL": "Siachen-Gletsjer"
+    }
+  },
+  {
+    "id": 235,
+    "url": "korea",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Korea"
+    },
+    "translations": {
+      "NL": "Korea"
+    }
+  },
+  {
+    "id": 236,
+    "url": "spratly-eilanden",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Spratly Is."
+    },
+    "translations": {
+      "NL": "Spratly-eilanden"
+    }
+  },
+  {
+    "id": 237,
+    "url": "scarborough-rif",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Scarborough Reef"
+    },
+    "translations": {
+      "NL": "Scarborough-rif"
+    }
+  },
+  {
+    "id": 238,
+    "url": "turkmenistan",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Turkmenistan"
+    },
+    "translations": {
+      "NL": "Turkmenistan"
+    }
+  },
+  {
+    "id": 239,
+    "url": "akrotiri",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Akrotiri"
+    },
+    "translations": {
+      "NL": "Akrotiri"
+    }
+  },
+  {
+    "id": 240,
+    "url": "somaliland",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Somaliland"
+    },
+    "translations": {
+      "NL": "Somaliland"
+    }
+  },
+  {
+    "id": 241,
+    "url": "amerikaanse-samoa",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "American Samoa"
+    },
+    "translations": {
+      "NL": "Amerikaans Samoa"
+    }
+  },
+  {
+    "id": 242,
+    "url": "ashmore-en-cartiereilanden",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Ashmore and Cartier Is."
+    },
+    "translations": {
+      "NL": "Ashmore- en Cartiereilanden"
+    }
+  },
+  {
+    "id": 243,
+    "url": "cookeilanden",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Cook Is."
+    },
+    "translations": {
+      "NL": "Cookeilanden"
+    }
+  },
+  {
+    "id": 244,
+    "url": "koraalzee-eilanden",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Coral Sea Is."
+    },
+    "translations": {
+      "NL": "Koraalzee-eilanden"
+    }
+  },
+  {
+    "id": 245,
+    "url": "guam",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Guam"
+    },
+    "translations": {
+      "NL": "Guam"
+    }
+  },
+  {
+    "id": 246,
+    "url": "kiribati",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Kiribati"
+    },
+    "translations": {
+      "NL": "Kiribati"
+    }
+  },
+  {
+    "id": 247,
+    "url": "noordelijke-marianen",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "N. Mariana Is."
+    },
+    "translations": {
+      "NL": "Noordelijke Marianen"
+    }
+  },
+  {
+    "id": 248,
+    "url": "norfolk-island",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Norfolk Island"
+    },
+    "translations": {
+      "NL": "Territorium Norfolkeiland"
+    }
+  },
+  {
+    "id": 249,
+    "url": "niue",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Niue"
+    },
+    "translations": {
+      "NL": "Niue"
+    }
+  },
+  {
+    "id": 250,
+    "url": "nauru",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Nauru"
+    },
+    "translations": {
+      "NL": "Nauru"
+    }
+  },
+  {
+    "id": 251,
+    "url": "pitcairneilanden",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Pitcairn Is."
+    },
+    "translations": {
+      "NL": "Pitcairneilanden"
+    }
+  },
+  {
+    "id": 252,
+    "url": "palau",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Palau"
+    },
+    "translations": {
+      "NL": "Palau"
+    }
+  },
+  {
+    "id": 253,
+    "url": "tonga",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Tonga"
+    },
+    "translations": {
+      "NL": "Tonga"
+    }
+  },
+  {
+    "id": 254,
+    "url": "tuvalu",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Tuvalu"
+    },
+    "translations": {
+      "NL": "Tuvalu"
+    }
+  },
+  {
+    "id": 255,
+    "url": "aland",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Aland"
+    },
+    "translations": {
+      "NL": "Åland"
+    }
+  },
+  {
+    "id": 256,
+    "url": "guernsey",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Guernsey"
+    },
+    "translations": {
+      "NL": "Guernsey"
+    }
+  },
+  {
+    "id": 257,
+    "url": "jersey",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Jersey"
+    },
+    "translations": {
+      "NL": "Jersey"
+    }
+  },
+  {
+    "id": 258,
+    "url": "kosovo",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Kosovo"
+    },
+    "translations": {
+      "NL": "Kosovo"
+    }
+  }
+]

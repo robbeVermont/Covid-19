@@ -64,7 +64,7 @@
     height: 50vh;
     @include media-breakpoint-down(lg) {
       height: 40vh;
-      margin-top: 5px;
+      margin-top: 2px;
     }
     @include media-breakpoint-down(md) {
       height: 40vh;
@@ -77,7 +77,7 @@
     }
     @include media-breakpoint-down(xs) {
       height: 20vh;
-      margin-top: 2px;
+      margin-top: -2px;
     }
     &--lines {
       @include media-breakpoint-down(sm) {
@@ -100,121 +100,4 @@
       height: 30vh;
     }
   }
-}
-
-h2 {
-  font-weight: 900;
-  position: relative;
-  padding-left: 3rem;
-  font-size: 56px;
-  color: #354b60;
-  margin-top: 115px;
-  margin-bottom: 40px;
-  display: block;
-  img {
-    height: 4rem;
-  }
-}
-h2::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: -0.7rem;
-  width: 1rem;
-  height: calc(100% + 1.4rem);
-  background-color: #00b8b1;
-}
-
-h3 {
-  color: white;
-  background-color: #00b8b1;
-  font-size: 36px;
-  position: relative;
-  font-weight: bold;
-  padding-left: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  display: inline-block;
-  padding-right: 2rem;
-  margin-bottom: 47px;
-  margin-top: 30px;
-}
-
-h4 {
-  margin-top: 47px;
-  margin-bottom: 30px;
-  font-size: 32px;
-  font-weight: bold;
-  color: #354b60;
-}
-
-p {
-  font-size: 2rem;
-  line-height: 30px;
-  display: block;
-  margin-bottom: 20px;
-}
-
-a {
-  text-decoration: none;
-  border-bottom: 1px;
-  color: #00b8b1;
-  font-size: 20px;
-}
-
-a:hover,
-a:active,
-a:focus,
-.link:hover,
-.link:active,
-.link:focus {
-  text-decoration: none;
-  border-bottom-style: solid;
-}
-
-ul {
-  list-style-type: none;
-  margin-bottom: 60px;
-}
-
-li {
-  position: relative;
-  margin-left: 41px;
-  margin-bottom: 8px;
-}
-
-li::before {
-  content: "";
-  width: 25rem;
-  height: 25rem;
-  background-image: url("../images/coronaklein.png");
-  position: absolute;
-  left: -137px;
-  top: -87px;
-}
-
-iframe {
-  margin-bottom: 30px;
-}
-
-blockquote {
-  p {
-    font-size: 44px;
-    color: #354b60;
-    font-weight: 900;
-    margin-left: 227px;
-  }
-  background: #a3e2e0;
-  padding-bottom: 66px;
-  padding-top: 66px;
-  margin-bottom: 45px;
-}
-blockquote::before {
-  content: "";
-  width: 118px;
-  height: 158px;
-  background-image: url("../images/doctor.png");
-  position: absolute;
-  margin-top: -42px;
-  margin-left: 58px;
 }

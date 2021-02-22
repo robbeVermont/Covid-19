@@ -282,6 +282,7 @@ const hashToCovid = function (nameHash) {
       nameCovid = country.covid.name;
     }
   }
+
   return nameCovid;
 };
 
@@ -304,8 +305,8 @@ const covidToNL = function (nameEng) {
 
   let nameNL;
   for (const country of countryTranslation) {
-    if (newName == country.EN_Covid) {
-      nameNL = country.NL;
+    if (newName == country.covid.name) {
+      nameNL = country.translations.NL;
     }
   }
   return nameNL;
@@ -629,10 +630,10 @@ const laadContinentsBarGrafiek = function (data, id) {
     fontSize = 12;
   }
 
-  // let seriesAngle = 0;
-  // if (screenWidth < 768) {
-  //   seriesAngle = -30;
-  // }
+  let showLabels = true;
+  if (screenWidth < 768) {
+    showLabels = false;
+  }
 
   let dataDict = {};
   let sortedDataDict = {};
@@ -680,6 +681,8 @@ const laadContinentsBarGrafiek = function (data, id) {
     }
   }
 
+  console.log(sortedDataDict);
+
   var options = {
     chart: {
       type: "bar",
@@ -694,7 +697,27 @@ const laadContinentsBarGrafiek = function (data, id) {
     colors: ["#5C81A5"],
 
     dataLabels: {
-      enabled: false,
+      enabled: !showLabels,
+      dropShadow: {
+        enabled: true,
+        top: 0,
+        left: 0,
+        blur: 1,
+        color: "#000",
+        opacity: 0.8,
+      },
+      style: {
+        fontWeight: 300,
+        fontSize: fontSize,
+        fontFamily: '"Mulish", cursive',
+      },
+      formatter: function (value, { seriesIndex, dataPointIndex, w }) {
+        for (const key in sortedDataDict) {
+          if (sortedDataDict[key] == value) {
+            return key;
+          }
+        }
+      },
     },
     grid: {
       show: true,
@@ -703,7 +726,7 @@ const laadContinentsBarGrafiek = function (data, id) {
     },
     xaxis: {
       labels: {
-        show: false,
+        show: showLabels,
         rotate: 0,
         style: {
           fontSize: fontSize,
@@ -834,11 +857,7 @@ const laadCountryBarGrafiek = function (data, id) {
   const topCountries = [];
   for (const key in topDict) {
     topData.push(topDict[key]);
-    for (const country of countryTranslation) {
-      if (key == country.EN_Covid) {
-        topCountries.push(country.NL);
-      }
-    }
+    topCountries.push(covidToNL(key));
   }
 
   for (let cases of casesData) {
@@ -856,6 +875,11 @@ const laadCountryBarGrafiek = function (data, id) {
     fontSize = 12;
   }
 
+  let showLabels = true;
+  if (screenWidth < 768) {
+    showLabels = false;
+  }
+
   var options = {
     chart: {
       type: "bar",
@@ -869,7 +893,27 @@ const laadCountryBarGrafiek = function (data, id) {
     ],
     colors: ["#5C81A5"],
     dataLabels: {
-      enabled: false,
+      enabled: !showLabels,
+      dropShadow: {
+        enabled: true,
+        top: 0,
+        left: 0,
+        blur: 1,
+        color: "#000",
+        opacity: 0.8,
+      },
+      style: {
+        fontWeight: 300,
+        fontSize: fontSize,
+        fontFamily: '"Mulish", cursive',
+      },
+      formatter: function (value, { seriesIndex, dataPointIndex, w }) {
+        for (const key in topDict) {
+          if (topDict[key] == value) {
+            return covidToNL(key);
+          }
+        }
+      },
     },
     grid: {
       show: true,
@@ -878,6 +922,7 @@ const laadCountryBarGrafiek = function (data, id) {
     },
     xaxis: {
       labels: {
+        show: showLabels,
         rotate: 0,
         style: {
           fontSize: fontSize,
@@ -1996,7 +2041,7 @@ const getVacData = function (id, country) {
 
 const getCountriesJson = function (country) {
   //ophalen van de externe json file
-  fetch("../data/countryData.json")
+  fetch("../data/countries.json")
     .then(function (response) {
       if (!response.ok) {
         throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);
@@ -2009,7 +2054,20 @@ const getCountriesJson = function (country) {
       // console.info("JSON object is aangemaakt");
       countryTranslation = json;
 
-      getCountryData(country);
+      let countryUrls = [];
+      let currentCountry;
+
+      for (const country of json) {
+        countryUrls.push(country.url);
+      }
+
+      if (countryUrls.includes(country)) {
+        currentCountry = hashToCovid(country);
+      } else {
+        currentCountry = country;
+      }
+
+      getCountryData(currentCountry);
     })
     //als de fout opgeworpen is vangen we ze hier op
     .catch(function (error) {
@@ -2126,12 +2184,7 @@ const init = function () {
     }
   };
 
-  country = "belgium";
-
-  if (window.location.hash) {
-    country = hashToCovid(window.location.hash.substring(1, window.location.hash.length));
-  }
-
+  country = window.location.hash.substring(1, window.location.hash.length);
 
   getCountriesJson(country);
 };

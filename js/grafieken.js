@@ -6,6 +6,7 @@ const colorGrey = "#a3a7ac";
 
 let country, countryData;
 let countryTranslation = [];
+let worldData;
 
 const colorArray = [
   "#DF7A7A",
@@ -680,8 +681,6 @@ const laadContinentsBarGrafiek = function (data, id) {
       casesTooltip.push(cases);
     }
   }
-
-  console.log(sortedDataDict);
 
   var options = {
     chart: {
@@ -1722,6 +1721,100 @@ const laadTotalCasesGrafiek = function (data, id, type) {
 
   chart.render();
 };
+const laadTotalCasesData = function (data, type) {
+  let casesData = [];
+  let dateData = [];
+  let casesTooltip = [];
+  let datesTooltip = [];
+  let tooltipName;
+
+  if (type == "cases") {
+    tooltipName = "Besmettingen";
+  } else if (type == "deaths") {
+    tooltipName = "Overlijdens";
+  }
+
+  let fontSize = 14;
+  let strokeWidth = 5;
+
+  if (screenWidth < 768) {
+    strokeWidth = 2;
+  }
+
+  if (screenWidth < 576) {
+    fontSize = 12;
+  }
+
+  for (const key in data) {
+    let dateArray = key.split("/");
+    const year = "20" + dateArray[2];
+
+    dateArray.pop();
+    for (let number = 0; number < 2; number += 1) {
+      if (dateArray[number].split("").length == 1) {
+        dateArray[number] = "0" + dateArray[number];
+      }
+    }
+    const date = dateArray[1] + "/" + dateArray[0];
+
+    const tempDate = new Date(year, dateArray[0] - 1, dateArray[1]);
+
+    datesTooltip.push(
+      dagen[tempDate.getDay()] +
+        " " +
+        dateArray[1] +
+        " " +
+        months[dateArray[0] - 1] +
+        " " +
+        year
+    );
+
+    dateData.push(date);
+    casesData.push(data[key]);
+  }
+
+  for (const key in casesData) {
+    if (casesData[key] < 0) {
+      casesData[key] = 0;
+    }
+  }
+
+  const totalCasesToday = convertNumber(casesData[casesData.length - 1]);
+
+  const stijgingNummer =
+    casesData[casesData.length - 1] - casesData[casesData.length - 2];
+
+  let stijgingProcent = (
+    stijgingNummer /
+    (casesData[casesData.length - 2] - casesData[casesData.length - 3])
+  ).toFixed(2);
+
+  if (type == "cases") {
+    document.querySelector(".js-cases").innerHTML = totalCasesToday;
+    document.querySelector(
+      ".js-casestext"
+    ).innerHTML = `Momenteel zijn er ${totalCasesToday} positieve tests afgenomen. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
+      stijgingNummer
+    )} mensen.`;
+  } else if (type == "deaths") {
+    document.querySelector(".js-deaths").innerHTML = totalCasesToday;
+    document.querySelector(
+      ".js-deathstext"
+    ).innerHTML = `Momenteel zijn er ${totalCasesToday} overlijdens. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
+      stijgingNummer
+    )} mensen.`;
+  }
+
+  for (let cases of casesData) {
+    if (cases > 999 && cases < 1000000) {
+      casesTooltip.push((cases / 1000).toFixed(0) + "k ");
+    } else if (cases > 999999) {
+      casesTooltip.push((cases / 1000000).toFixed(0) + "M ");
+    } else if (cases < 1000) {
+      casesTooltip.push(cases);
+    }
+  }
+};
 
 const laadVacPieChart = function (data, id, country) {
   let numberVac;
@@ -1741,7 +1834,9 @@ const laadVacPieChart = function (data, id, country) {
     ".js-vactext"
   ).innerHTML = `Momenteel zijn er ${convertNumber(
     numberVac
-  )} vaccinaties gezet in België. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd,`;
+  )} vaccinaties gezet in ${covidToNL(
+    country
+  )}. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd,`;
 
   var options = {
     chart: {
@@ -1799,6 +1894,23 @@ const laadVacPieChart = function (data, id, country) {
   var chart = new ApexCharts(document.querySelector(id), options);
 
   chart.render();
+};
+
+const laadVacPieChart2 = function (data, country) {
+  let numberVac;
+
+  if (country == "all") {
+    numberVac = data[Object.keys(data)[0]];
+  } else {
+    numberVac = data.timeline[Object.keys(data.timeline)[0]];
+  }
+
+  document.querySelector(".js-vac").innerHTML = convertNumber(numberVac);
+  document.querySelector(
+    ".js-vactext"
+  ).innerHTML = `Momenteel zijn er ${convertNumber(
+    numberVac
+  )} vaccinaties gezet werledwijd. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd,`;
 };
 
 const getSingleLineVacData = function (days, id) {
@@ -1890,6 +2002,51 @@ const getTotalCasesData = function (id, country, type) {
       }
 
       laadTotalCasesGrafiek(data, id, type);
+    })
+    //als de fout opgeworpen is vangen we ze hier op
+    .catch(function (error) {
+      if (type == "cases") {
+        document.querySelector(
+          ".js-gevallen"
+        ).innerHTML = `<p>Geen besmettingsgegevens gevonden voor ${covidToNL(
+          country
+        )}</p>`;
+      } else if (type == "deaths") {
+        document.querySelector(
+          ".js-overlijdens"
+        ).innerHTML = `<p>Geen overlijdingsgegevens gevonden voor ${covidToNL(
+          country
+        )}</p>`;
+      }
+      // console.error(`fout bij het verwerken van de jsonfile ${error}`);
+    });
+};
+
+const getTotalCasesData2 = function (country, type) {
+  //ophalen van de externe json file
+  fetch(
+    "https://disease.sh/v3/covid-19/historical/" + country + "?lastdays=all"
+  )
+    .then(function (response) {
+      if (!response.ok) {
+        throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);
+      } else {
+        // console.info("er is een response terug gekomen");
+        return response.json();
+      }
+    })
+    .then(function (json) {
+      // console.info("JSON object is aangemaakt");
+
+      let data;
+
+      if (json.timeline) {
+        data = json.timeline[type];
+      } else {
+        data = json[type];
+      }
+
+      laadTotalCasesData(data, type);
     })
     //als de fout opgeworpen is vangen we ze hier op
     .catch(function (error) {
@@ -2039,6 +2196,49 @@ const getVacData = function (id, country) {
     });
 };
 
+const getVacData2 = function (country) {
+  //ophalen van de externe json file
+
+  fetch("https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=1")
+    .then(function (response) {
+      if (!response.ok) {
+        throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);
+      } else {
+        // console.info("er is een response terug gekomen");
+        return response.json();
+      }
+    })
+    .then(function (json) {
+      // console.info("JSON object is aangemaakt");
+      laadVacPieChart2(json, country);
+    })
+    //als de fout opgeworpen is vangen we ze hier op
+    .catch(function (error) {
+      console.error(`fout bij het verwerken van de jsonfile ${error}`);
+    });
+};
+const getWorldData = function () {
+  //ophalen van de externe json file
+
+  fetch("https://disease.sh/v3/covid-19/all")
+    .then(function (response) {
+      if (!response.ok) {
+        throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);
+      } else {
+        // console.info("er is een response terug gekomen");
+        return response.json();
+      }
+    })
+    .then(function (json) {
+      // console.info("JSON object is aangemaakt");
+      worldData = json;
+    })
+    //als de fout opgeworpen is vangen we ze hier op
+    .catch(function (error) {
+      console.error(`fout bij het verwerken van de jsonfile ${error}`);
+    });
+};
+
 const getCountriesJson = function (country) {
   //ophalen van de externe json file
   fetch("../data/countries.json")
@@ -2068,6 +2268,43 @@ const getCountriesJson = function (country) {
       }
 
       getCountryData(currentCountry);
+    })
+    //als de fout opgeworpen is vangen we ze hier op
+    .catch(function (error) {
+      console.error(`fout bij het verwerken van de jsonfile ${error}`);
+    });
+};
+
+const getCountriesJson2 = function () {
+  //ophalen van de externe json file
+  fetch("../data/countries.json")
+    .then(function (response) {
+      if (!response.ok) {
+        throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);
+      } else {
+        // console.info("er is een response terug gekomen");
+        return response.json();
+      }
+    })
+    .then(function (json) {
+      // console.info("JSON object is aangemaakt");
+      countryTranslation = json;
+
+      createSingleLineGraph(7, "#caseschart", "all", ".js-casesbtn", "cases");
+      createSingleLineGraph(
+        7,
+        "#deathschart",
+        "all",
+        ".js-deathsbtn",
+        "deaths"
+      );
+      createCountryBarChart("#countrybarchart");
+      createSingleLineVacGraph(7, "#vacchart", ".js-vacbtn", "vaccine");
+      createMultipleLineGraph("#continentschart");
+      createContinentBarChart("#continentbarchart");
+      createTotalChart2("all", "cases");
+      createTotalChart2("all", "deaths");
+      createVacPieChart2("all");
     })
     //als de fout opgeworpen is vangen we ze hier op
     .catch(function (error) {
@@ -2150,20 +2387,23 @@ const createTotalChart = function (id, country, type) {
     getTotalCasesData(id, country, type);
   }
 };
+const createTotalChart2 = function (country, type) {
+  getTotalCasesData2(country, type);
+};
 
 const createVacPieChart = function (id, country) {
   if (document.getElementById(id.substring(1))) {
     getVacData(id, country);
   }
 };
+const createVacPieChart2 = function (country) {
+  getVacData2(country);
+};
 
 const laadGrafieken = function (country) {
-  createSingleLineGraph(7, "#caseschart", "all", ".js-casesbtn", "cases");
-  createSingleLineGraph(7, "#deathschart", "all", ".js-deathsbtn", "deaths");
-  createSingleLineVacGraph(7, "#vacchart", ".js-vacbtn", "vaccine");
-  createMultipleLineGraph("#continentschart");
-  createCountryBarChart("#countrybarchart");
-  createContinentBarChart("#continentbarchart");
+  createSingleLineGraph(7, "#caseschart", country, ".js-casesbtn", "cases");
+  createSingleLineGraph(7, "#deathschart", country, ".js-deathsbtn", "deaths");
+
   createTotalChart("#totalcaseschart", country, "cases");
   createTotalChart("#totaldeathschart", country, "deaths");
   createVacPieChart("#vacpiechart", country);
@@ -2184,9 +2424,14 @@ const init = function () {
     }
   };
 
-  country = window.location.hash.substring(1, window.location.hash.length);
+  if (window.location.hash.substring(1, window.location.hash.length)) {
+    country = window.location.hash.substring(1, window.location.hash.length);
 
-  getCountriesJson(country);
+    getCountriesJson(country);
+  } else {
+    getWorldData();
+    getCountriesJson2();
+  }
 };
 
 document.addEventListener("DOMContentLoaded", init);

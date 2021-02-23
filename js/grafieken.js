@@ -319,13 +319,13 @@ const convertNumber = function (oldNumber) {
   if (newNumber.length > 3) {
     newNumber =
       newNumber.slice(0, newNumber.length - 3) +
-      "," +
+      " " +
       newNumber.slice(newNumber.length - 3, newNumber.length);
 
     if (newNumber.length > 7) {
       newNumber =
         newNumber.slice(0, newNumber.length - 7) +
-        "," +
+        " " +
         newNumber.slice(newNumber.length - 7, newNumber.length);
     }
   }
@@ -1696,14 +1696,6 @@ const laadTotalCasesGrafiek = function (data, id, type) {
           return datesTooltip[dataPointIndex];
         },
       },
-      // y: {
-      //   formatter: function (
-      //     value,
-      //     { series, seriesIndex, dataPointIndex, w }
-      //   ) {
-      //     return casesTooltip[dataPointIndex];
-      //   },
-      // },
       y: {
         formatter: function (
           value,
@@ -1721,6 +1713,7 @@ const laadTotalCasesGrafiek = function (data, id, type) {
 
   chart.render();
 };
+
 const laadTotalCasesData = function (data, type) {
   let casesData = [];
   let dateData = [];
@@ -2217,6 +2210,7 @@ const getVacData2 = function (country) {
       console.error(`fout bij het verwerken van de jsonfile ${error}`);
     });
 };
+
 const getWorldData = function () {
   //ophalen van de externe json file
 
@@ -2241,7 +2235,7 @@ const getWorldData = function () {
 
 const getCountriesJson = function (country) {
   //ophalen van de externe json file
-  fetch("../data/countries.json")
+  fetch("https://api.jsonbin.io/b/60338a17f1be644b0a62f473")
     .then(function (response) {
       if (!response.ok) {
         throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);
@@ -2277,7 +2271,7 @@ const getCountriesJson = function (country) {
 
 const getCountriesJson2 = function () {
   //ophalen van de externe json file
-  fetch("../data/countries.json")
+  fetch("https://api.jsonbin.io/b/60338a17f1be644b0a62f473")
     .then(function (response) {
       if (!response.ok) {
         throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);

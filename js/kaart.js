@@ -1,89 +1,180 @@
 "use strict";
-let covidData = [];
-let countries = [];
 
-const GeoToCovid = function (nameGeo) {
-  let nameCovid;
-  for (const country of countries) {
-    if (nameGeo == country.geojson.name) {
-      nameCovid = country.covid.name;
+let dataCovid = [];
+let dataCountries = [];
+
+let map;
+
+const convertNumber = function (oldNumber) {
+  let newNumber = String(oldNumber);
+
+  if (newNumber.length > 3) {
+    newNumber =
+      newNumber.slice(0, newNumber.length - 3) +
+      "." +
+      newNumber.slice(newNumber.length - 3, newNumber.length);
+
+    if (newNumber.length > 7) {
+      newNumber =
+        newNumber.slice(0, newNumber.length - 7) +
+        "." +
+        newNumber.slice(newNumber.length - 7, newNumber.length);
     }
   }
-  return nameCovid;
+  return newNumber;
 };
 
-function getColor(d) {
-  return d > 1000
-    ? "#800026"
-    : d > 500
-    ? "#BD0026"
-    : d > 200
-    ? "#E31A1C"
-    : d > 100
-    ? "#FC4E2A"
-    : d > 50
-    ? "#FD8D3C"
-    : d > 20
-    ? "#FEB24C"
-    : d > 10
-    ? "#FED976"
-    : "#FFEDA0";
-}
-
-function style(feature) {
-  // console.log(GeoToCovid(feature.properties.name));
-  return {
-    fillColor: getColor(feature.properties.name),
-    weight: 2,
-    opacity: 1,
-    color: "white",
-    dashArray: "3",
-    fillOpacity: 0.7,
-  };
-}
-
-const onEachFeature = function (feature, layer) {
-  // console.log(feature);
-  layer.addEventListener("mouseover", function (e) {
-    let countryData;
-    console.log(GeoToCovid(feature.properties.name));
-
-    for (const key in covidData) {
-      if (covidData[key].country == feature.properties.name) {
-        countryData = covidData[key];
+const searchForCountryObject = function (searchItem, type) {
+  if (type == "geojson") {
+    for (const country of dataCountries) {
+      if (country.geojson.name == searchItem) {
+        return country;
       }
     }
-    e.target.setStyle({
-      fillColor: "#354B60",
-      color: "black",
-      weight: 1,
-      opacity: 0.1,
-      fillOpacity: 0.5,
+  }
+};
+
+const selectCountry = function (e, feature) {
+  //GeoJSON naam van land waar op geklikt werd.
+  const nameCountryGeoJSON = feature.properties.name;
+
+  //Ophalen van het object uit de lijst van de connectie
+  const objectCountry = searchForCountryObject(nameCountryGeoJSON, "geojson");
+
+  //Ophalen van de covid data voor dat land
+  let covidDataCountry;
+
+  for (const key in dataCovid) {
+    if (dataCovid[key].country == objectCountry.covid.name) {
+      covidDataCountry = dataCovid[key];
+    }
+  }
+
+  let popupOptions = {
+    maxWidth: 450,
+  };
+
+  let popupContent = `<div class="c-kaart__popup">
+  <p class="c-kaart__popup__land">
+    <img
+      src="${covidDataCountry.countryInfo.flag}"
+      alt=""
+      class="c-kaart__popup__vlag"
+    />
+    ${objectCountry.translations.NL}
+  </p>
+  <div class="c-kaart__popup__cijfers">
+    <div>
+      <p class="c-kaart__popup__title">Aantal besmettingen:</p>
+      <p>${convertNumber(covidDataCountry.todayCases)}</p>
+    </div>
+    <div>
+      <p class="c-kaart__popup__title">Aantal doden:</p>
+      <p>${convertNumber(covidDataCountry.todayDeaths)}</p>
+    </div>
+    <div>
+      <p class="c-kaart__popup__title">Aantal herstelde gevallen:</p>
+      <p>${convertNumber(covidDataCountry.todayRecovered)}</p>
+    </div>
+  </div>
+  <div class="c-kaart__popup__link">
+    <a href="#">Bekijk alle cijfers</a>
+  </div>
+</div>`;
+
+  if (window.innerWidth > 575) {
+    document.addEventListener("resize", function () {
+      document.querySelector(".js-kaart-popup").style.display = "none";
     });
+
+    //Tonen van de popup op de kaart
+    let popup = L.popup(popupOptions)
+      .setLatLng(e.latlng)
+      .setContent(popupContent)
+      .openOn(map);
+  } else {
+    //Tonen van de popup onder de kaart
+    document.querySelector(".js-kaart-popup").style.display = "block";
+    document.querySelector(".js-kaart-popup").innerHTML = `
+    <p class="c-kaart__popup__land">
+      <img
+        src="${covidDataCountry.countryInfo.flag}"
+        alt=""
+        class="c-kaart__popup__vlag"
+      />
+      ${objectCountry.translations.NL}
+    </p>
+    <div class="c-kaart__popup__cijfers">
+      <div>
+        <p class="c-kaart__popup__title">Aantal besmettingen:</p>
+        <p>${convertNumber(covidDataCountry.todayCases)}</p>
+      </div>
+      <div>
+        <p class="c-kaart__popup__title">Aantal doden:</p>
+        <p>${convertNumber(covidDataCountry.todayDeaths)}</p>
+      </div>
+      <div>
+        <p class="c-kaart__popup__title">Aantal herstelde gevallen:</p>
+        <p>${convertNumber(covidDataCountry.todayRecovered)}</p>
+      </div>
+    </div>
+    <div class="c-kaart__popup__link">
+      <a href="#">Bekijk alle cijfers</a>
+    </div>
+  `;
+  }
+};
+
+const mouseOutCountry = function (e) {
+  //Effect weghalen bij de mouseover van een land
+  e.target.setStyle({
+    fillColor: "white",
+    color: "black",
+    weight: 1,
+    opacity: 0.05,
+    fillOpacity: 0.8,
   });
+};
+
+const mouseOverCountry = function (e) {
+  //Kleur geven bij hover
+  e.target.setStyle({
+    fillColor: "#354B60",
+    color: "black",
+    weight: 1,
+    opacity: 0.1,
+    fillOpacity: 0.5,
+  });
+};
+
+const onEachFeature = function (feature, layer) {
+  //Effect toevoegen bij de mouseover van een land
+  layer.addEventListener("mouseover", function (e) {
+    mouseOverCountry(e);
+  });
+
+  //Het effect van de mouseout weghalen
   layer.addEventListener("mouseout", function (e) {
-    e.target.setStyle({
-      fillColor: "white",
-      color: "black",
-      weight: 1,
-      opacity: 0.05,
-      fillOpacity: 0.8,
-    });
+    mouseOutCountry(e);
+  });
+
+  //Effect toevoegen wanneer je op een land klikt of selecteert
+  layer.addEventListener("click", function (e) {
+    selectCountry(e, feature);
   });
 };
 
 const setMapWithGeoJSON = function (dataGeoJSON) {
-  let map = L.map("map", {
+  //Creëren van de kaart
+  map = L.map("map", {
     minZoom: 2,
     zoomControl: false,
   }).setView([30, 0], 2);
 
-  L.control
-    .zoom({
-      position: "bottomright",
-    })
-    .addTo(map);
+  //Controls rechtsonderaan zetten
+  L.control.zoom({ position: "bottomright" }).addTo(map);
 
+  //Maken van een stylingsobject
   let styleGeoData = {
     fillColor: "white",
     color: "black",
@@ -92,50 +183,61 @@ const setMapWithGeoJSON = function (dataGeoJSON) {
     fillOpacity: 0.8,
   };
 
-  L.geoJson(dataGeoJSON, {
-    style: style,
+  //GeoJSON toevoegen aan de kaart met bijhorende style
+  L.geoJSON(dataGeoJSON, {
+    style: styleGeoData,
     onEachFeature: onEachFeature,
   }).addTo(map);
 
+  //Kaart een blauwe achtergrondkleur geven
   document.querySelector("#map").style.backgroundColor = "#a7c8eb";
 };
 
-const verwerkCovidData = function (data) {
-  covidData = data;
+const verwerkDataCountriesConnection = function (data) {
+  dataCountries = data;
+};
+
+const verwerkDataCovid = function (data) {
+  dataCovid = data;
+};
+
+const getDataCountriesConnection = function () {
+  //     //Pad naar JSON
+  const path = "../data/countries.json";
+
+  //Fetchen van data
+  fetch(path)
+    .then((response) => response.json())
+    .then((data) => verwerkDataCountriesConnection(data));
 };
 
 const getDataGeoJSON = function () {
-  //Path naar geoJSON
-  const pathToGeoJSON = "../data/geojson.json";
+  //Pad naar JSON
+  const path = "../data/geojson.json";
 
-  //Ophalen van data van geoJSON
-  fetch(pathToGeoJSON)
+  //Fetchen van data
+  fetch(path)
     .then((response) => response.json())
     .then((data) => setMapWithGeoJSON(data));
 };
 
-const getDataCovidJSON = function () {
-  //Path naar covidJSON
-  const pathToCovidJSON = "https://disease.sh/v3/covid-19/countries";
+const getDataCovid = function () {
+  //Pad naar JSON
+  const path = "https://disease.sh/v3/covid-19/countries?yesterday=true";
 
-  //Ophalen van data van geoJSON
-  fetch(pathToCovidJSON)
+  //Fetchen van data
+  fetch(path)
     .then((response) => response.json())
-    .then((data) => verwerkCovidData(data));
-};
-
-const getDataCountriesJSON = function () {
-  //Path naar covidJSON
-  const pathToCovidJSON = "../data/countries.json";
-
-  //Ophalen van data van geoJSON
-  fetch(pathToCovidJSON)
-    .then((response) => response.json())
-    .then((data) => (countries = data));
+    .then((data) => verwerkDataCovid(data));
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+  //Ophalen van de Covid-19 data
+  getDataCovid();
+
+  //Ophalen van de JSON die de connectie maakt tussen alles
+  getDataCountriesConnection();
+
   //Ophalen van de geoJSON
-  getDataCovidJSON();
   getDataGeoJSON();
 });

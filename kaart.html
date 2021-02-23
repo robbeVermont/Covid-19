@@ -6,17 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Covid-19 in kaart</title>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="dist/screen.css" />
+
     <link
       rel="stylesheet"
-      href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
     />
+
+
     <!-- Scripts -->
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
     <!-- <script src="dist/main.js"></script> -->
+    <link rel="stylesheet" href="dist/screen.css" />
     <script src="js/kaart.js"></script>
   </head>
   <body>
     <div id="map" class="c-kaart"></div>
+
+    <div class="container">
+      <div
+        class="c-kaart__popup c-kaart__popup--small-screen js-kaart-popup d-sm-none"
+      >
+        <p class="c-kaart__popup__land">
+          <img
+            src="https://disease.sh/assets/img/flags/be.png"
+            alt=""
+            class="c-kaart__popup__vlag"
+          />
+          België
+        </p>
+        <div class="c-kaart__popup__cijfers">
+          <div>
+            <p class="c-kaart__popup__title">Aantal besmettingen:</p>
+            <p>1.059</p>
+          </div>
+          <div>
+            <p class="c-kaart__popup__title">Aantal doden:</p>
+            <p>60.059.059</p>
+          </div>
+          <div>
+            <p class="c-kaart__popup__title">Aantal herstelde gevallen:</p>
+            <p>60</p>
+          </div>
+        </div>
+        <div class="c-kaart__popup__link">
+          <a href="#">Bekijk alle cijfers</a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

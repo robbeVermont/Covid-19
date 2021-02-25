@@ -5,7 +5,7 @@ let countries = [];
 let geojson;
 var info = L.control();
 
-let prevCountry;
+let prevCountry, screenWidth;
 
 info.onAdd = function (map) {
   this._div = L.DomUtil.create("div", "info"); // create a div with a class "info"
@@ -44,8 +44,14 @@ info.update = function (props) {
           : "Hover over een land");
     }
   } else {
-    this._div.innerHTML =
-      "<div>Covid besmettingen</div>" + "Hover over een land";
+    if (screenWidth < 768) {
+      this._div.innerHTML =
+        "<div class='info-panel'>Covid besmettingen</div>" + "Klik op een land";
+    } else {
+      this._div.innerHTML =
+        "<div class='info-panel'>Covid besmettingen</div>" +
+        "Hover over een land";
+    }
   }
 };
 
@@ -60,11 +66,12 @@ const GeoToCovid = function (nameGeo) {
 };
 
 const convertNumber = function (oldNumber) {
-  const decimals = String(oldNumber).slice(
-    String(oldNumber).length - 3,
-    String(oldNumber).length
+  let number = parseFloat(oldNumber).toFixed(2);
+  const decimals = String(number).slice(
+    String(number).length - 3,
+    String(number).length
   );
-  let newNumber = String(oldNumber).slice(0, String(oldNumber).length - 3);
+  let newNumber = String(number).slice(0, String(number).length - 3);
 
   if (newNumber.length > 3) {
     newNumber =
@@ -190,11 +197,19 @@ const onEachFeature = function onEachFeature(feature, layer) {
 };
 
 const setMapWithGeoJSON = function (dataGeoJSON) {
+  let map;
 
-  let map = L.map("mymap", {
-    minZoom: 2,
-    zoomControl: false,
-  }).setView([30, 0], 2);
+  if (screenWidth < 768) {
+    map = L.map("mymap", {
+      minZoom: 1,
+      zoomControl: false,
+    }).setView([30, 0], 1);
+  } else {
+    map = L.map("mymap", {
+      minZoom: 2,
+      zoomControl: false,
+    }).setView([30, 0], 2);
+  }
 
   L.control
     .zoom({
@@ -270,6 +285,7 @@ const getDataCovidJSON = function () {
     .then((response) => response.json())
     .then((data) => {
       covidData = data;
+      getDataCountriesJSON();
     });
 };
 
@@ -280,13 +296,18 @@ const getDataCountriesJSON = function () {
   //Ophalen van data van geoJSON
   fetch(pathToCountriesJSON)
     .then((response) => response.json())
-    .then((data) => (countries = data));
+    .then((data) => {
+      countries = data;
+      getDataGeoJSON();
+    });
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+  window.onresize = window.onload = function () {
+    screenWidth = this.innerWidth;
+  };
+
   //Ophalen van de geoJSON
 
-  getDataCountriesJSON();
   getDataCovidJSON();
-  getDataGeoJSON();
 });

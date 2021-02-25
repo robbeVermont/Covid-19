@@ -1,4 +1,4 @@
 import "./hamburger_menu";
 import "./grafieken";
-// import "./kaart";
+import "./kleurkaart";
 import "apexcharts/dist/apexcharts";

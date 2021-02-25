@@ -13,6 +13,7 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     &.leaflet-control {
+      font-size: 2rem;
       .info-panel {
         padding-bottom: 0.5rem;
         &--bottom {
@@ -32,12 +33,21 @@
     }
   }
 
+  .leaflet-control-zoom {
+    box-shadow: none;
+  }
+
   .legend--background {
     width: 20px;
     height: 20px;
     @include media-breakpoint-down(sm) {
       width: 15px;
       height: 15px;
+    }
+  }
+  .leaflet-control-attribution {
+    a {
+      font-size: 1.2rem;
     }
   }
 }

@@ -18,13 +18,13 @@ const colorArray = [
 ];
 
 const dagen = [
-  "Zondag",
-  "Maandag",
-  "Dinsdag",
-  "Woensdag",
-  "Donderdag",
-  "Vrijdag",
-  "Zaterdag",
+  "zondag",
+  "maandag",
+  "dinsdag",
+  "woensdag",
+  "donderdag",
+  "vrijdag",
+  "zaterdag",
 ];
 
 const months = [
@@ -2425,6 +2425,21 @@ const init = function () {
   } else {
     getWorldData();
     getCountriesJson2();
+
+    let today = new Date();
+
+    console.log(dagen[today.getDay()]);
+    console.log(today.getDate());
+    console.log(months[today.getMonth()]);
+    console.log(today.getFullYear());
+    document.querySelector(".js-today").innerHTML =
+      dagen[today.getDay()] +
+      " " +
+      today.getDate() +
+      " " +
+      months[today.getMonth()] +
+      " " +
+      today.getFullYear();
   }
 };
 

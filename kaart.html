@@ -24,7 +24,8 @@
     <!-- <script src="dist/main.js"></script> -->
     <script src="js/kaart.js"></script>
     <script src="js/range.js"></script>
-    <script src="js/multirange.js"></script>
+    <script src="js/range2.js"></script>
+    <!-- <script src="js/multirange.js"></script> -->
   </head>
   <body>
     <div class="c-kaart">
@@ -85,30 +86,36 @@
                 <div class="c-filter__range--middle">
                   <div class="c-filter__range--multirange">
                     <input
+                      class="c-filter__range--multirange-left js-range"
                       type="range"
-                      id="deaths-left"
+                      id="cases-left"
                       step="10"
                       min="0"
                       max="100000"
                       value="20000"
+                      data-slider="cases-min"
                     />
                     <input
+                      class="c-filter__range--multirange-right js-range"
                       type="range"
-                      id="deaths-right"
+                      id="cases-right"
                       step="10"
                       min="0"
                       max="100000"
                       value="80000"
+                      data-slider="cases-max"
                     />
                     <div class="c-filter__range--slider">
                       <div class="c-filter__range--slider__track"></div>
-                      <div class="c-filter__range--slider__range"></div>
                       <div
-                        class="c-filter__range--slider__thumb c-filter__range--slider__thumb--left"
+                        class="c-filter__range--slider__range js-range-cases-range"
+                      ></div>
+                      <div
+                        class="c-filter__range--slider__thumb c-filter__range--slider__thumb--left js-range-cases-left"
                         data-left="584"
                       ></div>
                       <div
-                        class="c-filter__range--slider__thumb c-filter__range--slider__thumb--right"
+                        class="c-filter__range--slider__thumb c-filter__range--slider__thumb--right js-range-cases-right"
                         data-right="584"
                       ></div>
                     </div>
@@ -116,6 +123,66 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="c-filter__form-item">
+            <input
+              type="checkbox"
+              name="checkboxAantalDoden"
+              id="checkboxAantalDoden"
+              class="c-filter__checkbox"
+            />
+            <div class="c-filter__toggle"></div>
+            <label for="checkboxAantalDoden" class="c-filter__label">
+              Aantal overlijdens
+            </label>
+
+            <div class="c-filter__dropdown">
+              <div class="c-filter__range">
+                <div class="c-filter__range--middle">
+                  <div class="c-filter__range--multirange">
+                    <input
+                      class="c-filter__range--multirange-left js-range"
+                      type="range"
+                      id="deaths-left"
+                      step="10"
+                      min="0"
+                      max="5000"
+                      value="1000"
+                      data-slider="deaths-min"
+                    />
+                    <input
+                      class="c-filter__range--multirange-right js-range"
+                      type="range"
+                      id="deaths-right"
+                      step="10"
+                      min="0"
+                      max="5000"
+                      value="4000"
+                      data-slider="deaths-max"
+                    />
+                    <div class="c-filter__range--slider">
+                      <div class="c-filter__range--slider__track"></div>
+                      <div
+                        class="c-filter__range--slider__range js-range-deaths-range"
+                      ></div>
+                      <div
+                        class="c-filter__range--slider__thumb c-filter__range--slider__thumb--left js-range-deaths-left"
+                        data-left="584"
+                      ></div>
+                      <div
+                        class="c-filter__range--slider__thumb c-filter__range--slider__thumb--right js-range-deaths-right"
+                        data-right="584"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="c-filter__form-submit js-submit">
+              Filters toepassen
+            </button>
           </div>
         </form>
       </div>

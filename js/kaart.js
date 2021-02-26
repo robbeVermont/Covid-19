@@ -2,9 +2,13 @@
 
 let dataCovid = [];
 let dataCountries = [];
+let geoData = [];
+let newGeoData = [];
 
 let map;
 let popup;
+
+let link = "http://localhost/corona-website/covid19/detail#";
 
 const convertNumber = function (oldNumber) {
   let newNumber = String(oldNumber);
@@ -57,7 +61,9 @@ const setPopupContent = function (objectCountry, covidDataCountry) {
       covidDataCountry.todayDeaths
     )}</p></div><div><p class="c-kaart__popup__title">Aantal herstelde gevallen:</p><p>${convertNumber(
       covidDataCountry.todayRecovered
-    )}</p></div></div><div class="c-kaart__popup__link"><a href="#">Bekijk alle cijfers</a></div></div>`;
+    )}</p></div></div><div class="c-kaart__popup__link"><a href="${
+      link + objectCountry.url
+    }">Bekijk alle cijfers</a></div></div>`;
   }
 };
 
@@ -121,15 +127,26 @@ const clickOnCountry = function (e, feature) {
   showPopup(latlng, objectCountry, covidDataCountry);
 };
 
-const mouseOutCountry = function (e) {
+const mouseOutCountry = function (e, feature) {
   //Effect weghalen bij de mouseover van een land
-  e.target.setStyle({
-    fillColor: "white",
-    color: "black",
-    weight: 1,
-    opacity: 0.05,
-    fillOpacity: 0.8,
-  });
+
+  if (!newGeoData.includes(feature)) {
+    e.target.setStyle({
+      fillColor: "white",
+      color: "black",
+      weight: 1,
+      opacity: 0.05,
+      fillOpacity: 0.8,
+    });
+  } else {
+    e.target.setStyle({
+      fillColor: "#354B60",
+      color: "black",
+      weight: 1,
+      opacity: 0.1,
+      fillOpacity: 0.6,
+    });
+  }
 };
 
 const mouseOverCountry = function (e) {
@@ -150,8 +167,8 @@ const onEachFeature = function (feature, layer) {
   });
 
   //Het effect van de mouseout weghalen
-  layer.addEventListener("mouseout", function (e) {
-    mouseOutCountry(e);
+  layer.addEventListener("mouseout", function (e, feature) {
+    mouseOutCountry(e, layer.feature);
   });
 
   //Effect toevoegen wanneer je op een land klikt of selecteert
@@ -171,17 +188,10 @@ const setMapWithGeoJSON = function (dataGeoJSON) {
   L.control.zoom({ position: "bottomright" }).addTo(map);
 
   //Maken van een stylingsobject
-  let styleGeoData = {
-    fillColor: "white",
-    color: "black",
-    weight: 1,
-    opacity: 0.1,
-    fillOpacity: 0.8,
-  };
 
   //GeoJSON toevoegen aan de kaart met bijhorende style
   L.geoJSON(dataGeoJSON, {
-    style: styleGeoData,
+    style: style,
     onEachFeature: onEachFeature,
   }).addTo(map);
 
@@ -226,7 +236,10 @@ const getDataGeoJSON = function () {
   //Fetchen van data
   fetch(path)
     .then((response) => response.json())
-    .then((data) => setMapWithGeoJSON(data));
+    .then((data) => {
+      geoData = data;
+      setMapWithGeoJSON(data);
+    });
 };
 
 const getDataCovid = function () {
@@ -236,7 +249,9 @@ const getDataCovid = function () {
   //Fetchen van data
   fetch(path)
     .then((response) => response.json())
-    .then((data) => verwerkDataCovid(data));
+    .then((data) => {
+      verwerkDataCovid(data);
+    });
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -311,4 +326,124 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".c-filter__form-items").style.display = "none";
       }
     });
+
+  document.querySelector(".js-submit").addEventListener("click", function (e) {
+    e.preventDefault();
+    newGeoData = [];
+    document.querySelector(".c-filter__form-items").style.display = "none";
+    const checkboxCases = document.querySelector("#checkboxAantalBesmettingen");
+    const checkboxDeaths = document.querySelector("#checkboxAantalDoden");
+    const minCases = parseInt(
+      document.querySelector(".js-range-cases-min").value
+    );
+    const maxCases = parseInt(
+      document.querySelector(".js-range-cases-max").value
+    );
+    const minDeaths = parseInt(
+      document.querySelector(".js-range-deaths-min").value
+    );
+    const maxDeaths = parseInt(
+      document.querySelector(".js-range-deaths-max").value
+    );
+
+    let countryList = [];
+
+    if (checkboxCases.checked && !checkboxDeaths.checked) {
+      for (const country of dataCovid) {
+        if (country.todayCases <= maxCases && country.todayCases >= minCases) {
+          countryList.push(country);
+        }
+      }
+      for (const geoCountry of geoData.features) {
+        for (const country of countryList) {
+          if (searchForCountryObject(geoCountry.properties.name, "geojson")) {
+            if (
+              searchForCountryObject(geoCountry.properties.name, "geojson")
+                .covid.name == country.country
+            ) {
+              newGeoData.push(geoCountry);
+            }
+          }
+        }
+      }
+      map.remove();
+      setMapWithGeoJSON(geoData);
+    } else if (checkboxDeaths.checked && !checkboxCases.checked) {
+      for (const country of dataCovid) {
+        if (
+          country.todayDeaths <= maxDeaths &&
+          country.todayDeaths >= minDeaths
+        ) {
+          countryList.push(country);
+        }
+      }
+      for (const geoCountry of geoData.features) {
+        for (const country of countryList) {
+          if (searchForCountryObject(geoCountry.properties.name, "geojson")) {
+            if (
+              searchForCountryObject(geoCountry.properties.name, "geojson")
+                .covid.name == country.country
+            ) {
+              newGeoData.push(geoCountry);
+            }
+          }
+        }
+      }
+      map.remove();
+      setMapWithGeoJSON(geoData);
+    } else if (checkboxDeaths.checked && checkboxCases.checked) {
+      for (const country of dataCovid) {
+        if (
+          country.todayCases <= maxCases &&
+          country.todayCases >= minCases &&
+          country.todayDeaths <= maxDeaths &&
+          country.todayDeaths >= minDeaths
+        ) {
+          countryList.push(country);
+        }
+      }
+
+      for (const geoCountry of geoData.features) {
+        for (const country of countryList) {
+          if (searchForCountryObject(geoCountry.properties.name, "geojson")) {
+            if (
+              searchForCountryObject(geoCountry.properties.name, "geojson")
+                .covid.name == country.country
+            ) {
+              newGeoData.push(geoCountry);
+            }
+          }
+        }
+      }
+      map.remove();
+      setMapWithGeoJSON(geoData);
+    } else if (!checkboxDeaths.checked && !checkboxCases.checked) {
+      map.remove();
+      setMapWithGeoJSON(geoData);
+    }
+  });
 });
+
+function style(feature) {
+  let styleGeoData = {};
+
+  if (newGeoData.includes(feature)) {
+    styleGeoData = {
+      fillColor: "#354B60",
+      color: "black",
+      weight: 1,
+      opacity: 0.1,
+      fillOpacity: 0.6,
+    };
+  } else {
+    styleGeoData = {
+      fillColor: "white",
+      color: "black",
+      weight: 1,
+      opacity: 0.1,
+      fillOpacity: 0.8,
+    };
+  }
+
+  return styleGeoData;
+}

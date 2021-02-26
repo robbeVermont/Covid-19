@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filter</title>
+    <link rel="stylesheet" href="dist/screen.css" />
+    <script src="js/kaart.js"></script>
+  </head>
+  <body>
+    <div class="c-filter">
+      <header class="c-filter__header">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 28.068 28.03"
+          class="c-filter__icon"
+        >
+          <path
+            d="M23.827,0H1.173A1.173,1.173,0,0,0,.345,2l9.03,9.032V21.094a1.172,1.172,0,0,0,.5.96l3.906,2.733a1.173,1.173,0,0,0,1.844-.96V11.032L24.656,2A1.173,1.173,0,0,0,23.827,0Z"
+            transform="translate(1.534 1.5)"
+            fill="none"
+            stroke="#344b5e"
+            stroke-width="3"
+          />
+        </svg>
+        <p class="c-filter__head-title">Filter</p>
+      </header>
+      <form class="c-filter__form-items" autocomplete="off">
+        <div class="c-filter__form-item">
+          <input
+            type="checkbox"
+            name="checkboxZoekOpLand"
+            id="checkboxZoekOpLand"
+            class="c-filter__checkbox"
+          />
+          <div class="c-filter__toggle"></div>
+          <label for="checkboxZoekOpLand" class="c-filter__label">
+            Zoek op land
+            <div class="c-filter__dropdown">
+              <input
+                type="search"
+                name="searchZoekOpLand"
+                id="searchZoekOpLand"
+                placeholder="Typ om een land te zoeken"
+                class="c-filter__searchbar js-search-zoek-op-land"
+              />
+              <div class="c-filter__search-results js-search-results"></div>
+            </div>
+          </label>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

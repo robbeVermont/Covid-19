@@ -6,17 +6,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Covid-19 in kaart</title>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="dist/screen.css" />
+
     <link
       rel="stylesheet"
-      href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
     />
+    <link rel="stylesheet" href="dist/screen.css" />
+
     <!-- Scripts -->
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
     <!-- <script src="dist/main.js"></script> -->
     <script src="js/kaart.js"></script>
+    <script src="js/range.js"></script>
+    <script src="js/multirange.js"></script>
   </head>
   <body>
-    <div id="map" class="c-kaart"></div>
+    <div class="c-kaart">
+      <div class="c-filter">
+        <header class="c-filter__header">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 28.068 28.03"
+            class="c-filter__icon"
+          >
+            <path
+              d="M23.827,0H1.173A1.173,1.173,0,0,0,.345,2l9.03,9.032V21.094a1.172,1.172,0,0,0,.5.96l3.906,2.733a1.173,1.173,0,0,0,1.844-.96V11.032L24.656,2A1.173,1.173,0,0,0,23.827,0Z"
+              transform="translate(1.534 1.5)"
+              fill="none"
+              stroke="#344b5e"
+              stroke-width="3"
+            />
+          </svg>
+          <p class="c-filter__head-title">Filter</p>
+        </header>
+        <form class="c-filter__form-items" autocomplete="off">
+          <div class="c-filter__form-item">
+            <input
+              type="checkbox"
+              name="checkboxZoekOpLand"
+              id="checkboxZoekOpLand"
+              class="c-filter__checkbox"
+            />
+            <div class="c-filter__toggle"></div>
+            <label for="checkboxZoekOpLand" class="c-filter__label">
+              Zoek op land
+            </label>
+            <div class="c-filter__dropdown">
+              <input
+                type="search"
+                name="searchZoekOpLand"
+                id="searchZoekOpLand"
+                placeholder="Typ om een land te zoeken"
+                class="c-filter__searchbar js-search-zoek-op-land"
+              />
+              <div class="c-filter__search-results js-search-results"></div>
+            </div>
+          </div>
+          <div class="c-filter__form-item">
+            <input
+              type="checkbox"
+              name="checkboxAantalBesmettingen"
+              id="checkboxAantalBesmettingen"
+              class="c-filter__checkbox"
+            />
+            <div class="c-filter__toggle"></div>
+            <label for="checkboxAantalBesmettingen" class="c-filter__label">
+              Aantal besmettingen
+            </label>
+
+            <div class="c-filter__dropdown">
+              <div class="c-filter__range">
+                <div class="c-filter__range--middle">
+                  <div class="c-filter__range--multirange">
+                    <input
+                      type="range"
+                      id="deaths-left"
+                      step="10"
+                      min="0"
+                      max="100000"
+                      value="20000"
+                    />
+                    <input
+                      type="range"
+                      id="deaths-right"
+                      step="10"
+                      min="0"
+                      max="100000"
+                      value="80000"
+                    />
+                    <div class="c-filter__range--slider">
+                      <div class="c-filter__range--slider__track"></div>
+                      <div class="c-filter__range--slider__range"></div>
+                      <div
+                        class="c-filter__range--slider__thumb c-filter__range--slider__thumb--left"
+                        data-left="584"
+                      ></div>
+                      <div
+                        class="c-filter__range--slider__thumb c-filter__range--slider__thumb--right"
+                        data-right="584"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="map" class="c-kaart__kaart"></div>
+    </div>
+    <div class="container">
+      <div
+        class="c-kaart__popup c-kaart__popup--small-screen js-kaart-popup d-sm-none"
+      >
+        <p class="c-kaart__popup__land">
+          <img
+            src="https://disease.sh/assets/img/flags/be.png"
+            alt=""
+            class="c-kaart__popup__vlag"
+          />
+          België
+        </p>
+        <div class="c-kaart__popup__cijfers">
+          <div>
+            <p class="c-kaart__popup__title">Aantal besmettingen:</p>
+            <p>1.059</p>
+          </div>
+          <div>
+            <p class="c-kaart__popup__title">Aantal doden:</p>
+            <p>60.059.059</p>
+          </div>
+          <div>
+            <p class="c-kaart__popup__title">Aantal herstelde gevallen:</p>
+            <p>60</p>
+          </div>
+        </div>
+        <div class="c-kaart__popup__link">
+          <a href="#">Bekijk alle cijfers</a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

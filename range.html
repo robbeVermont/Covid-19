@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/range.js"></script>
+    <link rel="stylesheet" href="dist/screen.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="padding: 10rem 10rem">
+      <!-- <div class="c-filter__range">
+        <input type="range" min="0" max="50" value="5" id="lower" />
+        <input type="range" min="0" max="50" value="45" id="upper" />
+      </div> -->
+      <div class="c-filter__range">
+        <div class="c-filter__range--middle">
+          <div class="c-filter__range--multirange">
+            <input
+              type="range"
+              id="deaths-left"
+              step="10"
+              min="0"
+              max="100000"
+              value="20000"
+            />
+            <input
+              type="range"
+              id="deaths-right"
+              step="10"
+              min="0"
+              max="100000"
+              value="80000"
+            />
+            <div class="c-filter__range--slider">
+              <div class="c-filter__range--slider__track"></div>
+              <div class="c-filter__range--slider__range"></div>
+              <div
+                class="c-filter__range--slider__thumb c-filter__range--slider__thumb--left"
+                data-left="584"
+              ></div>
+              <div
+                class="c-filter__range--slider__thumb c-filter__range--slider__thumb--right"
+                data-right="584"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

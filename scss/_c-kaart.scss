@@ -1,4 +1,257 @@
 .c-kaart {
-  width: 100%;
-  height: 90vh;
+  position: relative;
+
+  &__kaart {
+    width: 100%;
+    height: 90vh;
+
+    @include media-breakpoint-down(xs) {
+      height: calc(100vh - 35rem);
+    }
+  }
+
+  &__popup {
+    width: 35rem;
+    padding: 2rem;
+    color: $color-blauw;
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+
+    &--small-screen {
+      margin: 2rem 0;
+      width: 100%;
+      box-shadow: 0px 0px 20px rgba($color-blauw, 0.2);
+      border-radius: 1rem;
+      display: none;
+    }
+
+    &__vlag {
+      display: inline-block;
+      width: 4rem;
+      margin-right: 2rem;
+    }
+
+    &__land {
+      font-size: 2.4rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+
+      p {
+        margin-top: 0;
+      }
+    }
+
+    &__cijfers {
+      margin: 2rem 0;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        margin: 0.5rem 0;
+
+        p {
+          font-size: 1.6rem;
+          margin: 0;
+        }
+      }
+    }
+
+    &__title {
+      font-weight: bold;
+    }
+
+    &__link {
+      text-align: right;
+
+      a {
+        font-size: 1.6rem;
+        display: inline-block;
+        font-weight: bold;
+        color: $color-blauw;
+        position: relative;
+        margin-right: 4rem;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: none;
+          color: $color-secondary;
+          border: none;
+        }
+
+        &::after {
+          content: "";
+          display: block;
+          width: 2rem;
+          height: 1rem;
+          background-image: url(../img/pijl-blauw.svg);
+          background-size: contain;
+          background-repeat: no-repeat;
+          position: absolute;
+          top: 50%;
+          right: -4rem;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}
+
+// .c-filter {
+//   font-size: 1.6rem;
+//   padding: 2rem;
+//   background-color: $color-white;
+//   box-shadow: 0px 0px 20px rgba($color-blauw, 0.2);
+//   border-radius: 1rem;
+//   position: absolute;
+//   top: 2rem;
+//   left: 2rem;
+//   z-index: 1000;
+
+//   &__title {
+//     font-size: 2rem;
+//     font-weight: 900;
+//     color: $color-blauw;
+//     margin: 0;
+//   }
+
+//   &__icon {
+//     width: 2rem;
+//     height: 2rem;
+//   }
+
+//   &__button-submit {
+//     display: block;
+//     padding: 1rem 2rem;
+//     border: none;
+//     border-radius: 1rem;
+//     color: $color-white;
+//     background-color: $color-blauw;
+//   }
+
+//   &__item {
+//     div:nth-child(1) {
+//       display: flex;
+//       align-items: center;
+//       margin: 0.5rem 0;
+
+//       label {
+//         margin: 0;
+//         margin-left: 1rem;
+//       }
+//     }
+//   }
+
+//   &__checkbox {
+//     position: relative;
+
+//     input {
+//       width: 2rem;
+//       height: 2rem;
+//       position: absolute;
+//       top: 0rem;
+//       left: 0rem;
+//       opacity: 0;
+//       z-index: 1;
+
+//       &:checked ~ .c-filter__toggle::after {
+//         opacity: 1;
+//       }
+//     }
+//   }
+
+//   &__toggle {
+//     display: block;
+//     width: 2rem;
+//     height: 2rem;
+//     border: 0.3rem solid $color-blauw;
+//     border-radius: 0.5rem;
+//     position: relative;
+
+//     &::after {
+//       content: "";
+//       width: 1.2rem;
+//       height: 1.4rem;
+//       background-image: url(../img/check.svg);
+//       background-repeat: no-repeat;
+//       background-size: contain;
+//       position: absolute;
+//       top: 0.3rem;
+//       left: 0.1rem;
+//       opacity: 0;
+//     }
+//   }
+
+//   &__search {
+//     &__box {
+//       border: 0.3rem solid $color-blauw;
+//       display: block;
+//       width: 100%;
+//       border-radius: 0.5rem;
+//       padding: 0.5rem 1rem;
+//       outline: none;
+//       font-size: 1.4rem;
+//     }
+
+//     &__item {
+//       margin-left: 1rem;
+//       font-size: 1.4rem;
+
+//       &::before {
+//         display: none;
+//       }
+//     }
+//   }
+// }
+
+.leaflet-container {
+  a.leaflet-popup-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 3rem;
+    padding: 2rem 2rem 0 0;
+    border: none;
+    text-align: center;
+    width: 3rem;
+    height: 3rem;
+    font: 3rem Tahoma, Verdana, sans-serif;
+    color: $color-blauw;
+    text-decoration: none;
+    font-weight: bold;
+    background: transparent;
+
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-secondary;
+    }
+  }
+  .leaflet-popup-content p {
+    margin: 0;
+  }
+
+  .leaflet-control-zoom {
+    border: none;
+
+    a {
+      margin: 0.5rem 0;
+      border-radius: 0.5rem;
+      color: $color-blauw;
+      font-weight: 900;
+      font-family: "Mulish", sans-serif;
+      box-shadow: 0px 0px 20px rgba($color-blauw, 0.2);
+
+      &:first-child {
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+      }
+    }
+  }
 }

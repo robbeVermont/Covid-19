@@ -12,7 +12,9 @@ function setLeftValue() {
   var percent = ((_this.value - min) / (max - min)) * 100;
 
   thumbLeft.style.left = percent + "%";
-  range.style.left = percent + "%";
+  range.style.left = percent -5 + "%";
+
+  thumbLeft.setAttribute("data-left", parseInt(_this.value));
 }
 
 function setRightValue() {
@@ -25,7 +27,9 @@ function setRightValue() {
   var percent = ((_this.value - min) / (max - min)) * 100;
 
   thumbRight.style.right = 100 - percent + "%";
-  range.style.right = 100 - percent + "%";
+  range.style.right = 95 - percent + "%";
+
+  thumbRight.setAttribute("data-right", parseInt(_this.value));
 }
 
 const eventListeners = function () {

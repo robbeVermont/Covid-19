@@ -1741,24 +1741,6 @@ const laadTotalCasesData = function (data, type) {
   let dateData = [];
   let casesTooltip = [];
   let datesTooltip = [];
-  let tooltipName;
-
-  if (type == "cases") {
-    tooltipName = "Besmettingen";
-  } else if (type == "deaths") {
-    tooltipName = "Overlijdens";
-  }
-
-  let fontSize = 14;
-  let strokeWidth = 5;
-
-  if (screenWidth < 768) {
-    strokeWidth = 2;
-  }
-
-  if (screenWidth < 576) {
-    fontSize = 12;
-  }
 
   for (const key in data) {
     let dateArray = key.split("/");
@@ -1804,22 +1786,26 @@ const laadTotalCasesData = function (data, type) {
     (casesData[casesData.length - 2] - casesData[casesData.length - 3])
   ).toFixed(2);
 
-  if (type == "cases") {
-    document.querySelector(".js-cases").innerHTML = totalCasesToday;
-    document.querySelector(
-      ".js-casestext"
-    ).innerHTML = `Momenteel zijn er ${totalCasesToday} positieve tests afgenomen. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
-      stijgingNummer
-    )} mensen.`;
-  } else if (type == "deaths") {
-    document.querySelector(".js-deaths").innerHTML = totalCasesToday;
-    document.querySelector(
-      ".js-deathstext"
-    ).innerHTML = `Momenteel zijn er ${totalCasesToday} overlijdens. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
-      stijgingNummer
-    )} mensen.`;
+  if (
+    document.querySelector(".js-cases") ||
+    document.querySelector(".js-deaths")
+  ) {
+    if (type == "cases") {
+      document.querySelector(".js-cases").innerHTML = totalCasesToday;
+      document.querySelector(
+        ".js-casestext"
+      ).innerHTML = `Momenteel zijn er ${totalCasesToday} positieve tests afgenomen. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
+        stijgingNummer
+      )} mensen.`;
+    } else if (type == "deaths") {
+      document.querySelector(".js-deaths").innerHTML = totalCasesToday;
+      document.querySelector(
+        ".js-deathstext"
+      ).innerHTML = `Momenteel zijn er ${totalCasesToday} overlijdens. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
+        stijgingNummer
+      )} mensen.`;
+    }
   }
-
   for (let cases of casesData) {
     if (cases > 999 && cases < 1000000) {
       casesTooltip.push((cases / 1000).toFixed(0) + "k ");
@@ -1920,12 +1906,14 @@ const laadVacPieChart2 = function (data, country) {
     numberVac = data.timeline[Object.keys(data.timeline)[0]];
   }
 
-  document.querySelector(".js-vac").innerHTML = convertNumber(numberVac);
-  document.querySelector(
-    ".js-vactext"
-  ).innerHTML = `Momenteel zijn er ${convertNumber(
-    numberVac
-  )} vaccinaties gezet werledwijd. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd,`;
+  if (document.querySelector(".js-vac")) {
+    document.querySelector(".js-vac").innerHTML = convertNumber(numberVac);
+    document.querySelector(
+      ".js-vactext"
+    ).innerHTML = `Momenteel zijn er ${convertNumber(
+      numberVac
+    )} vaccinaties gezet werledwijd. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd,`;
+  }
 };
 
 const getSingleLineVacData = function (days, id) {
@@ -2065,18 +2053,23 @@ const getTotalCasesData2 = function (country, type) {
     })
     //als de fout opgeworpen is vangen we ze hier op
     .catch(function (error) {
-      if (type == "cases") {
-        document.querySelector(
-          ".js-gevallen"
-        ).innerHTML = `<p>Geen besmettingsgegevens gevonden voor ${covidToNL(
-          country
-        )}</p>`;
-      } else if (type == "deaths") {
-        document.querySelector(
-          ".js-overlijdens"
-        ).innerHTML = `<p>Geen overlijdingsgegevens gevonden voor ${covidToNL(
-          country
-        )}</p>`;
+      if (
+        document.querySelector(".js-gevallen") ||
+        document.querySelector(".js-overlijdens")
+      ) {
+        if (type == "cases") {
+          document.querySelector(
+            ".js-gevallen"
+          ).innerHTML = `<p>Geen besmettingsgegevens gevonden voor ${covidToNL(
+            country
+          )}</p>`;
+        } else if (type == "deaths") {
+          document.querySelector(
+            ".js-overlijdens"
+          ).innerHTML = `<p>Geen overlijdingsgegevens gevonden voor ${covidToNL(
+            country
+          )}</p>`;
+        }
       }
       // console.error(`fout bij het verwerken van de jsonfile ${error}`);
     });
@@ -2449,19 +2442,16 @@ const init = function () {
     getCountriesJson2();
 
     let today = new Date();
-
-    console.log(dagen[today.getDay()]);
-    console.log(today.getDate());
-    console.log(months[today.getMonth()]);
-    console.log(today.getFullYear());
-    document.querySelector(".js-today").innerHTML =
-      dagen[today.getDay()] +
-      " " +
-      today.getDate() +
-      " " +
-      months[today.getMonth()] +
-      " " +
-      today.getFullYear();
+    if (document.querySelector(".js-today")) {
+      document.querySelector(".js-today").innerHTML =
+        dagen[today.getDay()] +
+        " " +
+        today.getDate() +
+        " " +
+        months[today.getMonth()] +
+        " " +
+        today.getFullYear();
+    }
   }
 };
 

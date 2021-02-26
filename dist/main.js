@@ -2780,6 +2780,501 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 /* 4 */
+/***/ (() => {
+
+"use strict";
+
+
+let dataCovid = [];
+let dataCountries = [];
+
+let map;
+let popup;
+
+const convertNumber = function (oldNumber) {
+  let newNumber = String(oldNumber);
+
+  if (newNumber.length > 3) {
+    newNumber =
+      newNumber.slice(0, newNumber.length - 3) +
+      "." +
+      newNumber.slice(newNumber.length - 3, newNumber.length);
+
+    if (newNumber.length > 7) {
+      newNumber =
+        newNumber.slice(0, newNumber.length - 7) +
+        "." +
+        newNumber.slice(newNumber.length - 7, newNumber.length);
+    }
+  }
+  return newNumber;
+};
+
+const searchForCountryObject = function (searchItem, type) {
+  if (type == "geojson") {
+    for (const country of dataCountries) {
+      if (country.geojson.name == searchItem) {
+        return country;
+      }
+    }
+  } else if (type == "countryNL") {
+    for (const country of dataCountries) {
+      if (country.translations.NL == searchItem) {
+        return country;
+      }
+    }
+  }
+};
+
+const setPopupContent = function (objectCountry, covidDataCountry) {
+  if (covidDataCountry == undefined) {
+    //Geen coviddata gevonden
+    return `<div class="c-kaart__popup"><div class="c-kaart__popup__cijfers"><p>Geen data gevonden voor ${objectCountry.translations.NL}</p></div></div>`;
+  } else {
+    //Wel coviddata gevonden
+    return `<div class="c-kaart__popup"><p class="c-kaart__popup__land"><img src="${
+      covidDataCountry.countryInfo.flag
+    } "alt="" class="c-kaart__popup__vlag"/>${
+      objectCountry.translations.NL
+    }</p><div class="c-kaart__popup__cijfers"><div><p class="c-kaart__popup__title">Aantal besmettingen:</p><p>${convertNumber(
+      covidDataCountry.todayCases
+    )}</p></div><div><p class="c-kaart__popup__title">Aantal doden:</p><p>${convertNumber(
+      covidDataCountry.todayDeaths
+    )}</p></div><div><p class="c-kaart__popup__title">Aantal herstelde gevallen:</p><p>${convertNumber(
+      covidDataCountry.todayRecovered
+    )}</p></div></div><div class="c-kaart__popup__link"><a href="#">Bekijk alle cijfers</a></div></div>`;
+  }
+};
+
+const showPopup = function (latlng, objectCountry, covidDataCountry) {
+  if (window.innerWidth > 575) {
+    //Popup op kaart
+    let popupOptions = {
+      maxWidth: 450,
+    };
+
+    let popup = L.popup(popupOptions)
+      .setLatLng(latlng)
+      .setContent(setPopupContent(objectCountry, covidDataCountry))
+      .openOn(map);
+  } else {
+    //Popup onder kaart
+    document.querySelector(".js-kaart-popup").style.display = "block";
+    document.querySelector(".js-kaart-popup").innerHTML = setPopupContent(
+      objectCountry,
+      covidDataCountry
+    );
+  }
+};
+
+const goToCountry = function (dataGeoapify, objectCountry) {
+  //Ophalen van de covid data voor dat land
+  let covidDataCountry;
+
+  for (const key in dataCovid) {
+    if (dataCovid[key].country == objectCountry.covid.name) {
+      covidDataCountry = dataCovid[key];
+    }
+  }
+
+  let latlng = {
+    lat: dataGeoapify.features[0].properties.lat,
+    lng: dataGeoapify.features[0].properties.lon,
+  };
+
+  showPopup(latlng, objectCountry, covidDataCountry);
+};
+
+const clickOnCountry = function (e, feature) {
+  //GeoJSON naam van land waar op geklikt werd.
+  const nameCountryGeoJSON = feature.properties.name;
+
+  //Ophalen van het object uit de lijst van de connectie
+  const objectCountry = searchForCountryObject(nameCountryGeoJSON, "geojson");
+
+  //Ophalen van de covid data voor dat land
+  let covidDataCountry;
+
+  for (const key in dataCovid) {
+    if (dataCovid[key].country == objectCountry.covid.name) {
+      covidDataCountry = dataCovid[key];
+    }
+  }
+
+  let latlng = e.latlng;
+
+  showPopup(latlng, objectCountry, covidDataCountry);
+};
+
+const mouseOutCountry = function (e) {
+  //Effect weghalen bij de mouseover van een land
+  e.target.setStyle({
+    fillColor: "white",
+    color: "black",
+    weight: 1,
+    opacity: 0.05,
+    fillOpacity: 0.8,
+  });
+};
+
+const mouseOverCountry = function (e) {
+  //Kleur geven bij hover
+  e.target.setStyle({
+    fillColor: "#354B60",
+    color: "black",
+    weight: 1,
+    opacity: 0.1,
+    fillOpacity: 0.5,
+  });
+};
+
+const onEachFeature = function (feature, layer) {
+  //Effect toevoegen bij de mouseover van een land
+  layer.addEventListener("mouseover", function (e) {
+    mouseOverCountry(e);
+  });
+
+  //Het effect van de mouseout weghalen
+  layer.addEventListener("mouseout", function (e) {
+    mouseOutCountry(e);
+  });
+
+  //Effect toevoegen wanneer je op een land klikt of selecteert
+  layer.addEventListener("click", function (e) {
+    clickOnCountry(e, feature);
+  });
+};
+
+const setMapWithGeoJSON = function (dataGeoJSON) {
+  //Creëren van de kaart
+  map = L.map("map", {
+    minZoom: 2,
+    zoomControl: false,
+  }).setView([30, 0], 2);
+
+  //Controls rechtsonderaan zetten
+  L.control.zoom({ position: "bottomright" }).addTo(map);
+
+  //Maken van een stylingsobject
+  let styleGeoData = {
+    fillColor: "white",
+    color: "black",
+    weight: 1,
+    opacity: 0.1,
+    fillOpacity: 0.8,
+  };
+
+  //GeoJSON toevoegen aan de kaart met bijhorende style
+  L.geoJSON(dataGeoJSON, {
+    style: styleGeoData,
+    onEachFeature: onEachFeature,
+  }).addTo(map);
+
+  //Kaart een blauwe achtergrondkleur geven
+  document.querySelector("#map").style.backgroundColor = "#a7c8eb";
+};
+
+const verwerkDataCountriesConnection = function (data) {
+  dataCountries = data;
+};
+
+const verwerkDataCovid = function (data) {
+  dataCovid = data;
+};
+
+const getDataGeoapify = function (country) {
+  const API_key = "ae0d2fc63ecd4c8a9f24aad5ea26a570";
+
+  //Pad naar JSON
+  const path = `https://api.geoapify.com/v1/geocode/search?text=${country.geojson.name}&limit=1&apiKey=${API_key}`;
+
+  //Fetchen van data
+  fetch(path)
+    .then((response) => response.json())
+    .then((data) => goToCountry(data, country));
+};
+
+const getDataCountriesConnection = function () {
+  //     //Pad naar JSON
+  const path = "../data/countries.json";
+
+  //Fetchen van data
+  fetch(path)
+    .then((response) => response.json())
+    .then((data) => verwerkDataCountriesConnection(data));
+};
+
+const getDataGeoJSON = function () {
+  //Pad naar JSON
+  const path = "../data/geojson.json";
+
+  //Fetchen van data
+  fetch(path)
+    .then((response) => response.json())
+    .then((data) => setMapWithGeoJSON(data));
+};
+
+const getDataCovid = function () {
+  //Pad naar JSON
+  const path = "https://disease.sh/v3/covid-19/countries?yesterday=true";
+
+  //Fetchen van data
+  fetch(path)
+    .then((response) => response.json())
+    .then((data) => verwerkDataCovid(data));
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  //Ophalen van de Covid-19 data
+  getDataCovid();
+
+  //Ophalen van de JSON die de connectie maakt tussen alles
+  getDataCountriesConnection();
+
+  //Ophalen van de geoJSON
+  getDataGeoJSON();
+
+  //Searchbar
+  const html_searchbar = document.querySelector(".js-search-zoek-op-land");
+  html_searchbar.addEventListener("keyup", function (e) {
+    let searchKeyword = e.target.value.toLowerCase();
+
+    let filteredResults = dataCountries.filter((country) =>
+      String(country.translations.NL)
+        .toLocaleLowerCase()
+        .startsWith(searchKeyword)
+    );
+
+    const html_results = document.querySelector(".js-search-results");
+    html_results.innerHTML = "";
+
+    if (searchKeyword != "") {
+      if (filteredResults.length != 0) {
+        if (filteredResults.length < 5) {
+          for (const result of filteredResults) {
+            html_results.innerHTML += `<a class="c-filter__search-result-item">${result.translations.NL}</a>`;
+          }
+        } else {
+          for (let i = 0; i < 5; i++) {
+            html_results.innerHTML += `<a class="c-filter__search-result-item">${filteredResults[i].translations.NL}</a>`;
+          }
+        }
+      } else if (searchKeyword.length < 2) {
+        for (const result of filteredResults) {
+          html_results.innerHTML += `<a class="c-filter__search-result-item">${result.translations.NL}</a>`;
+        }
+      } else {
+        html_results.innerHTML = "Oeps, geen overeenkomsten gevonden.";
+      }
+    }
+
+    let html_resultLinks = document.querySelectorAll(
+      ".c-filter__search-result-item"
+    );
+
+    for (const link of html_resultLinks) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        let countryNL = link.innerHTML;
+        const objectCountry = searchForCountryObject(countryNL, "countryNL");
+
+        getDataGeoapify(objectCountry);
+      });
+    }
+  });
+
+  //Filter klik
+  document
+    .querySelector(".c-filter__header")
+    .addEventListener("click", function () {
+      if (
+        document.querySelector(".c-filter__form-items").style.display == "none"
+      ) {
+        document.querySelector(".c-filter__form-items").style.display = "block";
+      } else {
+        document.querySelector(".c-filter__form-items").style.display = "none";
+      }
+    });
+});
+
+
+/***/ }),
+/* 5 */
+/***/ (() => {
+
+"use strict";
+
+
+var inputLeftCases, inputRightCases, thumbLeftCases, thumbRightCases, rangeCases;
+
+function setLeftValueCases() {
+  var _this = inputLeftCases,
+    min = parseInt(_this.min),
+    max = parseInt(_this.max);
+
+  _this.value = Math.min(parseInt(_this.value), parseInt(inputRightCases.value) - 1);
+
+  var percent = ((_this.value - min) / (max - min)) * 100;
+
+  thumbLeftCases.style.left = percent + "%";
+  rangeCases.style.left = percent - 5 + "%";
+
+  thumbLeftCases.setAttribute("data-left", parseInt(_this.value));
+}
+
+function setRightValueCases() {
+  var _this = inputRightCases,
+    min = parseInt(_this.min),
+    max = parseInt(_this.max);
+
+  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeftCases.value) + 1);
+
+  var percent = ((_this.value - min) / (max - min)) * 100;
+
+  thumbRightCases.style.right = 100 - percent + "%";
+  rangeCases.style.right = 95 - percent + "%";
+
+  thumbRightCases.setAttribute("data-right", parseInt(_this.value));
+}
+
+const eventListenersCases = function () {
+  inputLeftCases.addEventListener("input", setLeftValueCases);
+  inputRightCases.addEventListener("input", setRightValueCases);
+
+  inputLeftCases.addEventListener("mouseover", function () {
+    thumbLeftCases.classList.add("hover");
+  });
+  inputLeftCases.addEventListener("mouseout", function () {
+    thumbLeftCases.classList.remove("hover");
+  });
+  inputLeftCases.addEventListener("mousedown", function () {
+    thumbLeftCases.classList.add("active");
+  });
+  inputLeftCases.addEventListener("mouseup", function () {
+    thumbLeftCases.classList.remove("active");
+  });
+
+  inputRightCases.addEventListener("mouseover", function () {
+    thumbRightCases.classList.add("hover");
+  });
+  inputRightCases.addEventListener("mouseout", function () {
+    thumbRightCases.classList.remove("hover");
+  });
+  inputRightCases.addEventListener("mousedown", function () {
+    thumbRightCases.classList.add("active");
+  });
+  inputRightCases.addEventListener("mouseup", function () {
+    thumbRightCases.classList.remove("active");
+  });
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  inputLeftCases = document.getElementById("cases-left");
+  inputRightCases = document.getElementById("cases-right");
+
+  thumbLeftCases = document.querySelector(".js-range-cases-left");
+  thumbRightCases = document.querySelector(".js-range-cases-right");
+  rangeCases = document.querySelector(
+    ".js-range-cases-range"
+  );
+
+  setLeftValueCases();
+  setRightValueCases();
+
+  eventListenersCases();
+});
+
+
+/***/ }),
+/* 6 */
+/***/ (() => {
+
+"use strict";
+
+
+var inputLeftDeaths, inputRightDeaths, thumbLeftDeaths, thumbRightDeaths, rangeDeaths;
+
+function setLeftValueDeaths() {
+  var _this = inputLeftDeaths,
+    min = parseInt(_this.min),
+    max = parseInt(_this.max);
+
+  _this.value = Math.min(parseInt(_this.value), parseInt(inputRightDeaths.value) - 1);
+
+  var percent = ((_this.value - min) / (max - min)) * 100;
+
+  thumbLeftDeaths.style.left = percent + "%";
+  rangeDeaths.style.left = percent - 5 + "%";
+
+  thumbLeftDeaths.setAttribute("data-left", parseInt(_this.value));
+}
+
+function setRightValueDeaths() {
+  var _this = inputRightDeaths,
+    min = parseInt(_this.min),
+    max = parseInt(_this.max);
+
+  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeftDeaths.value) + 1);
+
+  var percent = ((_this.value - min) / (max - min)) * 100;
+
+  thumbRightDeaths.style.right = 100 - percent + "%";
+  rangeDeaths.style.right = 95 - percent + "%";
+
+  thumbRightDeaths.setAttribute("data-right", parseInt(_this.value));
+}
+
+const eventListenersDeaths = function () {
+  inputLeftDeaths.addEventListener("input", setLeftValueDeaths);
+  inputRightDeaths.addEventListener("input", setRightValueDeaths);
+
+  inputLeftDeaths.addEventListener("mouseover", function () {
+    thumbLeftDeaths.classList.add("hover");
+  });
+  inputLeftDeaths.addEventListener("mouseout", function () {
+    thumbLeftDeaths.classList.remove("hover");
+  });
+  inputLeftDeaths.addEventListener("mousedown", function () {
+    thumbLeftDeaths.classList.add("active");
+  });
+  inputLeftDeaths.addEventListener("mouseup", function () {
+    thumbLeftDeaths.classList.remove("active");
+  });
+
+  inputRightDeaths.addEventListener("mouseover", function () {
+    thumbRightDeaths.classList.add("hover");
+  });
+  inputRightDeaths.addEventListener("mouseout", function () {
+    thumbRightDeaths.classList.remove("hover");
+  });
+  inputRightDeaths.addEventListener("mousedown", function () {
+    thumbRightDeaths.classList.add("active");
+  });
+  inputRightDeaths.addEventListener("mouseup", function () {
+    thumbRightDeaths.classList.remove("active");
+  });
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  inputLeftDeaths = document.getElementById("deaths-left");
+  inputRightDeaths = document.getElementById("deaths-right");
+
+  thumbLeftDeaths = document.querySelector(".js-range-deaths-left");
+  thumbRightDeaths = document.querySelector(".js-range-deaths-right");
+  rangeDeaths = document.querySelector(
+    ".js-range-deaths-range"
+  );
+
+  setLeftValueDeaths();
+  setRightValueDeaths();
+
+  eventListenersDeaths();
+});
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -33583,8 +34078,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grafieken__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_grafieken__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _kleurkaart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var _kleurkaart__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_kleurkaart__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var apexcharts_dist_apexcharts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
-/* harmony import */ var apexcharts_dist_apexcharts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(apexcharts_dist_apexcharts__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _kaart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
+/* harmony import */ var _kaart__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_kaart__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _range__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
+/* harmony import */ var _range__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_range__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _range2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
+/* harmony import */ var _range2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_range2__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var apexcharts_dist_apexcharts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
+/* harmony import */ var apexcharts_dist_apexcharts__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(apexcharts_dist_apexcharts__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
 
 
 

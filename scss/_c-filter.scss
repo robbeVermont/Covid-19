@@ -1,0 +1,280 @@
+.c-filter {
+  margin: 2rem;
+  z-index: 1000;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: $color-white;
+  box-shadow: 0px 0px 20px rgba($color-blauw, 0.2);
+  width: calc(100% - 4rem);
+  color: $color-blauw;
+
+  @include media-breakpoint-up(sm) {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: 35rem;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__head-title {
+    margin: 0;
+    margin-left: 1rem;
+    font-weight: 900;
+  }
+
+  //Items
+
+  &__form-submit {
+    margin-top: 2rem;
+    width: 100%;
+    display: block;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 1rem;
+    color: $color-white;
+    background-color: $color-blauw;
+  }
+  &__form-items {
+    display: none;
+    margin-top: 1.5rem;
+  }
+
+  &__form-item {
+    position: relative;
+    font-size: 1.6rem;
+  }
+
+  &__checkbox {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+
+    &:checked ~ .c-filter__toggle::after {
+      opacity: 1;
+    }
+
+    &:checked ~ .c-filter__dropdown {
+      display: block;
+    }
+  }
+
+  &__label {
+    margin: 0;
+    margin-left: 1rem;
+    display: inline-block;
+  }
+
+  &__toggle {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    border: 0.3rem solid $color-blauw;
+    border-radius: 0.5rem;
+
+    &::after {
+      content: "";
+      width: 1.2rem;
+      height: 2rem;
+      background-image: url(../img/check.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: absolute;
+      top: 0.6rem;
+      left: 0.4rem;
+      opacity: 0;
+
+      transition: opacity 0.1s ease;
+    }
+  }
+
+  &__dropdown {
+    display: none;
+    font-size: 1.4rem;
+    color: $color-blauw;
+    margin-left: 3rem;
+  }
+
+  &__searchbar {
+    outline: none;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    border: 0.3rem solid $color-blauw;
+    border-radius: 0.5rem;
+    width: 28rem;
+
+    @include media-breakpoint-down(sm) {
+      width: 25rem;
+    }
+  }
+
+  &__search-results {
+    display: flex;
+    flex-direction: column;
+    margin: 0.2rem 0.5rem;
+  }
+
+  &__search-result-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    color: $color-blauw;
+    text-decoration: none;
+    border: none;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 2rem;
+      height: 1rem;
+      background-image: url(../img/pijl-blauw.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      transform: translateY(50%);
+      margin-left: 2rem;
+      opacity: 0;
+
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      text-decoration: none;
+      border: none;
+      color: $color-secondary;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &:hover::before {
+      text-decoration: none;
+      border: none;
+    }
+  }
+
+  &__range {
+    padding-top: 3rem;
+
+    input[type="range"] {
+      position: absolute;
+      pointer-events: none;
+      -webkit-appearance: none;
+      z-index: 2;
+      height: 1rem;
+      width: 93%;
+      opacity: 0;
+      z-index: 1000;
+    }
+
+    &--multirange {
+      &-left {
+        right: 7%;
+      }
+      &-right {
+        left: 7%;
+      }
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      pointer-events: all;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 0;
+      border: 0 none;
+      background-color: red;
+      -webkit-appearance: none;
+    }
+    &--middle {
+      position: relative;
+      max-width: 28rem;
+    }
+    &--slider {
+      position: relative;
+      z-index: 1;
+      height: 3px;
+      margin: 0 15px;
+
+      &__track {
+        position: absolute;
+        z-index: 1;
+        left: -1rem;
+        right: -1rem;
+        top: 0;
+        bottom: 0;
+        border-radius: 5px;
+        background-color: $color-blauw;
+      }
+      &__range {
+        position: absolute;
+        z-index: 2;
+        left: 25%;
+        right: 25%;
+        height: calc(100% + 2px);
+        top: -1px;
+        bottom: 0;
+        border-radius: 5px;
+        background-color: $color-secondary;
+      }
+      &__thumb {
+        position: absolute;
+        z-index: 3;
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: $color-secondary;
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 rgba($color-secondary, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
+      }
+      &__thumb--left {
+        left: 25%;
+        transform: translate(-15px, -5px);
+
+        &::after {
+          position: absolute;
+          left: 50%;
+          bottom: 1rem;
+          content: attr(data-left);
+          color: $color-black;
+          transform: translateX(-50%);
+        }
+      }
+      &__thumb--right {
+        right: 25%;
+        transform: translate(15px, -5px);
+
+        &::after {
+          position: absolute;
+          left: 50%;
+          bottom: 1rem;
+          content: attr(data-right);
+          color: $color-black;
+          transform: translateX(-50%);
+        }
+      }
+      &__thumb.hover {
+        box-shadow: 0 0 0 10px rgba($color-secondary, 0.1);
+      }
+      &__thumb.active {
+        box-shadow: 0 0 0 20px rgba($color-secondary, 0.2);
+      }
+    }
+  }
+}

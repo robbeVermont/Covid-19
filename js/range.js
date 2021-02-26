@@ -1,80 +1,80 @@
 "use strict";
 
-var inputLeft, inputRight, thumbLeft, thumbRight, range;
+var inputLeftCases, inputRightCases, thumbLeftCases, thumbRightCases, rangeCases;
 
-function setLeftValue() {
-  var _this = inputLeft,
+function setLeftValueCases() {
+  var _this = inputLeftCases,
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.min(parseInt(_this.value), parseInt(inputRight.value) - 1);
+  _this.value = Math.min(parseInt(_this.value), parseInt(inputRightCases.value) - 1);
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
-  thumbLeft.style.left = percent + "%";
-  range.style.left = percent -5 + "%";
+  thumbLeftCases.style.left = percent + "%";
+  rangeCases.style.left = percent - 5 + "%";
 
-  thumbLeft.setAttribute("data-left", parseInt(_this.value));
+  thumbLeftCases.setAttribute("data-left", parseInt(_this.value));
 }
 
-function setRightValue() {
-  var _this = inputRight,
+function setRightValueCases() {
+  var _this = inputRightCases,
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 1);
+  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeftCases.value) + 1);
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
-  thumbRight.style.right = 100 - percent + "%";
-  range.style.right = 95 - percent + "%";
+  thumbRightCases.style.right = 100 - percent + "%";
+  rangeCases.style.right = 95 - percent + "%";
 
-  thumbRight.setAttribute("data-right", parseInt(_this.value));
+  thumbRightCases.setAttribute("data-right", parseInt(_this.value));
 }
 
-const eventListeners = function () {
-  inputLeft.addEventListener("input", setLeftValue);
-  inputRight.addEventListener("input", setRightValue);
+const eventListenersCases = function () {
+  inputLeftCases.addEventListener("input", setLeftValueCases);
+  inputRightCases.addEventListener("input", setRightValueCases);
 
-  inputLeft.addEventListener("mouseover", function () {
-    thumbLeft.classList.add("hover");
+  inputLeftCases.addEventListener("mouseover", function () {
+    thumbLeftCases.classList.add("hover");
   });
-  inputLeft.addEventListener("mouseout", function () {
-    thumbLeft.classList.remove("hover");
+  inputLeftCases.addEventListener("mouseout", function () {
+    thumbLeftCases.classList.remove("hover");
   });
-  inputLeft.addEventListener("mousedown", function () {
-    thumbLeft.classList.add("active");
+  inputLeftCases.addEventListener("mousedown", function () {
+    thumbLeftCases.classList.add("active");
   });
-  inputLeft.addEventListener("mouseup", function () {
-    thumbLeft.classList.remove("active");
+  inputLeftCases.addEventListener("mouseup", function () {
+    thumbLeftCases.classList.remove("active");
   });
 
-  inputRight.addEventListener("mouseover", function () {
-    thumbRight.classList.add("hover");
+  inputRightCases.addEventListener("mouseover", function () {
+    thumbRightCases.classList.add("hover");
   });
-  inputRight.addEventListener("mouseout", function () {
-    thumbRight.classList.remove("hover");
+  inputRightCases.addEventListener("mouseout", function () {
+    thumbRightCases.classList.remove("hover");
   });
-  inputRight.addEventListener("mousedown", function () {
-    thumbRight.classList.add("active");
+  inputRightCases.addEventListener("mousedown", function () {
+    thumbRightCases.classList.add("active");
   });
-  inputRight.addEventListener("mouseup", function () {
-    thumbRight.classList.remove("active");
+  inputRightCases.addEventListener("mouseup", function () {
+    thumbRightCases.classList.remove("active");
   });
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  inputLeft = document.getElementById("deaths-left");
-  inputRight = document.getElementById("deaths-right");
+  inputLeftCases = document.getElementById("cases-left");
+  inputRightCases = document.getElementById("cases-right");
 
-  thumbLeft = document.querySelector(".c-filter__range--slider__thumb--left");
-  thumbRight = document.querySelector(".c-filter__range--slider__thumb--right");
-  range = document.querySelector(
-    ".c-filter__range--slider > .c-filter__range--slider__range"
+  thumbLeftCases = document.querySelector(".js-range-cases-left");
+  thumbRightCases = document.querySelector(".js-range-cases-right");
+  rangeCases = document.querySelector(
+    ".js-range-cases-range"
   );
 
-  setLeftValue();
-  setRightValue();
+  setLeftValueCases();
+  setRightValueCases();
 
-  eventListeners();
+  eventListenersCases();
 });

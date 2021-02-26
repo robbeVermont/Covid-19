@@ -4,6 +4,7 @@ let dataCovid = [];
 let dataCountries = [];
 
 let map;
+let popup;
 
 const convertNumber = function (oldNumber) {
   let newNumber = String(oldNumber);
@@ -31,10 +32,75 @@ const searchForCountryObject = function (searchItem, type) {
         return country;
       }
     }
+  } else if (type == "countryNL") {
+    for (const country of dataCountries) {
+      if (country.translations.NL == searchItem) {
+        return country;
+      }
+    }
   }
 };
 
-const selectCountry = function (e, feature) {
+const setPopupContent = function (objectCountry, covidDataCountry) {
+  if (covidDataCountry == undefined) {
+    //Geen coviddata gevonden
+    return `<div class="c-kaart__popup"><div class="c-kaart__popup__cijfers"><p>Geen data gevonden voor ${objectCountry.translations.NL}</p></div></div>`;
+  } else {
+    //Wel coviddata gevonden
+    return `<div class="c-kaart__popup"><p class="c-kaart__popup__land"><img src="${
+      covidDataCountry.countryInfo.flag
+    } "alt="" class="c-kaart__popup__vlag"/>${
+      objectCountry.translations.NL
+    }</p><div class="c-kaart__popup__cijfers"><div><p class="c-kaart__popup__title">Aantal besmettingen:</p><p>${convertNumber(
+      covidDataCountry.todayCases
+    )}</p></div><div><p class="c-kaart__popup__title">Aantal doden:</p><p>${convertNumber(
+      covidDataCountry.todayDeaths
+    )}</p></div><div><p class="c-kaart__popup__title">Aantal herstelde gevallen:</p><p>${convertNumber(
+      covidDataCountry.todayRecovered
+    )}</p></div></div><div class="c-kaart__popup__link"><a href="#">Bekijk alle cijfers</a></div></div>`;
+  }
+};
+
+const showPopup = function (latlng, objectCountry, covidDataCountry) {
+  if (window.innerWidth > 575) {
+    //Popup op kaart
+    let popupOptions = {
+      maxWidth: 450,
+    };
+
+    let popup = L.popup(popupOptions)
+      .setLatLng(latlng)
+      .setContent(setPopupContent(objectCountry, covidDataCountry))
+      .openOn(map);
+  } else {
+    //Popup onder kaart
+    document.querySelector(".js-kaart-popup").style.display = "block";
+    document.querySelector(".js-kaart-popup").innerHTML = setPopupContent(
+      objectCountry,
+      covidDataCountry
+    );
+  }
+};
+
+const goToCountry = function (dataGeoapify, objectCountry) {
+  //Ophalen van de covid data voor dat land
+  let covidDataCountry;
+
+  for (const key in dataCovid) {
+    if (dataCovid[key].country == objectCountry.covid.name) {
+      covidDataCountry = dataCovid[key];
+    }
+  }
+
+  let latlng = {
+    lat: dataGeoapify.features[0].properties.lat,
+    lng: dataGeoapify.features[0].properties.lon,
+  };
+
+  showPopup(latlng, objectCountry, covidDataCountry);
+};
+
+const clickOnCountry = function (e, feature) {
   //GeoJSON naam van land waar op geklikt werd.
   const nameCountryGeoJSON = feature.properties.name;
 
@@ -50,79 +116,9 @@ const selectCountry = function (e, feature) {
     }
   }
 
-  let popupOptions = {
-    maxWidth: 450,
-  };
+  let latlng = e.latlng;
 
-  let popupContent = `<div class="c-kaart__popup">
-  <p class="c-kaart__popup__land">
-    <img
-      src="${covidDataCountry.countryInfo.flag}"
-      alt=""
-      class="c-kaart__popup__vlag"
-    />
-    ${objectCountry.translations.NL}
-  </p>
-  <div class="c-kaart__popup__cijfers">
-    <div>
-      <p class="c-kaart__popup__title">Aantal besmettingen:</p>
-      <p>${convertNumber(covidDataCountry.todayCases)}</p>
-    </div>
-    <div>
-      <p class="c-kaart__popup__title">Aantal doden:</p>
-      <p>${convertNumber(covidDataCountry.todayDeaths)}</p>
-    </div>
-    <div>
-      <p class="c-kaart__popup__title">Aantal herstelde gevallen:</p>
-      <p>${convertNumber(covidDataCountry.todayRecovered)}</p>
-    </div>
-  </div>
-  <div class="c-kaart__popup__link">
-    <a href="#">Bekijk alle cijfers</a>
-  </div>
-</div>`;
-
-  if (window.innerWidth > 575) {
-    document.addEventListener("resize", function () {
-      document.querySelector(".js-kaart-popup").style.display = "none";
-    });
-
-    //Tonen van de popup op de kaart
-    let popup = L.popup(popupOptions)
-      .setLatLng(e.latlng)
-      .setContent(popupContent)
-      .openOn(map);
-  } else {
-    //Tonen van de popup onder de kaart
-    document.querySelector(".js-kaart-popup").style.display = "block";
-    document.querySelector(".js-kaart-popup").innerHTML = `
-    <p class="c-kaart__popup__land">
-      <img
-        src="${covidDataCountry.countryInfo.flag}"
-        alt=""
-        class="c-kaart__popup__vlag"
-      />
-      ${objectCountry.translations.NL}
-    </p>
-    <div class="c-kaart__popup__cijfers">
-      <div>
-        <p class="c-kaart__popup__title">Aantal besmettingen:</p>
-        <p>${convertNumber(covidDataCountry.todayCases)}</p>
-      </div>
-      <div>
-        <p class="c-kaart__popup__title">Aantal doden:</p>
-        <p>${convertNumber(covidDataCountry.todayDeaths)}</p>
-      </div>
-      <div>
-        <p class="c-kaart__popup__title">Aantal herstelde gevallen:</p>
-        <p>${convertNumber(covidDataCountry.todayRecovered)}</p>
-      </div>
-    </div>
-    <div class="c-kaart__popup__link">
-      <a href="#">Bekijk alle cijfers</a>
-    </div>
-  `;
-  }
+  showPopup(latlng, objectCountry, covidDataCountry);
 };
 
 const mouseOutCountry = function (e) {
@@ -160,7 +156,7 @@ const onEachFeature = function (feature, layer) {
 
   //Effect toevoegen wanneer je op een land klikt of selecteert
   layer.addEventListener("click", function (e) {
-    selectCountry(e, feature);
+    clickOnCountry(e, feature);
   });
 };
 
@@ -199,6 +195,18 @@ const verwerkDataCountriesConnection = function (data) {
 
 const verwerkDataCovid = function (data) {
   dataCovid = data;
+};
+
+const getDataGeoapify = function (country) {
+  const API_key = "ae0d2fc63ecd4c8a9f24aad5ea26a570";
+
+  //Pad naar JSON
+  const path = `https://api.geoapify.com/v1/geocode/search?text=${country.geojson.name}&limit=1&apiKey=${API_key}`;
+
+  //Fetchen van data
+  fetch(path)
+    .then((response) => response.json())
+    .then((data) => goToCountry(data, country));
 };
 
 const getDataCountriesConnection = function () {
@@ -240,4 +248,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Ophalen van de geoJSON
   getDataGeoJSON();
+
+  //Searchbar
+  const html_searchbar = document.querySelector(".js-search-zoek-op-land");
+  html_searchbar.addEventListener("keyup", function (e) {
+    let searchKeyword = e.target.value.toLowerCase();
+
+    let filteredResults = dataCountries.filter((country) =>
+      String(country.translations.NL)
+        .toLocaleLowerCase()
+        .startsWith(searchKeyword)
+    );
+
+    const html_results = document.querySelector(".js-search-results");
+    html_results.innerHTML = "";
+
+    if (searchKeyword != "") {
+      if (filteredResults.length != 0) {
+        if (filteredResults.length < 5) {
+          for (const result of filteredResults) {
+            html_results.innerHTML += `<a class="c-filter__search-result-item">${result.translations.NL}</a>`;
+          }
+        } else {
+          for (let i = 0; i < 5; i++) {
+            html_results.innerHTML += `<a class="c-filter__search-result-item">${filteredResults[i].translations.NL}</a>`;
+          }
+        }
+      } else if (searchKeyword.length < 2) {
+        for (const result of filteredResults) {
+          html_results.innerHTML += `<a class="c-filter__search-result-item">${result.translations.NL}</a>`;
+        }
+      } else {
+        html_results.innerHTML = "Oeps, geen overeenkomsten gevonden.";
+      }
+    }
+
+    let html_resultLinks = document.querySelectorAll(
+      ".c-filter__search-result-item"
+    );
+
+    for (const link of html_resultLinks) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        let countryNL = link.innerHTML;
+        const objectCountry = searchForCountryObject(countryNL, "countryNL");
+
+        getDataGeoapify(objectCountry);
+      });
+    }
+  });
+
+  //Filter klik
+  document
+    .querySelector(".c-filter__header")
+    .addEventListener("click", function () {
+      if (
+        document.querySelector(".c-filter__form-items").style.display == "none"
+      ) {
+        document.querySelector(".c-filter__form-items").style.display = "block";
+      } else {
+        document.querySelector(".c-filter__form-items").style.display = "none";
+      }
+    });
 });

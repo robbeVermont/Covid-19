@@ -2146,15 +2146,15 @@
   },
   {
     "id": 166,
-    "url": "zuid-korea",
+    "url": "noord-korea",
     "covid": {
-      "name": "S. Korea"
+      "name": null
     },
     "geojson": {
       "name": "Dem. Rep. Korea"
     },
     "translations": {
-      "NL": "Zuid-Korea"
+      "NL": "Noord Korea"
     }
   },
   {
@@ -3043,15 +3043,15 @@
   },
   {
     "id": 235,
-    "url": "korea",
+    "url": "zuid-korea",
     "covid": {
-      "name": null
+      "name": "S. Korea"
     },
     "geojson": {
       "name": "Korea"
     },
     "translations": {
-      "NL": "Korea"
+      "NL": "Zuid Korea"
     }
   },
   {
@@ -3351,6 +3351,19 @@
     },
     "translations": {
       "NL": "Kosovo"
+    }
+  },
+  {
+    "id": 259,
+    "url": "cyprus-vn-bufferzone",
+    "covid": {
+      "name": null
+    },
+    "geojson": {
+      "name": "Cyprus U.N. Buffer Zone"
+    },
+    "translations": {
+      "NL": "Cyprus VN-Bufferzone"
     }
   }
 ]

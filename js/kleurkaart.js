@@ -303,11 +303,13 @@ const getDataCountriesJSON = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  window.onresize = window.onload = function () {
-    screenWidth = this.innerWidth;
-  };
+  if (document.querySelector("#mymap")) {
+    window.onresize = window.onload = function () {
+      screenWidth = this.innerWidth;
+    };
 
-  //Ophalen van de geoJSON
+    //Ophalen van de geoJSON
 
-  getDataCovidJSON();
+    getDataCovidJSON();
+  }
 });

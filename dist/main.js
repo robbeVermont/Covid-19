@@ -2768,13 +2768,15 @@ const getDataCountriesJSON = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  window.onresize = window.onload = function () {
-    screenWidth = this.innerWidth;
-  };
+  if (document.querySelector("#mymap")) {
+    window.onresize = window.onload = function () {
+      screenWidth = this.innerWidth;
+    };
 
-  //Ophalen van de geoJSON
+    //Ophalen van de geoJSON
 
-  getDataCovidJSON();
+    getDataCovidJSON();
+  }
 });
 
 
@@ -3040,173 +3042,207 @@ const getDataCovid = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  //Ophalen van de Covid-19 data
-  getDataCovid();
+  if (document.querySelector("#map")) {
+    //Ophalen van de Covid-19 data
+    getDataCovid();
 
-  //Ophalen van de JSON die de connectie maakt tussen alles
-  getDataCountriesConnection();
+    //Ophalen van de JSON die de connectie maakt tussen alles
+    getDataCountriesConnection();
 
-  //Ophalen van de geoJSON
-  getDataGeoJSON();
+    //Ophalen van de geoJSON
+    getDataGeoJSON();
 
-  //Searchbar
-  const html_searchbar = document.querySelector(".js-search-zoek-op-land");
-  html_searchbar.addEventListener("keyup", function (e) {
-    let searchKeyword = e.target.value.toLowerCase();
+    //Searchbar
+    let html_searchbar;
+    if (document.querySelector(".js-search-zoek-op-land")) {
+      html_searchbar = document.querySelector(".js-search-zoek-op-land");
+      html_searchbar.addEventListener("keyup", function (e) {
+        let searchKeyword = e.target.value.toLowerCase();
 
-    let filteredResults = dataCountries.filter((country) =>
-      String(country.translations.NL)
-        .toLocaleLowerCase()
-        .startsWith(searchKeyword)
-    );
+        let filteredResults = dataCountries.filter((country) =>
+          String(country.translations.NL)
+            .toLocaleLowerCase()
+            .startsWith(searchKeyword)
+        );
 
-    const html_results = document.querySelector(".js-search-results");
-    html_results.innerHTML = "";
+        const html_results = document.querySelector(".js-search-results");
+        html_results.innerHTML = "";
 
-    if (searchKeyword != "") {
-      if (filteredResults.length != 0) {
-        if (filteredResults.length < 5) {
-          for (const result of filteredResults) {
-            html_results.innerHTML += `<a class="c-filter__search-result-item">${result.translations.NL}</a>`;
-          }
-        } else {
-          for (let i = 0; i < 5; i++) {
-            html_results.innerHTML += `<a class="c-filter__search-result-item">${filteredResults[i].translations.NL}</a>`;
+        if (searchKeyword != "") {
+          if (filteredResults.length != 0) {
+            if (filteredResults.length < 5) {
+              for (const result of filteredResults) {
+                html_results.innerHTML += `<a class="c-filter__search-result-item">${result.translations.NL}</a>`;
+              }
+            } else {
+              for (let i = 0; i < 5; i++) {
+                html_results.innerHTML += `<a class="c-filter__search-result-item">${filteredResults[i].translations.NL}</a>`;
+              }
+            }
+          } else if (searchKeyword.length < 2) {
+            for (const result of filteredResults) {
+              html_results.innerHTML += `<a class="c-filter__search-result-item">${result.translations.NL}</a>`;
+            }
+          } else {
+            html_results.innerHTML = "Oeps, geen overeenkomsten gevonden.";
           }
         }
-      } else if (searchKeyword.length < 2) {
-        for (const result of filteredResults) {
-          html_results.innerHTML += `<a class="c-filter__search-result-item">${result.translations.NL}</a>`;
+
+        let html_resultLinks = document.querySelectorAll(
+          ".c-filter__search-result-item"
+        );
+
+        for (const link of html_resultLinks) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            let countryNL = link.innerHTML;
+            const objectCountry = searchForCountryObject(
+              countryNL,
+              "countryNL"
+            );
+
+            getDataGeoapify(objectCountry);
+          });
         }
-      } else {
-        html_results.innerHTML = "Oeps, geen overeenkomsten gevonden.";
-      }
-    }
-
-    let html_resultLinks = document.querySelectorAll(
-      ".c-filter__search-result-item"
-    );
-
-    for (const link of html_resultLinks) {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-
-        let countryNL = link.innerHTML;
-        const objectCountry = searchForCountryObject(countryNL, "countryNL");
-
-        getDataGeoapify(objectCountry);
       });
     }
-  });
-
-  //Filter klik
-  document
-    .querySelector(".c-filter__header")
-    .addEventListener("click", function () {
-      if (
-        document.querySelector(".c-filter__form-items").style.display == "none"
-      ) {
-        document.querySelector(".c-filter__form-items").style.display = "block";
-      } else {
-        document.querySelector(".c-filter__form-items").style.display = "none";
-      }
-    });
-
-  document.querySelector(".js-submit").addEventListener("click", function (e) {
-    e.preventDefault();
-    newGeoData = [];
-    document.querySelector(".c-filter__form-items").style.display = "none";
-    const checkboxCases = document.querySelector("#checkboxAantalBesmettingen");
-    const checkboxDeaths = document.querySelector("#checkboxAantalDoden");
-    const minCases = parseInt(
-      document.querySelector(".js-range-cases-min").value
-    );
-    const maxCases = parseInt(
-      document.querySelector(".js-range-cases-max").value
-    );
-    const minDeaths = parseInt(
-      document.querySelector(".js-range-deaths-min").value
-    );
-    const maxDeaths = parseInt(
-      document.querySelector(".js-range-deaths-max").value
-    );
-
-    let countryList = [];
-
-    if (checkboxCases.checked && !checkboxDeaths.checked) {
-      for (const country of dataCovid) {
-        if (country.todayCases <= maxCases && country.todayCases >= minCases) {
-          countryList.push(country);
-        }
-      }
-      for (const geoCountry of geoData.features) {
-        for (const country of countryList) {
-          if (searchForCountryObject(geoCountry.properties.name, "geojson")) {
-            if (
-              searchForCountryObject(geoCountry.properties.name, "geojson")
-                .covid.name == country.country
-            ) {
-              newGeoData.push(geoCountry);
-            }
+    //Filter klik
+    if (document.querySelector(".c-filter__header")) {
+      document
+        .querySelector(".c-filter__header")
+        .addEventListener("click", function () {
+          if (
+            document.querySelector(".c-filter__form-items").style.display ==
+            "none"
+          ) {
+            document.querySelector(".c-filter__form-items").style.display =
+              "block";
+          } else {
+            document.querySelector(".c-filter__form-items").style.display =
+              "none";
           }
-        }
-      }
-      map.remove();
-      setMapWithGeoJSON(geoData);
-    } else if (checkboxDeaths.checked && !checkboxCases.checked) {
-      for (const country of dataCovid) {
-        if (
-          country.todayDeaths <= maxDeaths &&
-          country.todayDeaths >= minDeaths
-        ) {
-          countryList.push(country);
-        }
-      }
-      for (const geoCountry of geoData.features) {
-        for (const country of countryList) {
-          if (searchForCountryObject(geoCountry.properties.name, "geojson")) {
-            if (
-              searchForCountryObject(geoCountry.properties.name, "geojson")
-                .covid.name == country.country
-            ) {
-              newGeoData.push(geoCountry);
-            }
-          }
-        }
-      }
-      map.remove();
-      setMapWithGeoJSON(geoData);
-    } else if (checkboxDeaths.checked && checkboxCases.checked) {
-      for (const country of dataCovid) {
-        if (
-          country.todayCases <= maxCases &&
-          country.todayCases >= minCases &&
-          country.todayDeaths <= maxDeaths &&
-          country.todayDeaths >= minDeaths
-        ) {
-          countryList.push(country);
-        }
-      }
-
-      for (const geoCountry of geoData.features) {
-        for (const country of countryList) {
-          if (searchForCountryObject(geoCountry.properties.name, "geojson")) {
-            if (
-              searchForCountryObject(geoCountry.properties.name, "geojson")
-                .covid.name == country.country
-            ) {
-              newGeoData.push(geoCountry);
-            }
-          }
-        }
-      }
-      map.remove();
-      setMapWithGeoJSON(geoData);
-    } else if (!checkboxDeaths.checked && !checkboxCases.checked) {
-      map.remove();
-      setMapWithGeoJSON(geoData);
+        });
     }
-  });
+
+    if (document.querySelector(".js-submit")) {
+      document
+        .querySelector(".js-submit")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          newGeoData = [];
+          document.querySelector(".c-filter__form-items").style.display =
+            "none";
+          const checkboxCases = document.querySelector(
+            "#checkboxAantalBesmettingen"
+          );
+          const checkboxDeaths = document.querySelector("#checkboxAantalDoden");
+          const minCases = parseInt(
+            document.querySelector(".js-range-cases-min").value
+          );
+          const maxCases = parseInt(
+            document.querySelector(".js-range-cases-max").value
+          );
+          const minDeaths = parseInt(
+            document.querySelector(".js-range-deaths-min").value
+          );
+          const maxDeaths = parseInt(
+            document.querySelector(".js-range-deaths-max").value
+          );
+
+          let countryList = [];
+
+          if (checkboxCases.checked && !checkboxDeaths.checked) {
+            for (const country of dataCovid) {
+              if (
+                country.todayCases <= maxCases &&
+                country.todayCases >= minCases
+              ) {
+                countryList.push(country);
+              }
+            }
+            for (const geoCountry of geoData.features) {
+              for (const country of countryList) {
+                if (
+                  searchForCountryObject(geoCountry.properties.name, "geojson")
+                ) {
+                  if (
+                    searchForCountryObject(
+                      geoCountry.properties.name,
+                      "geojson"
+                    ).covid.name == country.country
+                  ) {
+                    newGeoData.push(geoCountry);
+                  }
+                }
+              }
+            }
+            map.remove();
+            setMapWithGeoJSON(geoData);
+          } else if (checkboxDeaths.checked && !checkboxCases.checked) {
+            for (const country of dataCovid) {
+              if (
+                country.todayDeaths <= maxDeaths &&
+                country.todayDeaths >= minDeaths
+              ) {
+                countryList.push(country);
+              }
+            }
+            for (const geoCountry of geoData.features) {
+              for (const country of countryList) {
+                if (
+                  searchForCountryObject(geoCountry.properties.name, "geojson")
+                ) {
+                  if (
+                    searchForCountryObject(
+                      geoCountry.properties.name,
+                      "geojson"
+                    ).covid.name == country.country
+                  ) {
+                    newGeoData.push(geoCountry);
+                  }
+                }
+              }
+            }
+            map.remove();
+            setMapWithGeoJSON(geoData);
+          } else if (checkboxDeaths.checked && checkboxCases.checked) {
+            for (const country of dataCovid) {
+              if (
+                country.todayCases <= maxCases &&
+                country.todayCases >= minCases &&
+                country.todayDeaths <= maxDeaths &&
+                country.todayDeaths >= minDeaths
+              ) {
+                countryList.push(country);
+              }
+            }
+
+            for (const geoCountry of geoData.features) {
+              for (const country of countryList) {
+                if (
+                  searchForCountryObject(geoCountry.properties.name, "geojson")
+                ) {
+                  if (
+                    searchForCountryObject(
+                      geoCountry.properties.name,
+                      "geojson"
+                    ).covid.name == country.country
+                  ) {
+                    newGeoData.push(geoCountry);
+                  }
+                }
+              }
+            }
+            map.remove();
+            setMapWithGeoJSON(geoData);
+          } else if (!checkboxDeaths.checked && !checkboxCases.checked) {
+            map.remove();
+            setMapWithGeoJSON(geoData);
+          }
+        });
+    }
+  }
 });
 
 function style(feature) {
@@ -3241,14 +3277,21 @@ function style(feature) {
 "use strict";
 
 
-var inputLeftCases, inputRightCases, thumbLeftCases, thumbRightCases, rangeCases;
+var inputLeftCases,
+  inputRightCases,
+  thumbLeftCases,
+  thumbRightCases,
+  rangeCases;
 
 function setLeftValueCases() {
   var _this = inputLeftCases,
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.min(parseInt(_this.value), parseInt(inputRightCases.value) - 1);
+  _this.value = Math.min(
+    parseInt(_this.value),
+    parseInt(inputRightCases.value) - 1
+  );
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
@@ -3263,7 +3306,10 @@ function setRightValueCases() {
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeftCases.value) + 1);
+  _this.value = Math.max(
+    parseInt(_this.value),
+    parseInt(inputLeftCases.value) + 1
+  );
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
@@ -3305,19 +3351,25 @@ const eventListenersCases = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  inputLeftCases = document.getElementById("cases-left");
-  inputRightCases = document.getElementById("cases-right");
+  if (
+    document.getElementById("cases-left") &&
+    document.getElementById("cases-right") &&
+    document.querySelector(".js-range-cases-left") &&
+    document.querySelector(".js-range-cases-right") &&
+    document.querySelector(".js-range-cases-range")
+  ) {
+    inputLeftCases = document.getElementById("cases-left");
+    inputRightCases = document.getElementById("cases-right");
 
-  thumbLeftCases = document.querySelector(".js-range-cases-left");
-  thumbRightCases = document.querySelector(".js-range-cases-right");
-  rangeCases = document.querySelector(
-    ".js-range-cases-range"
-  );
+    thumbLeftCases = document.querySelector(".js-range-cases-left");
+    thumbRightCases = document.querySelector(".js-range-cases-right");
+    rangeCases = document.querySelector(".js-range-cases-range");
 
-  setLeftValueCases();
-  setRightValueCases();
+    setLeftValueCases();
+    setRightValueCases();
 
-  eventListenersCases();
+    eventListenersCases();
+  }
 });
 
 
@@ -3328,14 +3380,21 @@ document.addEventListener("DOMContentLoaded", function () {
 "use strict";
 
 
-var inputLeftDeaths, inputRightDeaths, thumbLeftDeaths, thumbRightDeaths, rangeDeaths;
+var inputLeftDeaths,
+  inputRightDeaths,
+  thumbLeftDeaths,
+  thumbRightDeaths,
+  rangeDeaths;
 
 function setLeftValueDeaths() {
   var _this = inputLeftDeaths,
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.min(parseInt(_this.value), parseInt(inputRightDeaths.value) - 1);
+  _this.value = Math.min(
+    parseInt(_this.value),
+    parseInt(inputRightDeaths.value) - 1
+  );
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
@@ -3350,7 +3409,10 @@ function setRightValueDeaths() {
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeftDeaths.value) + 1);
+  _this.value = Math.max(
+    parseInt(_this.value),
+    parseInt(inputLeftDeaths.value) + 1
+  );
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
@@ -3392,19 +3454,25 @@ const eventListenersDeaths = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  inputLeftDeaths = document.getElementById("deaths-left");
-  inputRightDeaths = document.getElementById("deaths-right");
+  if (
+    document.getElementById("deaths-left") &&
+    document.getElementById("deaths-right") &&
+    document.querySelector(".js-range-deaths-left") &&
+    document.querySelector(".js-range-deaths-right") &&
+    document.querySelector(".js-range-deaths-range")
+  ) {
+    inputLeftDeaths = document.getElementById("deaths-left");
+    inputRightDeaths = document.getElementById("deaths-right");
 
-  thumbLeftDeaths = document.querySelector(".js-range-deaths-left");
-  thumbRightDeaths = document.querySelector(".js-range-deaths-right");
-  rangeDeaths = document.querySelector(
-    ".js-range-deaths-range"
-  );
+    thumbLeftDeaths = document.querySelector(".js-range-deaths-left");
+    thumbRightDeaths = document.querySelector(".js-range-deaths-right");
+    rangeDeaths = document.querySelector(".js-range-deaths-range");
 
-  setLeftValueDeaths();
-  setRightValueDeaths();
+    setLeftValueDeaths();
+    setRightValueDeaths();
 
-  eventListenersDeaths();
+    eventListenersDeaths();
+  }
 });
 
 

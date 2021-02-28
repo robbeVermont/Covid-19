@@ -1,13 +1,20 @@
 "use strict";
 
-var inputLeftDeaths, inputRightDeaths, thumbLeftDeaths, thumbRightDeaths, rangeDeaths;
+var inputLeftDeaths,
+  inputRightDeaths,
+  thumbLeftDeaths,
+  thumbRightDeaths,
+  rangeDeaths;
 
 function setLeftValueDeaths() {
   var _this = inputLeftDeaths,
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.min(parseInt(_this.value), parseInt(inputRightDeaths.value) - 1);
+  _this.value = Math.min(
+    parseInt(_this.value),
+    parseInt(inputRightDeaths.value) - 1
+  );
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
@@ -22,7 +29,10 @@ function setRightValueDeaths() {
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeftDeaths.value) + 1);
+  _this.value = Math.max(
+    parseInt(_this.value),
+    parseInt(inputLeftDeaths.value) + 1
+  );
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
@@ -64,17 +74,23 @@ const eventListenersDeaths = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  inputLeftDeaths = document.getElementById("deaths-left");
-  inputRightDeaths = document.getElementById("deaths-right");
+  if (
+    document.getElementById("deaths-left") &&
+    document.getElementById("deaths-right") &&
+    document.querySelector(".js-range-deaths-left") &&
+    document.querySelector(".js-range-deaths-right") &&
+    document.querySelector(".js-range-deaths-range")
+  ) {
+    inputLeftDeaths = document.getElementById("deaths-left");
+    inputRightDeaths = document.getElementById("deaths-right");
 
-  thumbLeftDeaths = document.querySelector(".js-range-deaths-left");
-  thumbRightDeaths = document.querySelector(".js-range-deaths-right");
-  rangeDeaths = document.querySelector(
-    ".js-range-deaths-range"
-  );
+    thumbLeftDeaths = document.querySelector(".js-range-deaths-left");
+    thumbRightDeaths = document.querySelector(".js-range-deaths-right");
+    rangeDeaths = document.querySelector(".js-range-deaths-range");
 
-  setLeftValueDeaths();
-  setRightValueDeaths();
+    setLeftValueDeaths();
+    setRightValueDeaths();
 
-  eventListenersDeaths();
+    eventListenersDeaths();
+  }
 });

@@ -1,13 +1,20 @@
 "use strict";
 
-var inputLeftCases, inputRightCases, thumbLeftCases, thumbRightCases, rangeCases;
+var inputLeftCases,
+  inputRightCases,
+  thumbLeftCases,
+  thumbRightCases,
+  rangeCases;
 
 function setLeftValueCases() {
   var _this = inputLeftCases,
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.min(parseInt(_this.value), parseInt(inputRightCases.value) - 1);
+  _this.value = Math.min(
+    parseInt(_this.value),
+    parseInt(inputRightCases.value) - 1
+  );
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
@@ -22,7 +29,10 @@ function setRightValueCases() {
     min = parseInt(_this.min),
     max = parseInt(_this.max);
 
-  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeftCases.value) + 1);
+  _this.value = Math.max(
+    parseInt(_this.value),
+    parseInt(inputLeftCases.value) + 1
+  );
 
   var percent = ((_this.value - min) / (max - min)) * 100;
 
@@ -64,17 +74,23 @@ const eventListenersCases = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  inputLeftCases = document.getElementById("cases-left");
-  inputRightCases = document.getElementById("cases-right");
+  if (
+    document.getElementById("cases-left") &&
+    document.getElementById("cases-right") &&
+    document.querySelector(".js-range-cases-left") &&
+    document.querySelector(".js-range-cases-right") &&
+    document.querySelector(".js-range-cases-range")
+  ) {
+    inputLeftCases = document.getElementById("cases-left");
+    inputRightCases = document.getElementById("cases-right");
 
-  thumbLeftCases = document.querySelector(".js-range-cases-left");
-  thumbRightCases = document.querySelector(".js-range-cases-right");
-  rangeCases = document.querySelector(
-    ".js-range-cases-range"
-  );
+    thumbLeftCases = document.querySelector(".js-range-cases-left");
+    thumbRightCases = document.querySelector(".js-range-cases-right");
+    rangeCases = document.querySelector(".js-range-cases-range");
 
-  setLeftValueCases();
-  setRightValueCases();
+    setLeftValueCases();
+    setRightValueCases();
 
-  eventListenersCases();
+    eventListenersCases();
+  }
 });

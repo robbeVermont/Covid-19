@@ -1,9 +1,10 @@
-"use strict"
+"use strict";
+document.addEventListener("DOMContentLoaded", function () {
+  const hammenu = document.querySelector(".hammenu");
+  const nav = document.querySelector(".c-navbar__items");
 
-$(document).ready(function () {
-    $(".hammenu").click(function () { 
-        $(this).toggleClass('js-transformed');
-        $(".nvbar__items").slideToggle(350, "linear");
-        $(".nvbar__items").css("display", "flex");
-    });
+  hammenu.addEventListener("click", function () {
+    hammenu.classList.toggle("js-transformed");
+    nav.classList.toggle("c-navbar__items--expand");
+  });
 });

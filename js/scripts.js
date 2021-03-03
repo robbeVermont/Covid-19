@@ -1,7 +1,11 @@
-import "./hamburger_menu";
+// import "../node_modules/jquery/src/jquery";
+import "../node_modules/apexcharts/dist/apexcharts.min.js";
+import "../node_modules/leaflet/dist/leaflet";
+// import "./hamburger_menu";
 import "./grafieken";
 import "./kleurkaart";
 import "./kaart";
 import "./range";
 import "./range2";
-import "apexcharts/dist/apexcharts";
+// import "./top";
+// import "./navbar";

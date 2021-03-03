@@ -43,6 +43,13 @@
     border-radius: 1rem;
     color: $color-white;
     background-color: $color-blauw;
+    opacity: 1;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
   }
   &__form-items {
     display: none;
@@ -52,6 +59,7 @@
   &__form-item {
     position: relative;
     font-size: 1.6rem;
+    padding-bottom: 0.5rem;
   }
 
   &__checkbox {
@@ -75,7 +83,7 @@
 
   &__label {
     margin: 0;
-    margin-left: 1rem;
+    margin-left: 3.5rem;
     display: inline-block;
   }
 
@@ -85,6 +93,8 @@
     height: 2rem;
     border: 0.3rem solid $color-blauw;
     border-radius: 0.5rem;
+    position: absolute;
+    top: 0.2rem;
 
     &::after {
       content: "";
@@ -94,11 +104,11 @@
       background-repeat: no-repeat;
       background-size: contain;
       position: absolute;
-      top: 0.6rem;
-      left: 0.4rem;
+      top: 0.3rem;
+      left: 0.1rem;
       opacity: 0;
 
-      transition: opacity 0.1s ease;
+      transition: opacity 0.2s ease;
     }
   }
 
@@ -106,7 +116,7 @@
     display: none;
     font-size: 1.4rem;
     color: $color-blauw;
-    margin-left: 3rem;
+    margin-left: 3.5rem;
   }
 
   &__searchbar {

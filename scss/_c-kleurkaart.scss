@@ -14,10 +14,14 @@
     border-radius: 5px;
     &.leaflet-control {
       font-size: 2rem;
+
       .info-panel {
-        padding-bottom: 0.5rem;
+        font-size: 3rem;
+        padding: 0.5rem 0.5rem 0 0;
+        padding-bottom: 1.5rem;
         &--bottom {
-          padding-top: 0.3rem;
+          padding-top: 0.7rem;
+          line-height: 1;
         }
       }
     }
@@ -50,6 +54,12 @@
       font-size: 1.2rem;
     }
   }
+}
+
+.js-countryimg {
+  box-shadow: 1px -1px 3px 2px rgba($color-black, 0.1);
+  height: 3rem;
+  width: auto;
 }
 
 .leaflet-container .leaflet-control-attribution,

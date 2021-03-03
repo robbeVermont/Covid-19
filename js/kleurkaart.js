@@ -6,6 +6,8 @@ let geojson;
 var info = L.control();
 
 let prevCountry, screenWidth;
+const geoLink = "https://api.jsonbin.io/b/603cc6849342196a6a6a8f7e";
+const countriesLink = "https://api.jsonbin.io/b/60338a17f1be644b0a62f473/5";
 
 info.onAdd = function (map) {
   this._div = L.DomUtil.create("div", "info"); // create a div with a class "info"
@@ -16,26 +18,31 @@ info.onAdd = function (map) {
 info.update = function (props) {
   if (props) {
     let cases = "onbekend";
+    let countryObj;
     const covidName = GeoToCovid(props.name);
     if (covidName) {
       for (const country of covidData) {
         if (country.country == covidName) {
           cases = country.activePerOneMillion;
+          countryObj = country;
         }
       }
 
       this._div.innerHTML =
-        "<div class='info-panel'>Covid besmettingen</div>" +
+        "<div class='info-panel pb-4'>Covid besmettingen</div>" +
         (props
           ? "<b>" +
             GeoToNL(props.name) +
+            "<img style='height:2rem; padding-left:1rem;' src='" +
+            countryObj.countryInfo.flag +
+            "'>" +
             "</b><br /><div class='info-panel--bottom'>" +
             convertNumber(cases) +
-            " per miljoen inwoners</sup></div>"
+            " besmettingen</br> per miljoen inwoners</sup></div>"
           : "Hover over een land");
     } else {
       this._div.innerHTML =
-        "<div class='info-panel'>Covid besmettingen</div>" +
+        "<div class='info-panel pb-4'>Covid besmettingen</div>" +
         (props
           ? "<b>" +
             GeoToNL(props.name) +
@@ -46,10 +53,10 @@ info.update = function (props) {
   } else {
     if (screenWidth < 768) {
       this._div.innerHTML =
-        "<div class='info-panel'>Covid besmettingen</div>" + "Klik op een land";
+        "<div class='info-panel pb-4'>Covid besmettingen</div>" + "Klik op een land";
     } else {
       this._div.innerHTML =
-        "<div class='info-panel'>Covid besmettingen</div>" +
+        "<div class='info-panel pb-4'>Covid besmettingen</div>" +
         "Hover over een land";
     }
   }
@@ -76,17 +83,17 @@ const convertNumber = function (oldNumber) {
   if (newNumber.length > 3) {
     newNumber =
       newNumber.slice(0, newNumber.length - 3) +
-      " " +
+      "." +
       newNumber.slice(newNumber.length - 3, newNumber.length);
 
     if (newNumber.length > 7) {
       newNumber =
         newNumber.slice(0, newNumber.length - 7) +
-        " " +
+        "." +
         newNumber.slice(newNumber.length - 7, newNumber.length);
     }
   }
-  return newNumber + decimals;
+  return newNumber;
 };
 
 function highlightFeature(e) {
@@ -230,7 +237,8 @@ const setMapWithGeoJSON = function (dataGeoJSON) {
       grades = [0, 1, 20, 50, 100, 250, 1000, 7500, 15000],
       labels = [];
 
-    div.innerHTML += '<div style="background:rgba(white, 0.7);">';
+    div.innerHTML +=
+      '<div style="background:rgba(white, 0.7); z-index:100;"> <div style="padding-bottom:1rem; line-height:1;">Covid besmettingen </br> per miljoen inwoners</div>';
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
@@ -268,10 +276,9 @@ const setMapWithGeoJSON = function (dataGeoJSON) {
 
 const getDataGeoJSON = function () {
   //Path naar geoJSON
-  const pathToGeoJSON = "../data/geojson.json";
 
   //Ophalen van data van geoJSON
-  fetch(pathToGeoJSON)
+  fetch(geoLink)
     .then((response) => response.json())
     .then((data) => setMapWithGeoJSON(data));
 };
@@ -291,10 +298,9 @@ const getDataCovidJSON = function () {
 
 const getDataCountriesJSON = function () {
   //Path naar covidJSON
-  const pathToCountriesJSON = "../data/countries.json";
 
   //Ophalen van data van geoJSON
-  fetch(pathToCountriesJSON)
+  fetch(countriesLink)
     .then((response) => response.json())
     .then((data) => {
       countries = data;

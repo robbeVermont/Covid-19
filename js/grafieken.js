@@ -1,4 +1,5 @@
 "use strict";
+window.ApexCharts = require("apexcharts");
 let screenWidth;
 const colorBlue = "#354b60";
 const colorGreen = "#00B8B1";
@@ -7,6 +8,8 @@ const colorGrey = "#a3a7ac";
 let country, countryData;
 let countryTranslation = [];
 let worldData;
+
+const countriesLink = "https://api.jsonbin.io/b/60338a17f1be644b0a62f473/5";
 
 const colorArray = [
   "#DF7A7A",
@@ -319,13 +322,13 @@ const convertNumber = function (oldNumber) {
   if (newNumber.length > 3) {
     newNumber =
       newNumber.slice(0, newNumber.length - 3) +
-      " " +
+      "," +
       newNumber.slice(newNumber.length - 3, newNumber.length);
 
     if (newNumber.length > 7) {
       newNumber =
         newNumber.slice(0, newNumber.length - 7) +
-        " " +
+        "," +
         newNumber.slice(newNumber.length - 7, newNumber.length);
     }
   }
@@ -1578,25 +1581,40 @@ const laadTotalCasesGrafiek = function (data, id, type) {
   const stijgingNummer =
     casesData[casesData.length - 1] - casesData[casesData.length - 2];
 
-  let stijgingProcent = (
-    stijgingNummer /
-    (casesData[casesData.length - 2] - casesData[casesData.length - 3])
-  ).toFixed(2);
+  let stijgingProcent;
+  if (stijgingNummer != 0) {
+    stijgingProcent = (
+      stijgingNummer /
+      (casesData[casesData.length - 2] - casesData[casesData.length - 3])
+    ).toFixed(2);
 
-  if (type == "cases") {
-    document.querySelector(".js-cases").innerHTML = totalCasesToday;
-    document.querySelector(
-      ".js-casestext"
-    ).innerHTML = `Momenteel zijn er ${totalCasesToday} positieve tests afgenomen. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
-      stijgingNummer
-    )} mensen.`;
-  } else if (type == "deaths") {
-    document.querySelector(".js-deaths").innerHTML = totalCasesToday;
-    document.querySelector(
-      ".js-deathstext"
-    ).innerHTML = `Momenteel zijn er ${totalCasesToday} overlijdens. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
-      stijgingNummer
-    )} mensen.`;
+    if (type == "cases") {
+      document.querySelector(".js-cases").innerHTML = totalCasesToday;
+      document.querySelector(
+        ".js-casestext"
+      ).innerHTML = `Momenteel zijn er ${totalCasesToday} positieve tests afgenomen. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
+        stijgingNummer
+      )} mensen.`;
+    } else if (type == "deaths") {
+      document.querySelector(".js-deaths").innerHTML = totalCasesToday;
+      document.querySelector(
+        ".js-deathstext"
+      ).innerHTML = `Momenteel zijn er ${totalCasesToday} overlijdens. Dit is een stijging van ${stijgingProcent}% of ${convertNumber(
+        stijgingNummer
+      )} mensen.`;
+    }
+  } else {
+    if (type == "cases") {
+      document.querySelector(".js-cases").innerHTML = totalCasesToday;
+      document.querySelector(
+        ".js-casestext"
+      ).innerHTML = `Momenteel zijn er ${totalCasesToday} positieve tests afgenomen. Er zijn vandaag geen nieuwe besmettingen gemeten. `;
+    } else if (type == "deaths") {
+      document.querySelector(".js-deaths").innerHTML = totalCasesToday;
+      document.querySelector(
+        ".js-deathstext"
+      ).innerHTML = `Momenteel zijn er ${totalCasesToday} overlijdens. Er zijn vandaag geen nieuwe overlijdens gemeten. `;
+    }
   }
 
   for (let cases of casesData) {
@@ -1759,15 +1777,13 @@ const laadTotalCasesData = function (data, type) {
   const stijgingNummer =
     casesData[casesData.length - 1] - casesData[casesData.length - 2];
 
-  let stijgingProcent = (
-    stijgingNummer /
-    (casesData[casesData.length - 2] - casesData[casesData.length - 3])
-  ).toFixed(2);
+  let stijgingProcent;
+  if (stijgingNummer != 0) {
+    stijgingProcent = (
+      stijgingNummer /
+      (casesData[casesData.length - 2] - casesData[casesData.length - 3])
+    ).toFixed(2);
 
-  if (
-    document.querySelector(".js-cases") ||
-    document.querySelector(".js-deaths")
-  ) {
     if (type == "cases") {
       document.querySelector(".js-cases").innerHTML = totalCasesToday;
       document.querySelector(
@@ -1783,7 +1799,20 @@ const laadTotalCasesData = function (data, type) {
         stijgingNummer
       )} mensen.`;
     }
+  } else {
+    if (type == "cases") {
+      document.querySelector(".js-cases").innerHTML = totalCasesToday;
+      document.querySelector(
+        ".js-casestext"
+      ).innerHTML = `Momenteel zijn er ${totalCasesToday} positieve tests afgenomen. Dit zijn er even veel als gisteren. `;
+    } else if (type == "deaths") {
+      document.querySelector(".js-deaths").innerHTML = totalCasesToday;
+      document.querySelector(
+        ".js-deathstext"
+      ).innerHTML = `Momenteel zijn er ${totalCasesToday} overlijdens.  Dit zijn er even veel als gisteren. `;
+    }
   }
+
   for (let cases of casesData) {
     if (cases > 999 && cases < 1000000) {
       casesTooltip.push((cases / 1000).toFixed(0) + "k ");
@@ -1815,7 +1844,7 @@ const laadVacPieChart = function (data, id, country) {
     numberVac
   )} vaccinaties gezet in ${covidToNL(
     country
-  )}. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd,`;
+  )}. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd.`;
 
   var options = {
     chart: {
@@ -1830,6 +1859,18 @@ const laadVacPieChart = function (data, id, country) {
     colors: [colorGreen, colorBlue],
     stroke: {
       show: false,
+    },
+    plotOptions: {
+      pie: {
+        expandOnClick: false,
+      },
+    },
+    states: {
+      hover: {
+        filter: {
+          type: "none",
+        },
+      },
     },
     legend: {
       position: legendPos,
@@ -1890,7 +1931,7 @@ const laadVacPieChart2 = function (data, country) {
       ".js-vactext"
     ).innerHTML = `Momenteel zijn er ${convertNumber(
       numberVac
-    )} vaccinaties gezet werledwijd. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd,`;
+    )} vaccinaties gezet werledwijd. Dit getal zijn mensen die minstens 1 maal zijn vaccineerd.`;
   }
 };
 
@@ -2228,7 +2269,7 @@ const getWorldData = function () {
 
 const getCountriesJson = function (country) {
   //ophalen van de externe json file
-  fetch("https://api.jsonbin.io/b/60338a17f1be644b0a62f473")
+  fetch(countriesLink)
     .then(function (response) {
       if (!response.ok) {
         throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);
@@ -2264,7 +2305,7 @@ const getCountriesJson = function (country) {
 
 const getCountriesJson2 = function () {
   //ophalen van de externe json file
-  fetch("https://api.jsonbin.io/b/60338a17f1be644b0a62f473")
+  fetch(countriesLink)
     .then(function (response) {
       if (!response.ok) {
         throw Error(`probleem bij de fetch(). Statuscode: ${response.status}`);
